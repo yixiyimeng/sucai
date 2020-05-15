@@ -1,0 +1,63 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "设计e周•素材",
+			"navigationStyle": "custom"
+		}
+	}, {
+		"path": "pages/find/find",
+		"style": {}
+	}, {
+		"path": "pages/follow/follow",
+		"style": {}
+	}, {
+		"path": "pages/mine/mine",
+		"style": {}
+	}],
+	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#f37b1d",
+		"borderStyle": "black",
+		"backgroundColor": "#fff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/shouye.png",
+				"selectedIconPath": "static/tabbar/shouye_1.png",
+				"text": "首页"
+			}, {
+				"pagePath": "pages/find/find",
+				"iconPath": "static/tabbar/faxian.png",
+				"selectedIconPath": "static/tabbar/faxian_1.png",
+				"text": "发现"
+			},
+			{
+				"pagePath": "pages/follow/follow",
+				"iconPath": "static/tabbar/shoucang.png",
+				"selectedIconPath": "static/tabbar/shoucang_1.png",
+				"text": "收藏"
+			}, {
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/tabbar/shequ.png",
+				"selectedIconPath": "static/tabbar/shequ_1.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"mp-alipay": {
+			/* 支付宝小程序特有相关 */
+			"transparentTitle": "always",
+			"allowsBounceVertical": "NO"
+		},
+		"navigationBarBackgroundColor": "#0081ff",
+		"navigationBarTitleText": "设计e周•素材",
+
+		"navigationBarTextStyle": "white"
+	},
+	"usingComponts": true,
+	"condition": { //模式配置，仅开发期间生效
+
+	}
+
+}
