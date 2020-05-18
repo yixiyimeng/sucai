@@ -14,7 +14,33 @@
 	}, {
 		"path": "pages/mine/mine",
 		"style": {}
-	}],
+	}, {
+		"path": "pages/details/details",
+		"style": {}
+	}, {
+		"path": "pages/score/score",
+		"style": {
+			"navigationBarTitleText": "设计e周素材库积分充值"
+		}
+	}, {
+		"path": "pages/vip/vip",
+		"style": {
+			"navigationBarTitleText": "设计e周素材库VIP"
+		}
+	}, {
+		"path": "pages/list/list",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	}    ,{
+            "path" : "pages/followdetails/followdetails",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/search/search",
+            "style" : {}
+        }
+    ],
 	"tabBar": {
 		"color": "#333",
 		"selectedColor": "#f37b1d",
@@ -50,9 +76,8 @@
 			"transparentTitle": "always",
 			"allowsBounceVertical": "NO"
 		},
-		"navigationBarBackgroundColor": "#0081ff",
+		"navigationBarBackgroundColor": "#141414",
 		"navigationBarTitleText": "设计e周•素材",
-
 		"navigationBarTextStyle": "white"
 	},
 	"usingComponts": true,

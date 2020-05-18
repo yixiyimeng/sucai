@@ -251,4 +251,43 @@
 	image {
 		height: auto;
 	}
+	
+</style>
+<style lang="scss">
+	.cu-tag {
+		padding: 16upx 0;
+		width: 210upx;
+		display: block;
+		font-size: 30upx;
+		text-align: center;
+		color: #333;
+		height: auto;
+		
+	}
+	
+	.goodslist {
+		.goods-item {
+			width: 48%;
+			margin: 0 0 20upx;
+			background: #fff;
+	
+			font-size: 28upx;
+			color: #333;
+			box-shadow: 0 10upx 10upx rgba(0, 0, 0, .05);
+			border-radius: 4upx;
+			overflow: hidden;
+			text-align: center;
+	
+			image {
+				display: block;
+				width: 100%;
+				height: 48vw;
+			}
+	
+			p {
+				height: 80upx;
+				line-height: 80upx;
+			}
+		}
+	}
 </style>
