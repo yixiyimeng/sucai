@@ -13,7 +13,7 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">关联专辑</text>
-				<text class="bg-gradual-orange" style="width:5em"></text>
+				<text class="bg-gradual-orange" style="width:4em"></text>
 			</view>
 		</view>
 		<view class="bg-white">

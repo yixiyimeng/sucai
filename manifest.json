@@ -56,7 +56,7 @@
     },
     "h5" : {
         "title" : "sucai",
-        "domain" : "",
+        "domain" : "/h5/",
         "publicPath" : "./",
         "router" : {
             "mode" : "hash",

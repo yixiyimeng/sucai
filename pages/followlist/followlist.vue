@@ -4,24 +4,26 @@
 		<view class="flex-sub">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action border-title">
-					<text class="text-orange">相关专辑</text>
-					<text class="bg-gradual-orange" style="width:4em"></text>
+					<text class="text-orange">我的收藏夹</text>
+					<text class="bg-gradual-orange" style="width:5em"></text>
 				</view>
 			</view>
 			<view class="bg-white">
 				<view class='padding-sm flex flex-wrap justify-between'>
-					<view class="padding-xs" v-for="(item,index) in 3" :key="index">
-						<view class='cu-tag  radius'>标签</view>
+					<view class="padding-xs" v-for="(item,index) in 2" :key="index">
+						<navigator class='cu-tag  round light' url="/pages/followdetails/followdetails" hover-class="none">收藏夹</navigator>
 					</view>
-				</view>
-				<view class="more">
-					<text>展开</text>
-					<text class="cuIcon-unfold"></text>
+					<view class="padding-xs">
+						<navigator class='cu-tag  round more' url="/pages/follow/follow" hover-class="none">
+							<text>更多</text>
+							<text class="cuIcon-more"></text>
+						</navigator>
+					</view>
 				</view>
 			</view>
 			<view class="cu-bar bg-white  margin-top-sm">
 				<view class="action border-title">
-					<text>共20条结果</text>
+					<text>最近收藏</text>
 				</view>
 			</view>
 			<view class="">
@@ -40,15 +42,17 @@
 	import searchbar from '@/component/searchbar.vue'
 	export default {
 		data() {
-			return {
-			};
+			return {};
 		},
 		components: {
 			searchbar
 		},
 		methods: {
 			search(keyword) {
-				console.log(keyword)
+				// console.log(keyword)
+				uni.navigateTo({
+					url:'/pages/search/search'
+				})
 			}
 		}
 	}
@@ -56,7 +60,7 @@
 <style>
 	page,
 	.pageview {
-		background: #fff;
+		/* background: #fff; */
 		height: 100%;
 		overflow: hidden;
 	}
@@ -68,9 +72,9 @@
 		-webkit-overflow-scrolling: touch;
 	}
 
-	.more {
-		text-align: center;
-		padding: 10upx;
-		color: #999;
+	.cu-tag.more {
+		color: #FF6A00;
+		border: 1px solid #FF6A00;
+		background: none;
 	}
 </style>

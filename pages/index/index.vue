@@ -24,7 +24,7 @@
 		<view class="bg-white">
 			<view class='padding-sm flex flex-wrap justify-between'>
 				<view class="padding-xs" v-for="(item,index) in 3" :key="index">
-					<view class='cu-tag  radius'>标签</view>
+					<navigator class='cu-tag  radius' url="/pages/list/list" hover-class="none">标签</navigator>
 				</view>
 			</view>
 			<view class="more">
@@ -58,10 +58,10 @@
 		</view>
 		<view class="">
 			<view class="padding goodslist flex flex-wrap justify-between">
-				<view class="goods-item" v-for="(item,index) in 10" :key="index">
+				<navigator url="/pages/details/details" class="goods-item" hover-class="none" v-for="(item,index) in 10" :key="index">
 					<image src="/static/demo.png" mode="aspectFill"></image>
 					<p>配景乔木psd</p>
-				</view>
+				</navigator>
 			</view>
 		</view>
 	</view>

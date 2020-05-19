@@ -1,6 +1,55 @@
 <template>
 	<view>
-		
+		<view class="userinfo">
+			<image src="/static/img_bg_3x.png" mode="widthFix"></image>
+			<div class="flex align-center">
+				<div class="imgbox">
+					<image src="/static/photo.png" mode="widthFix"></image>
+				</div>
+				<div class="flex-sub">
+					<div class="name">哈哈哈哈</div>
+					<div>
+						<image class="vip" src="/static/VIP@2x.png" mode="widthFix"></image>
+						<text>vip用户</text>
+					</div>
+				</div>
+			</div>
+		</view>
+		<view class="cu-list menu sm-border margin-top">
+			<navigator class="cu-item arrow" url="/pages/vip/vip" hover-class="none">
+				<view class="content flex align-center">
+					<text class="cuIcon-vip text-orange icon"></text>
+					<text>我的素材VIP</text>
+				</view>
+				<view class="action text-grey">
+					加入
+				</view>
+			</navigator>
+			<navigator class="cu-item arrow" url="/pages/score/score" hover-class="none">
+				<view class="content flex align-center">
+					<text class="cuIcon-coin text-green icon"></text>
+					<text>我的素材积分</text>
+				</view>
+				<view class="action text-grey">
+					充值
+				</view>
+			</navigator>
+			<view class="cu-item arrow">
+				<view class="content flex align-center">
+					<text class="cuIcon-settings text-red icon"></text>
+					<text>设置</text>
+				</view>
+
+			</view>
+			<view class="cu-item arrow">
+				<view class="content flex align-center">
+					<text class="cuIcon-question text-blue icon"></text>
+					<text>使用帮助</text>
+				</view>
+			</view>
+
+		</view>
+
 	</view>
 </template>
 
@@ -8,12 +57,52 @@
 	export default {
 		data() {
 			return {
-				
+				cuIconList: []
 			};
 		}
 	}
 </script>
 
 <style lang="scss">
+	.userinfo {
+		position: relative;
+		overflow:hidden;
 
+		&>image {
+			width: 100%;
+			position: absolute;
+			z-index: -1;
+		}
+
+		&>div {
+			position: relative;
+			top: 0;
+			z-index: 9999;
+			padding: 40upx 30upx;
+			color: #fff;
+		}
+		.vip{
+			width: 28upx;
+		}
+		.imgbox{
+			width: 120upx;
+			height: 120upx;
+			border-radius: 100%;
+			overflow: hidden;
+			background: #fff;
+			border: 2px solid #fff;
+			margin-right: 20upx;
+		}
+		.name{
+			font-size: 32upx;
+			font-weight: bold;
+			margin-bottom: 10upx;
+		}
+	}
+
+	.menu {
+		.icon {
+			font-size: 40upx;
+		}
+	}
 </style>

@@ -13,7 +13,9 @@
 		"style": {}
 	}, {
 		"path": "pages/mine/mine",
-		"style": {}
+		"style": {
+			"navigationStyle": "custom"
+		}
 	}, {
 		"path": "pages/details/details",
 		"style": {}
@@ -29,18 +31,17 @@
 		}
 	}, {
 		"path": "pages/list/list",
-		"style": {
-			"navigationStyle": "custom"
-		}
-	}    ,{
-            "path" : "pages/followdetails/followdetails",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/search/search",
-            "style" : {}
-        }
-    ],
+		"style": {}
+	}, {
+		"path": "pages/followdetails/followdetails",
+		"style": {}
+	}, {
+		"path": "pages/search/search",
+		"style": {}
+	}, {
+		"path": "pages/followlist/followlist",
+		"style": {}
+	}],
 	"tabBar": {
 		"color": "#333",
 		"selectedColor": "#f37b1d",
@@ -58,7 +59,7 @@
 				"text": "发现"
 			},
 			{
-				"pagePath": "pages/follow/follow",
+				"pagePath": "pages/followlist/followlist",
 				"iconPath": "static/tabbar/shoucang.png",
 				"selectedIconPath": "static/tabbar/shoucang_1.png",
 				"text": "收藏"

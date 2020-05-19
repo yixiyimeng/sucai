@@ -10,7 +10,7 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">父专辑</text>
-				<text class="bg-gradual-orange" style="width:5em"></text>
+				<text class="bg-gradual-orange" style="width:3em"></text>
 			</view>
 		</view>
 		<view class="bg-white">
@@ -27,7 +27,7 @@
 		<view class="cu-bar bg-white margin-top-sm solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">子专辑</text>
-				<text class="bg-gradual-orange" style="width:5em"></text>
+				<text class="bg-gradual-orange" style="width:3em"></text>
 			</view>
 		</view>
 		<view class="bg-white">
