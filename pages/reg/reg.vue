@@ -100,7 +100,9 @@
 						}
 					}, 1000);
 					/* 获取验证码 */
-					this.$getajax(this.$api.getcode + this.registeMobile).then(da => {
+					this.$getajax(this.$api.getcode, {
+						mobile: this.registeMobile
+					}).then(da => {
 						uni.showToast({
 							title: da.msg,
 							icon: 'none'
@@ -121,7 +123,9 @@
 			},
 			checkmobile() {
 				this.isCheckmobile = true;
-				this.$getajax(this.$api.isMobileAvailabled + this.registeMobile).then((da) => {
+				this.$getajax(this.$api.isMobileAvailabled, {
+					mobile: this.registeMobile
+				}).then((da) => {
 					this.isMobileAvailabled = true;
 				}).finally(() => {
 					this.isCheckmobile = false

@@ -6,7 +6,7 @@ const request = new Fly()
 
 request.config.timeout = 60 * 1000
 request.config.baseURL = basePath
-//request.config.baseURL ='https://m.2yahua.com/index.php?s=/api/'
+request.config.withCredentials =true;
 request.interceptors.request.use((request) => {
 	console.log('request' + JSON.stringify(request))
 	request.headers["content-type"] = "application/x-www-form-urlencoded";
@@ -30,7 +30,7 @@ request.interceptors.response.use(
 			});
 		}
 		// wx.hideLoading();
-		if (response.data.code == 0 || response.request.url == '/api/member/userinfo') {
+		if (response.data.code == 10000) {
 			return promise.resolve(response.data)
 		} else {
 			uni.showToast({

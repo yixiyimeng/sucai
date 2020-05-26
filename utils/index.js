@@ -93,7 +93,7 @@ export function base64ToString(data) {
 		throw Components.Exception('Corrupted base64 string');
 	return result;
 }
-export const basePath='https://www.huaxianpai.com'
+export const basePath='http://material.yipro.cn/'
 
 export default {
 	formatNumber,
