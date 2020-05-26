@@ -290,4 +290,26 @@
 			}
 		}
 	}
+	
+	.cancelBtn,
+	.defaultBtn {
+		color: #fff;
+		text-align: center;
+		border-radius: 14upx;
+		background-image: linear-gradient(#fb9549, #fc733b);
+		line-height: 100upx;
+		font-size: 32upx;
+		display: block;
+		margin-left: 40upx;
+		margin-right: 40upx;
+	}
+	
+	.cancelBtn {
+		background: #f0f0f0;
+		color: #fc743c;
+	}
+	
+	.defaultBtn {
+		background: #d5d5d5;
+	}
 </style>
