@@ -16,12 +16,14 @@
 		<form>
 			<view class="cu-form-group margin-top">
 				<view class="title">昵称</view>
-				<input placeholder="请输入昵称" name="input"></input>
+				<input placeholder="请输入昵称" name="input" v-model="nickName" @blur="checknickName"></input>
+				<image v-if="isChecknickName" src="#" mode="widthFix" class="loading text-orange"></image>
+
 			</view>
 			<view class="cu-form-group">
 				<view class="title">手机号码</view>
 				<input placeholder="输入框带标签" name="input" v-model="registeMobile" @blur="changeMobile"></input>
-				<image v-if="isCheckmobile" src="#" mode="widthFix" style="height: 20px; width: 20px;" class="loading text-orange"></image>
+				<image v-if="isCheckmobile" src="#" mode="widthFix" class="loading text-orange"></image>
 				<!-- <text class="cuIcon-loading2 text-orange"></text> -->
 			</view>
 			<view class="cu-form-group">
@@ -31,7 +33,7 @@
 			</view>
 			<view class="cu-form-group solid-bottom">
 				<view class="title">密码</view>
-				<input placeholder="请输入密码" name="input" type="password"></input>
+				<input placeholder="请输入密码" name="input" type="password" v-model="password"></input>
 			</view>
 		</form>
 		<view class="margin-top-lg submitBtn cu-btn shadow" :class="{'bg-orange':isAble}" @tap="submitLogin">注册</view>
@@ -47,27 +49,23 @@
 		data() {
 			return {
 				registeMobile: '',
+				nickName: '',
 				verifyNum: '',
+				password: '',
 				codetxt: '验证码',
 				num: 60,
 				timer: null,
 				isMobileAvailabled: false, //手机号是否可用
 				isCheckmobile: false, //是否正在校验手机号码
+				isChecknickName: false, //是否校验昵称
+				isNickNameAvailabled: false //昵称是否可用
 			};
 		},
 		components: {},
 		computed: {
 			isAble() {
-				return (regPhone(this.registeMobile) && this.verifyNum)
+				return (this.isMobileAvailabled && this.verifyNum && this.isNickNameAvailabled&&this.password)
 			},
-			// isSendCode() {
-			// 	if(regPhone(this.registeMobile)){
-
-			// 	}else{
-
-			// 	}
-			// 	// return regPhone(this.registeMobile)
-			// }
 		},
 		methods: {
 			changeMobile(e) {
@@ -90,8 +88,8 @@
 					$me.codetxt = this.num + 's';
 					this.timer = setInterval(function() {
 						if ($me.num == 1) {
-							clearInterval(this.timer);
-							this.timer = null;
+							clearInterval($me.timer);
+							$me.timer = null;
 							$me.codetxt = '获取验证码';
 							$me.num = 60;
 						} else {
@@ -101,10 +99,11 @@
 					}, 1000);
 					/* 获取验证码 */
 					this.$getajax(this.$api.getcode, {
-						mobile: this.registeMobile
+						mobile: this.registeMobile,
+						codetype:'sign'// login 登录
 					}).then(da => {
 						uni.showToast({
-							title: da.msg,
+							title: da.message,
 							icon: 'none'
 						});
 					})
@@ -116,9 +115,28 @@
 				}
 			},
 			submitLogin() {
-				let param = {
-					registeMobile: this.registeMobile,
-					verifyNum: this.verifyNum
+				console.log(this.isAble)
+				if (this.isAble) {
+					let param = {
+						registeMobile: this.registeMobile,
+						verifyNum: this.verifyNum,
+						password:this.password,
+						nickName:this.nickName,
+						operation:'password/verifynum'//  wechat 微信登录
+					}
+					this.$postajax(this.$api.reg,param).then(da=>{
+						if(da.code==10000){
+							setTimeout(()=>{
+							uni.navigateTo({
+								url:'/pages/login/login'
+							})	
+							},500)
+						}
+						uni.showToast({
+							title:da.message,
+							icon:'none'
+						});
+					})
 				}
 			},
 			checkmobile() {
@@ -129,6 +147,16 @@
 					this.isMobileAvailabled = true;
 				}).finally(() => {
 					this.isCheckmobile = false
+				})
+			},
+			checknickName() {
+				this.isChecknickName = true;
+				this.$getajax(this.$api.isNickNameAvailabled, {
+					nickName: this.nickName
+				}).then((da) => {
+					this.isNickNameAvailabled = true;
+				}).finally(() => {
+					this.isChecknickName = false
 				})
 			}
 
@@ -208,5 +236,10 @@
 		display: block;
 		margin-left: 40upx;
 		margin-right: 40upx;
+	}
+
+	.loading {
+		height: 20px;
+		width: 20px;
 	}
 </style>
