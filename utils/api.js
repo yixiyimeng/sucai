@@ -20,9 +20,10 @@ export const api = {
 }
 
 export function getajax(url, params) {
-	return $http.get(url, params)
+	let myparams = JsontoForm(params);
+	return this.$axios.get(url+'?'+myparams)
 }
 export function postajax(url, params) {
 	// let myparams = JsontoForm(params);
-	return $http.post(url, params)
+	return this.$axios.post(url, params)
 }
