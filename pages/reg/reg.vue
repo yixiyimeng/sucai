@@ -64,7 +64,7 @@
 		components: {},
 		computed: {
 			isAble() {
-				return (this.isMobileAvailabled && this.verifyNum && this.isNickNameAvailabled&&this.password)
+				return (this.isMobileAvailabled && this.verifyNum && this.isNickNameAvailabled && this.password)
 			},
 		},
 		methods: {
@@ -90,7 +90,7 @@
 						if ($me.num == 1) {
 							clearInterval($me.timer);
 							$me.timer = null;
-							$me.codetxt = '获取验证码';
+							$me.codetxt = '验证码';
 							$me.num = 60;
 						} else {
 							$me.num--;
@@ -100,7 +100,7 @@
 					/* 获取验证码 */
 					this.$getajax(this.$api.getcode, {
 						mobile: this.registeMobile,
-						codetype:'sign'// login 登录
+						codetype: 'sign' // login 登录
 					}).then(da => {
 						uni.showToast({
 							title: da.message,
@@ -120,21 +120,21 @@
 					let param = {
 						registeMobile: this.registeMobile,
 						verifyNum: this.verifyNum,
-						password:this.password,
-						nickName:this.nickName,
-						operation:'password/verifynum'//  wechat 微信登录
+						password: this.password,
+						nickName: this.nickName,
+						operation: 'password/verifynum' //  wechat 微信登录
 					}
-					this.$postajax(this.$api.reg,param).then(da=>{
-						if(da.code==10000){
-							setTimeout(()=>{
-							uni.navigateTo({
-								url:'/pages/login/login'
-							})	
-							},500)
+					this.$postajax(this.$api.reg, param).then(da => {
+						if (da.code == 10000) {
+							setTimeout(() => {
+								uni.navigateTo({
+									url: '/pages/login/login'
+								})
+							}, 500)
 						}
 						uni.showToast({
-							title:da.message,
-							icon:'none'
+							title: da.message,
+							icon: 'none'
 						});
 					})
 				}

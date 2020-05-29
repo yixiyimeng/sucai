@@ -9,10 +9,10 @@ request.config.baseURL = basePath
 request.config.withCredentials =true;
 request.interceptors.request.use((request) => {
 	console.log('request' + JSON.stringify(request))
-	request.headers["content-type"] = "application/x-www-form-urlencoded";
-	if (uni.getStorageSync('cookiekey')) {
-		request.headers["Cookie"] = uni.getStorageSync('cookiekey')
-	}
+	// request.headers["content-type"] = "application/x-www-form-urlencoded";
+	// if (uni.getStorageSync('cookiekey')) {
+	// 	request.headers["Cookie"] = uni.getStorageSync('cookiekey')
+	// }
 	// uni.showLoading({
 	// 	title: '拼命加载中...'
 	// })
@@ -34,7 +34,7 @@ request.interceptors.response.use(
 			return promise.resolve(response.data)
 		} else {
 			uni.showToast({
-				title: response.data.msg || '请求发生错误了',
+				title: response.data.message || '请求发生错误了',
 				icon: 'none'
 			})
 			// if (response.data.code == 4004) {
