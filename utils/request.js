@@ -10,9 +10,9 @@ request.config.withCredentials =true;
 request.interceptors.request.use((request) => {
 	console.log('request' + JSON.stringify(request))
 	// request.headers["content-type"] = "application/x-www-form-urlencoded";
-	// if (uni.getStorageSync('cookiekey')) {
-	// 	request.headers["Cookie"] = uni.getStorageSync('cookiekey')
-	// }
+	if (uni.getStorageSync('cookiekey')) {
+		request.headers["Cookie"] = uni.getStorageSync('cookiekey')
+	}
 	// uni.showLoading({
 	// 	title: '拼命加载中...'
 	// })
