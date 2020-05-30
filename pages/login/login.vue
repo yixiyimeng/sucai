@@ -1,6 +1,6 @@
 <template>
-	<view class="flex flex-direction pageview">
-		<view class="group flex-sub">
+	<view class="flex flex-direction pageview bg-white">
+		<!-- <view class="group flex-sub">
 			<view class="row flex">
 				<input type="text" placeholder="请输入手机号码" class="flex-sub" @input="changeMobile">
 			</view>
@@ -10,7 +10,37 @@
 			</view>
 			<view class="margin-top-lg" :class="[isAble?'submitBtn':'defaultBtn']" @tap="submitLogin">登录</view>
 			<view class="text-orange text-right margin-top">收不到验证码？</view>
-		</view>
+		</view> -->
+		<scroll-view scroll-x class="bg-white nav text-center margin-top">
+			<view class="cu-item" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in 2" :key="index" @tap="tabSelect"
+			 :data-id="index">
+				{{index==0?'密码登录':'快捷登录'}}
+			</view>
+		</scroll-view>
+		<form class="margin-top">
+			<!-- <view class="cu-form-group ">
+				<view class="title">昵称</view>
+				<input placeholder="请输入昵称" name="input" @blur="checknickName"></input>
+				<image v-if="isChecknickName" src="#" mode="widthFix" class="loading text-orange"></image>
+
+			</view> -->
+			<view class="cu-form-group">
+				<view class="title">手机号码</view>
+				<input placeholder="输入框带标签" name="input" @blur="changeMobile"></input>
+				<image v-if="isCheckmobile" src="#" mode="widthFix" class="loading text-orange"></image>
+			</view>
+			<view class="cu-form-group" v-if="TabCur==1">
+				<view class="title">验证码</view>
+				<input placeholder="输入验证码" name="input" v-model.lazy="verifyNum"></input>
+				<button class='getcode cu-btn shadow' :class="{'bg-orange':isMobileAvailabled&&!timer}" @tap="getcode">{{codetxt}}</button>
+			</view>
+			<view class="cu-form-group solid-bottom" v-if="TabCur==0">
+				<view class="title">密码</view>
+				<input placeholder="5~20位英文、数字或符号，区分大小写" name="input" type="password" v-model="password"></input>
+			</view>
+		</form>
+		<view class="margin-top-lg submitBtn cu-btn shadow" :class="{'bg-orange':isAble}" @tap="submitLogin">登录</view>
+
 		<view class="otherway">
 			<view class="title flex align-center">
 				<view class="line flex-sub"></view>
@@ -22,10 +52,7 @@
 				<image src="../../static/wechat.png" mode="widthFix"></image>
 				<view>微信登录</view>
 			</button>
-			<view class="tag margin-top margin-bottom-lg">
-				登录即代表你同意 <navigator url="" class="text-orange">《服务协议》</navigator>
-				和<navigator url="" class="text-orange">《隐私政策》</navigator>
-			</view>
+
 		</view>
 
 	</view>
@@ -33,65 +60,72 @@
 
 <script>
 	import {
-		regPhone
+		regPhone,
+		regLoginPwd
 	} from '@/utils/index';
-	import {
-		mapState,
-		mapMutations,
-		mapActions
-	} from 'vuex'
-	let num = 60;
+
 	export default {
 		data() {
 			return {
-				phone: '',
-				verify: '',
-				codetxt: '获取验证码'
+				registeMobile: '',
+				nickName: '',
+				verifyNum: '',
+				password: '',
+				codetxt: '验证码',
+				num: 60,
+				timer: null,
+				isMobileAvailabled: false, //手机号是否可用
+				isCheckmobile: false, //是否正在校验手机号码
+				isChecknickName: false, //是否校验昵称
+				isNickNameAvailabled: false, //昵称是否可用
+				TabCur: 0
 			};
 		},
-		components: {
-		},
+		components: {},
 		computed: {
 			isAble() {
-				if (regPhone(this.phone) && this.verify) {
-					return true
-				} else {
-					return false
+				return (this.isMobileAvailabled && (this.verifyNum || this.password))
+			},
+		},
+		methods: {
+			changeMobile(e) {
+				if (this.registeMobile != e.detail.value) {
+					this.registeMobile = e.detail.value;
+					if (regPhone(this.registeMobile)) {
+						this.checkmobile();
+					}
 				}
 
 			},
-			...mapState(['session_key', 'openid'])
-		},
-		methods: {
-			...mapMutations(['uploadPhone', 'uploadMemberId', 'uploadUserInfo']),
-			changeMobile(e) {
-				this.phone = e.detail.value;
-			},
 			changeCode(e) {
-				this.verify = e.detail.value;
+				this.verifyNum = e.detail.value;
 			},
 			getcode() {
 				let $me = this;
-				if (num < 60) {
+				if (this.num < 60) {
 					return false;
 				}
-				if (regPhone(this.phone)) {
+				if (regPhone(this.registeMobile)) {
 					/* 设置倒计时 */
-					$me.codetxt = num + 's';
-					var timer = setInterval(function() {
-						if (num == 1) {
-							clearInterval(timer);
-							$me.codetxt = '获取验证码';
-							num = 60;
+					$me.codetxt = this.num + 's';
+					this.timer = setInterval(function() {
+						if ($me.num == 1) {
+							clearInterval($me.timer);
+							$me.timer = null;
+							$me.codetxt = '验证码';
+							$me.num = 60;
 						} else {
-							num--;
-							$me.codetxt = num + 's';
+							$me.num--;
+							$me.codetxt = $me.num + 's';
 						}
 					}, 1000);
 					/* 获取验证码 */
-					this.$postajax(this.$api.getcode + this.phone).then(da => {
+					this.$getajax(this.$api.getcode, {
+						mobile: this.registeMobile,
+						codetype: 'login' // login 登录
+					}).then(da => {
 						uni.showToast({
-							title: da.msg,
+							title: da.message,
 							icon: 'none'
 						});
 					})
@@ -102,79 +136,81 @@
 					});
 				}
 			},
-			wxGetPhoneNumber(e) {
-				var $me = this;
-				let param = {
-					session_key: this.session_key,
-					encryptedData: e.detail.encryptedData,
-					iv: e.detail.iv
-				};
-
-				console.log("参数" + JSON.stringify(param))
-				this.$postajax(this.$api.decrypt, param)
-					.then(res => {
-						if (res.code == 0 && res.data.phoneNumber) {
-							this.login({
-								phone: res.data.phoneNumber,
-								openid: this.openid
-							})
-
-						} else {
-							uni.showToast({
-								title: '换取手机号码失败',
-								icon: 'none'
-							});
-						}
-
-
-					})
-					.catch(err => {
-
-					});
-			},
 			submitLogin() {
-				let param = {
-					phone: this.phone,
-					verify: this.verify
-				}
-				this.login(param)
-			},
-			/* 登录 */
-			login(param) {
-				this.$postajax(this.$api.login, param).then(da => {
-					if (da.code == 0) {
-						this.getUserinfo()
+				// if(regLoginPwd(this.password)){
+				// 	console.log('12')
+				// }
+				if (this.isAble) {
+					/* 校验密码 */
+					let param = {};
+					// let param = {
+					// 	registeMobile: this.registeMobile,
+					// 	verifyNum: this.verifyNum,
+					// 	password: this.password,
+					// 	nickName: this.nickName,
+					// 	operation: 'password/verifynum' //  wechat 微信登录
+					// }
+					if (this.TabCur == 0) {
+						param = {
+							password: this.password,
+							operation: 'password'
+						}
+					} else {
+						param = {
+							verifyNum: this.verifyNum,
+							operation: 'verifynum'
+						}
 					}
-					uni.showToast({
-						title: da.msg,
-						icon: 'none'
-					});
+					this.$postajax(this.$api.login, Object.assign({}, param, {
+						registeMobile: this.registeMobile
+					})).then(da => {
+						if (da.code == 10000) {
+							uni.setStorageSync('userInfo',da.userInfo)
+							setTimeout(() => {
+								uni.switchTab({
+									url: '/pages/index/index'
+								})
+							}, 500)
+						}
+						uni.showToast({
+							title: da.message,
+							icon: 'none'
+						});
+					})
+				}
+			},
+			checkmobile() {
+				this.isCheckmobile = true;
+				this.$getajax(this.$api.isLoginAvailabled, {
+					mobile: this.registeMobile
+				}).then((da) => {
+					if (da.code == 10000) {
+						this.isMobileAvailabled = true;
+					} else {
+						this.isMobileAvailabled = false;
+					}
+				}).catch(() => {
+					this.isMobileAvailabled = false;
+				}).
+				finally(() => {
+					this.isCheckmobile = false;
 				})
 			},
-			getUserinfo() {
-				var $me = this;
-				$me.$postajax($me.$api.getUserinfo)
-					.then(res => {
-						if (res.code == 0) {
-							if (res.data.phone) {
-								$me.uploadPhone(res.data.phone)
-							}
-							if (res.data.id) {
-								$me.uploadMemberId(res.data.id)
-							}
-							$me.uploadUserInfo(res.data);
-							// uni.switchTab({
-							// 	url: '/pages/index/index'
-							// });
-							uni.navigateBack({
-								delta: 1
-							});
-						}
-					})
-					.catch(err => {
+			checknickName(e) {
+				if (this.nickName != e.detail.value) {
+					this.nickName = e.detail.value;
+					if (this.nickName) {
+						this.isNickNameAvailabled = true;
+					} else {
+						this.isNickNameAvailabled = false
+					}
+				}
 
-					});
+			},
+			tabSelect(e) {
+				this.TabCur = e.currentTarget.dataset.id;
 			}
+
 		}
 	}
 </script>
@@ -210,6 +246,10 @@
 	.otherway {
 		text-align: center;
 		font-size: 26upx;
+		position: absolute;
+		bottom: 20px;
+		left: 0;
+		right: 0;
 		color: #878787;
 
 		.title {
@@ -229,6 +269,7 @@
 		.wechat {
 			background: #fff;
 			font-size: 26upx;
+			border: none;
 		}
 
 		image {
@@ -240,5 +281,28 @@
 		navigator {
 			display: inline-block;
 		}
+	}
+
+	.cu-form-group .title {
+		min-width: calc(4em + 15px);
+	}
+
+	.getcode {
+		width: 165upx;
+	}
+
+	.submitBtn {
+		line-height: 100upx;
+		height: 100upx;
+		border-radius: 16upx;
+		font-size: 32upx;
+		display: block;
+		margin-left: 40upx;
+		margin-right: 40upx;
+	}
+
+	.loading {
+		height: 20px;
+		width: 20px;
 	}
 </style>

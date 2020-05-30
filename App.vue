@@ -312,4 +312,8 @@
 	.defaultBtn {
 		background: #d5d5d5;
 	}
+	button::after {
+		border: none;
+	}
+	
 </style>

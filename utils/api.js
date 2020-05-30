@@ -17,13 +17,19 @@ export const api = {
 	getcode: '/common/sendSmsCode/', //发送验证码
 	isMobileAvailabled: '/common/isMobileAvailabled/', //验证注册手机号码的正确性
 	isNickNameAvailabled: '/common/isNickNameAvailabled',
+	isLoginAvailabled: '/common/isLoginAvailabled', //验证登录手机号的正确性
+	findCollectionsInfo: '/common/findCollectionsInfo/', //专辑信息
 }
 
 export function getajax(url, params) {
-	let myparams = JsontoForm(params);
-	return this.$axios.get(url+'?'+myparams)
+
+	if (params) {
+		let myparams = '?' + JsontoForm(params);
+		url = url + myparams
+	}
+	return $http.get(url)
 }
 export function postajax(url, params) {
 	// let myparams = JsontoForm(params);
-	return this.$axios.post(url, params)
+	return $http.post(url, params)
 }

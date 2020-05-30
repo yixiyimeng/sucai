@@ -27,6 +27,11 @@ export function regpayPwd(pwd) {
 	var reg = /^\d{6}$/;
 	return reg.test(pwd)
 }
+/* 校验注册登录密码 */
+export function regLoginPwd(pwd) {
+	var reg = /^[A-Za-z]{1}[A-Za-z0-9#@!~%^&*]{4,19}$/;
+	return reg.test(pwd)
+}
 var toBase64Table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 var base64Pad = '=';
 /*字符串转化base64*/

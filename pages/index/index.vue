@@ -74,9 +74,17 @@
 				keyword: ''
 			};
 		},
+		onLoad() {
+			this.findCollectionsInfo()
+		},
 		methods: {
 			confirm() {
 				/* TODO 搜索 */
+			},
+			findCollectionsInfo(){
+				this.$getajax(this.$api.findCollectionsInfo+'0').then(da=>{
+					
+				})
 			}
 		}
 	}

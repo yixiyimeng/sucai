@@ -1,18 +1,5 @@
 <template>
 	<view class="flex flex-direction bg-white pageview">
-		<!-- <view class="group flex-sub">
-			<view class="row flex">
-				<input type="text" placeholder="请输入手机号码" class="flex-sub" @input="changeMobile">
-			</view>
-			<view class="row flex">
-				<input type="text" placeholder="请输入手机号码" class="flex-sub" @input="changeMobile">
-			</view>
-			<view class="row flex">
-				<input type="text" placeholder="请输入验证码" class="flex-sub" @input="changeCode">
-				<view class="getcode" @tap="getcode">{{codetxt}}</view>
-			</view>
-			<view class="margin-top-lg" :class="[isAble?'submitBtn':'defaultBtn']" @tap="submitLogin">登录</view>
-		</view> -->
 		<form>
 			<view class="cu-form-group margin-top">
 				<view class="title">昵称</view>
@@ -33,7 +20,7 @@
 			</view>
 			<view class="cu-form-group solid-bottom">
 				<view class="title">密码</view>
-				<input placeholder="请输入密码" name="input" type="password" v-model="password"></input>
+				<input placeholder="5~20位英文、数字或符号，区分大小写" name="input" type="password" v-model="password"></input>
 			</view>
 		</form>
 		<view class="margin-top-lg submitBtn cu-btn shadow" :class="{'bg-orange':isAble}" @tap="submitLogin">注册</view>
@@ -69,10 +56,13 @@
 		},
 		methods: {
 			changeMobile(e) {
-				console.log(122);
-				this.registeMobile = e.detail.value;
-				if (regPhone(this.registeMobile)) {
-					this.checkmobile();
+				if (this.registeMobile != e.detail.value) {
+					this.registeMobile = e.detail.value;
+					if (regPhone(this.registeMobile)) {
+						this.checkmobile();
+					} else {
+						this.isMobileAvailabled = false;
+					}
 				}
 			},
 			changeCode(e) {
@@ -122,7 +112,7 @@
 						verifyNum: this.verifyNum,
 						password: this.password,
 						nickName: this.nickName,
-						operation: 'password/verifynum' //  wechat 微信登录
+						operation: 'password' //verifynum  wechat 微信登录
 					}
 					this.$postajax(this.$api.reg, param).then(da => {
 						if (da.code == 10000) {
@@ -144,9 +134,16 @@
 				this.$getajax(this.$api.isMobileAvailabled, {
 					mobile: this.registeMobile
 				}).then((da) => {
-					this.isMobileAvailabled = true;
-				}).finally(() => {
-					this.isCheckmobile = false
+					if (da.code == 10000) {
+						this.isMobileAvailabled = true;
+					} else {
+						this.isMobileAvailabled = false;
+					}
+				}).catch(() => {
+					this.isMobileAvailabled = false;
+				}).
+				finally(() => {
+					this.isCheckmobile = false;
 				})
 			},
 			checknickName() {
@@ -154,9 +151,15 @@
 				this.$getajax(this.$api.isNickNameAvailabled, {
 					nickName: this.nickName
 				}).then((da) => {
-					this.isNickNameAvailabled = true;
+					if (da.code == 10000) {
+						this.isNickNameAvailabled = true;
+					} else {
+						this.isNickNameAvailabled = false;
+					}
+				}).catch(() => {
+					this.isNickNameAvailabled = false;
 				}).finally(() => {
-					this.isChecknickName = false
+					this.isChecknickName = false;
 				})
 			}
 

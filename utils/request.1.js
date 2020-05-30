@@ -1,15 +1,12 @@
 import {
 	basePath
 } from '@/utils/index.js'
-// var Fly = require("./wx")
-var axios = require("./axios.min")
-axios.defaults.timeout = 6000; //响应时间
-axios.defaults.withCredentials = true; //让请求头携带参数cookie
-axios.defaults.baseURL = basePath; //配置接口地址  
-const request = axios.create()
-// request.config.timeout = 60 * 1000
-// request.config.baseURL = basePath
-// request.config.withCredentials =true;
+var Fly = require("./wx")
+const request = new Fly()
+
+request.config.timeout = 60 * 1000
+request.config.baseURL = basePath
+request.config.withCredentials =true;
 request.interceptors.request.use((request) => {
 	console.log('request' + JSON.stringify(request))
 	// request.headers["content-type"] = "application/x-www-form-urlencoded";
@@ -33,18 +30,30 @@ request.interceptors.response.use(
 			});
 		}
 		// wx.hideLoading();
-		if (response.data.code != 10000) {
+		if (response.data.code == 10000) {
+			return promise.resolve(response.data)
+		} else {
 			uni.showToast({
 				title: response.data.message || '请求发生错误了',
 				icon: 'none'
 			})
-		} else {
-
+			// if (response.data.code == 4004) {
+			// 	setTimeout(() => {
+			// 		uni.redirectTo({
+			// 			url: '/pages/login/login'
+			// 		})
+			// 	}, 500)
+			// }
+			return promise.reject(err)
 		}
-		return response.data
+		// return promise.resolve(response.data)
 	},
 	(err, promise) => {
-		// uni.hideLoading()
+		uni.hideLoading()
+		// uni.showToast({
+		// 	title: err.message,
+		// 	icon: 'none'
+		// })
 		return promise.reject(err)
 	}
 )
