@@ -1,21 +1,33 @@
 <template>
 	<view class=" pageview flex flex-direction">
-		<view class="tip">当前状态: <image src="/static/VIP@2x.png" mode="widthFix"></image> <text class="num">高级VIP</text>
-			<text class="thumb">(到期时间 2021-01-07 19:30:24)</text></view>
+		<view class="tip flex">
+			<text>当前状态:</text>
+			<view class="flex-sub">
+				<view class="text-left num" v-if="userVipinfo.length<=0">普通会员</view>
+				<view v-for="(item,index) in userVipinfo" :key="index" class="flex">
+					<image src="/static/VIP@2x.png" mode="widthFix"></image> <text class="num">{{item.vipTitle}}</text>
+					<text class="thumb">(到期时间 {{item.expireTime}})</text>
+				</view>
+			</view>
+		</view>
 		<view class="flex-sub ">
 			<view class="taglist flex justify-between flex-wrap">
-				<view class="tag flex align-center" :class="{'active':selectIndex==index}" v-for="(item,index) in 6" :key='index'>
-					<view>
-						<p>初级VIP ￥99/年</p>
-						<p class="price">送600积分</p>
-						<p class="price">加购积分享8折优惠</p>
-						<p class="price">不限收藏夹数量</p>
+				<view class="tag flex align-center justify-between" :class="{'active':selectIndex==index}" v-for="(item,index) in list"
+				 :key='index' @tap="selectVip(index)">
+					<view class="flex-sub">
+						<p class="name">{{item.name}}</p>
+						<rich-text :nodes="item.description"></rich-text>
+					</view>
+					<view class="">
+						<view class="cu-tag round">
+							￥{{item.price}}元/年
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="ftbar">
-			<view class="btn"><text>立即购买</text>(110.00元)</view>
+			<view class="btn"><text>立即购买</text>({{money}}元)</view>
 		</view>
 	</view>
 </template>
@@ -24,8 +36,32 @@
 	export default {
 		data() {
 			return {
-				selectIndex: 0
+				selectIndex: 0,
+				list: [],
+				userVipinfo: []
 			};
+		},
+		created() {
+			this.getVipTemplates();
+			this.userVipinfo = uni.getStorageSync('userInfo').list;
+		},
+		computed: {
+			money() {
+				return this.list[this.selectIndex].price || 0
+			}
+		},
+		methods: {
+			getVipTemplates() {
+				this.$getajax(this.$api.getVipTemplates).then(da => {
+					if (da.code == 10000) {
+						this.list = da.list;
+					}
+				})
+			},
+			selectVip(index) {
+				this.selectIndex = index;
+
+			}
 		}
 	}
 </script>
@@ -39,7 +75,8 @@
 	.pageview {
 		height: 100%;
 		overflow: hidden;
-		&>.flex-sub{
+
+		&>.flex-sub {
 			height: 200upx;
 			overflow: auto;
 			-webkit-overflow-scrolling: touch;
@@ -69,33 +106,49 @@
 
 	.taglist {
 		margin-top: 20upx;
-		padding: 0 15upx;
+		// padding: 0 15upx;
 
 		.tag {
 			width: 100%;
-			margin: 10upx 15upx;
-			border: 1px solid #FF6A00;
-			border-radius: 10upx;
-			text-align: center;
-			color: #FF6A00;
-			font-size: 38upx;
+			margin: 10upx 0;
+			padding: 0 20upx;
+			border-bottom: 1px solid rgba(0, 0, 0, .1);
+			// border-radius: 10upx;
+			// text-align: center;
+			color: #999;
+
 			padding: 20upx;
 
 
 
-			&>view {
-				width: 100%;
+			.name {
+				font-size: 30upx;
+				margin-bottom: 10upx;
 			}
 
 			.price {
 				color: #999;
-				font-size: 30upx;
+				font-size: 34upx;
 				margin-top: 10upx;
 			}
 
+			.cu-tag {
+				background: none;
+				color: #FF6A00;
+				width: auto;
+				padding: 10upx 20upx;
+				border: 1px solid #FF6A00;
+			}
+
 			&.active {
-				color: #fff;
-				background: #FF6A00;
+				.cu-tag {
+					background: #FF6A00;
+					color: #fff;
+				}
+
+				.name {
+					color: #FF6A00;
+				}
 
 				.price {
 					color: #fff;

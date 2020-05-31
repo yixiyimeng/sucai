@@ -2,43 +2,65 @@
 	<view class="pageview flex flex-direction">
 		<view class="flex-sub">
 			<view class='padding-sm flex flex-wrap'>
-				<view class="padding-xs" v-for="(item,index) in 2" :key="index">
-					<view class='cu-tag  radius'>标签</view>
+				<view class="padding-xs" v-for="(item,index) in info.collections" :key="index">
+					<view class='cu-tag  radius'>{{item.name}}</view>
 				</view>
 			</view>
 			<view class="padding">
 				<view class="name margin-top">
-					一键生成中国风插件
+					{{info.title}}
 				</view>
 				<view class="imgbox">
-					<image src="/static/demo.png" mode="widthFix"></image>
+					<!-- <image src="/static/demo.png" mode="widthFix"></image> -->
+					<rich-text :nodes="info.content"></rich-text>
 				</view>
 				<view class="tip">
 					<p>下载所需积分：<text class="num">0</text></p>
-					<p>文件大小：54.21MB</p>
-					<p>发布人：乔克叔叔</p>
+					<p>文件大小：{{info.fileSize}}</p>
+					<p>发布人：{{info.creator}}</p>
 				</view>
 			</view>
 		</view>
 		<view class="cu-bar bg-white tabbar border shop">
 
 			<view class="action">
-				<view class=" cuIcon-home text-orange"></view>首页
+				<navigator url="/pages/index/index" open-type="switchTab">
+					<view class=" cuIcon-home text-orange"></view>首页
+				</navigator>
 			</view>
 
 			<view class="btn-group">
 				<button class="cu-btn  round shadow-blur">收藏下载</button>
 			</view>
 		</view>
+		<favmodal></favmodal>
 	</view>
 </template>
 
 <script>
+	import favmodal from '@/component/favmodal.vue'
 	export default {
 		data() {
 			return {
-
+				id: '',
+				info: {}
 			};
+		},
+		components: {
+			favmodal
+		},
+		onLoad(option) {
+			this.id = option.id;
+			this.findMaterialDetail();
+		},
+		methods: {
+			findMaterialDetail() {
+				this.$getajax(this.$api.findMaterialDetail + this.id).then(da => {
+					if (da.code == 10000) {
+						this.info = da.detail;
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -93,5 +115,14 @@
 			background: #FF6A00;
 			color: #fff;
 		}
+	}
+
+	/deep/ uni-rich-text img {
+		max-width: 100%
+	}
+
+	.cu-tag {
+		width: auto;
+		padding: 16upx 20upx;
 	}
 </style>

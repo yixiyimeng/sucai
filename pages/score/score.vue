@@ -1,18 +1,19 @@
 <template>
 	<view class=" pageview flex flex-direction">
-		<view class="tip">当前余额: <text class="num margin-right">4335积分</text>累计充值: <text class="num">¥44.55</text></view>
+		<view class="tip">当前余额: <text class="num margin-right">{{scores}}积分</text>累计充值: <text class="num">¥44.55</text></view>
 		<view class="flex-sub ">
 			<view class="taglist flex justify-between flex-wrap">
-				<view class="tag flex align-center" :class="{'active':selectIndex==index}" v-for="(item,index) in 6" :key='index'>
+				<view class="tag flex align-center" :class="{'active':selectIndex==index}" v-for="(item,index) in list" :key='index'
+				 @tap="select(index)">
 					<view>
-						<p>100积分</p>
-						<p class="price">10元</p>
+						<p>{{item.title}}</p>
+						<p class="price">{{item.price}}元</p>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="ftbar">
-			<view class="btn"><text>立即购买</text>(110.00元)</view>
+			<view class="btn"><text>立即购买</text>({{money}}元)</view>
 		</view>
 	</view>
 </template>
@@ -21,8 +22,33 @@
 	export default {
 		data() {
 			return {
-				selectIndex: 0
+				selectIndex: 0,
+				scores: 0,
+				cost: 0,
+				list: []
 			};
+		},
+		computed: {
+			money() {
+				return this.list[this.selectIndex].price || 0
+			}
+		},
+		created() {
+			this.getScoreTemplates();
+			this.scores = uni.getStorageSync('userInfo').scores
+			this.cost = uni.getStorageSync('userInfo').cost
+		},
+		methods: {
+			getScoreTemplates() {
+				this.$getajax(this.$api.getScoreTemplates).then(da => {
+					if (da.code == 10000) {
+						this.list = da.list;
+					}
+				})
+			},
+			select(index) {
+				this.selectIndex = index;
+			}
 		}
 	}
 </script>

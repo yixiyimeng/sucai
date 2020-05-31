@@ -12,9 +12,9 @@ const request = axios.create()
 // request.config.withCredentials =true;
 request.interceptors.request.use((request) => {
 	console.log('request' + JSON.stringify(request))
-	// request.headers["content-type"] = "application/x-www-form-urlencoded";
-	if (uni.getStorageSync('cookiekey')) {
-		request.headers["Cookie"] = uni.getStorageSync('cookiekey')
+	//request.headers["content-type"] = "application/x-www-form-urlencoded";
+	if (uni.getStorageSync('token')) {
+		request.headers["Authorization"] = uni.getStorageSync('token')
 	}
 	// uni.showLoading({
 	// 	title: '拼命加载中...'
@@ -38,8 +38,15 @@ request.interceptors.response.use(
 				title: response.data.message || '请求发生错误了',
 				icon: 'none'
 			})
+			if (response.data.code == 10015) {
+				setTimeout(() => {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}, 100)
+			}
 		} else {
-
+			
 		}
 		return response.data
 	},

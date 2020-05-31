@@ -1,7 +1,8 @@
 <template>
 	<view class="pageview flex flex-direction">
 		<view class="list flex-sub">
-			<navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 3" :key="index">
+			<navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 3"
+			 :key="index">
 				<div class="name">神器插件</div>
 				<view class="flex justify-between">
 					<text class="num">100个关注</text>
@@ -17,15 +18,21 @@
 			<view><text class="cuIcon-add"></text>
 				<text>创建</text></view>
 		</view>
+		<addfavmodal></addfavmodal>
 	</view>
 </template>
 
 <script>
+	import addfavmodal from '@/component/addfavmodal.vue'
 	export default {
 		data() {
 			return {
-
+				showModal: true,
+				name:''
 			};
+		},
+		components:{
+			addfavmodal
 		}
 	}
 </script>
@@ -72,15 +79,18 @@
 		height: 100upx;
 		width: 100upx;
 		border-radius: 100%;
-&>view{
-	width: 100%;
-}
+
+		&>view {
+			width: 100%;
+		}
+
 		text {
 			font-size: 20upx;
 			font-size-adjust: none;
 			display: block;
-			&:first-child{
-				font-size:46upx;
+
+			&:first-child {
+				font-size: 46upx;
 				font-weight: bold;
 				line-height: 30upx;
 			}

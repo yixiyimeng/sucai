@@ -54,13 +54,13 @@
 				<text class="text-orange">最新</text>
 				<text class="bg-gradual-orange" style="width:2em; min-width: 1em;"></text>
 			</view>
-			<view class="action">换一换</view>
+			<view class="action" @tap="findPageMaterials">换一换</view>
 		</view>
 		<view class="">
 			<view class="padding goodslist flex flex-wrap justify-between">
-				<navigator url="/pages/details/details" class="goods-item" hover-class="none" v-for="(item,index) in 10" :key="index">
-					<image src="/static/demo.png" mode="aspectFill"></image>
-					<p>配景乔木psd</p>
+				<navigator :url="`/pages/details/details?id=${item.id}`" class="goods-item" hover-class="none" v-for="(item,index) in materialslist" :key="index">
+					<image :src="item.coverPath" mode="aspectFill"></image>
+					<p>{{item.title}}</p>
 				</navigator>
 			</view>
 		</view>
@@ -71,11 +71,13 @@
 	export default {
 		data() {
 			return {
-				keyword: ''
+				keyword: '',
+				materialslist:[]
 			};
 		},
 		onLoad() {
-			this.findCollectionsInfo()
+			this.findCollectionsInfo();
+			this.findPageMaterials();
 		},
 		methods: {
 			confirm() {
@@ -84,6 +86,17 @@
 			findCollectionsInfo(){
 				this.$getajax(this.$api.findCollectionsInfo+'0').then(da=>{
 					
+				})
+			},
+			findPageMaterials(){
+				this.$postajax(this.$api.findPageMaterials,{
+					page:1,
+					pageSize:10
+				}).then(da=>{
+					if(da.code==10000){
+						this.materialslist=da.list
+						// console.log(da.data)
+					}
 				})
 			}
 		}

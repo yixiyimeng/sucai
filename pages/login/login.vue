@@ -40,7 +40,10 @@
 			</view>
 		</form>
 		<view class="margin-top-lg submitBtn cu-btn shadow" :class="{'bg-orange':isAble}" @tap="submitLogin">登录</view>
-
+		<view class="margin-lg flex justify-between">
+			<navigator class="text-orange" url="/pages/reg/reg">去注册&gt;</navigator>
+			<navigator class="text-orange" url="/pages/login/login">忘记密码&gt;</navigator>
+		</view>
 		<view class="otherway">
 			<view class="title flex align-center">
 				<view class="line flex-sub"></view>
@@ -165,17 +168,19 @@
 						registeMobile: this.registeMobile
 					})).then(da => {
 						if (da.code == 10000) {
-							uni.setStorageSync('userInfo',da.userInfo)
+							uni.setStorageSync('userInfo', da.userInfo);
+							uni.setStorageSync('token', da.userInfo.token)
 							setTimeout(() => {
 								uni.switchTab({
 									url: '/pages/index/index'
 								})
 							}, 500)
+						} else {
+							uni.showToast({
+								title: da.message,
+								icon: 'none'
+							});
 						}
-						uni.showToast({
-							title: da.message,
-							icon: 'none'
-						});
 					})
 				}
 			},
