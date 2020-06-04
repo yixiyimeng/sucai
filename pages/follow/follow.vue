@@ -1,15 +1,19 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<view class="list flex-sub">
-			<navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 3"
-			 :key="index">
-				<div class="name">神器插件</div>
-				<view class="flex justify-between">
-					<text class="num">100个关注</text>
-					<text>2010-10-10 创建</text>
-				</view>
-			</navigator>
-		</view>
+		<mescroll-body ref="mescrollRef" :bottom="80" @init="mescrollInit"  @down="downCallback" 
+		 @up="upCallback">
+			<!-- 数据列表 -->
+			<view class="list">
+				<navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 20"
+				 :key="index">
+					<div class="name">{{item.name}}</div>
+					<view class="flex justify-between">
+						<text class="num">100个关注</text>
+						<text>2010-10-10 创建</text>
+					</view>
+				</navigator>
+			</view>
+		</mescroll-body>
 		<view class="tip">
 			<p>非VIP可免费创建6个收藏夹</p>
 			<p>加入VIP享受不限量的收藏功能</p>
@@ -21,28 +25,38 @@
 			</view>
 		</view>
 		<addmodal ref="addmodal"></addmodal>
-		
+
 	</view>
 </template>
 
 <script>
 	import addmodal from "@/component/addmodal"
+	import MescrollMixin from "@/component/mescroll-uni/mescroll-mixins.js";
 	export default {
+		mixins: [MescrollMixin],
 		data() {
 			return {
 				isAdd: false,
-				name: ''
+				name: '',
+				list:[]
 			};
 		},
 		components: {
 			addmodal
 		},
 		methods: {
-			handleAddFile() {
-				/* 创建文件夹 */
+			upCallback(mescroll) {
+				this.getlist();
 			},
-			addFile(){
+			addFile() {
 				this.$refs.addmodal.show()
+			},
+			getlist() {
+				this.$getajax(this.$api.findStores).then(da => {
+					let curPageData = da.list;
+					this.list=curPageData;
+					this.mescroll.endBySize(curPageData.length, curPageData.length);
+				})
 			}
 		}
 	}
@@ -50,8 +64,8 @@
 <style>
 	.pageview,
 	page {
-		height: 100%;
-		overflow: hidden;
+		/* height: 100%; */
+		/* overflow: hidden; */
 	}
 </style>
 <style lang="scss">
@@ -77,7 +91,13 @@
 		text-align: center;
 		color: #666;
 		font-size: 20upx;
-		padding-bottom: 10upx;
+		padding: 10upx;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background: #fff;
+		box-shadow: 0 -10upx 10upx rgba($color: #000000, $alpha: .05);
 	}
 
 	.add {

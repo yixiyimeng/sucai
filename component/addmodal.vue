@@ -2,11 +2,11 @@
 	<view class="cu-modal" :class="showModal?'show':''">
 		<view class="cu-dialog bg-white">
 			<view class="title flex justify-between align-center">
-				<text>创建</text>
+				<text>添加收藏夹</text>
 				<text class="cuIcon-close" @tap="showModal=false"></text>
 			</view>
 			<view class="padding-sm solid text-left margin">
-				<input  type="text" value="" v-model="info" placeholder="收藏夹名称" />
+				<input type="text" value="" v-model="info" placeholder="收藏夹名称" />
 			</view>
 			<view class="ftbar flex">
 				<view class="btn flex-sub" @tap="cancel">
@@ -26,29 +26,32 @@
 			return {
 				showModal: false,
 				info: '',
-				id:''
+				id: ''
 			};
 		},
 		methods: {
 			show(id) {
-				this.id=id;
+				this.id = id;
 				this.showModal = true;
 			},
 			cancel() {
-				this.showModal=false
+				this.showModal = false
 			},
-			submit(){
-				this.$postajax(this.$api.addFollowfile,{name:this.info}).then(da=>{
-					if(da.code==10000){
+			submit() {
+				this.$postajax(this.$api.addFollowFile, {
+					name: this.info,
+					id: 0
+				}).then(da => {
+					if (da.code == 10000) {
 						uni.showToast({
-							title:'添加成功',
-							icon:'none'
+							title: '添加成功',
+							icon: 'none'
 						})
-						this.showModal=false
-					}else{
+						this.showModal = false
+					} else {
 						uni.showToast({
-							title:da.msg,
-							icon:'none'
+							title: da.message,
+							icon: 'none'
 						})
 					}
 				})
