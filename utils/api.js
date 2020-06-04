@@ -19,6 +19,7 @@ export const api = {
 	isNickNameAvailabled: '/common/isNickNameAvailabled',
 	isLoginAvailabled: '/common/isLoginAvailabled', //验证登录手机号的正确性
 	findCollectionsInfo: '/common/findCollectionsInfo/', //专辑信息
+	addFollowfile: '/store/addOrUpdate/', //新增收藏夹
 }
 
 export function getajax(url, params) {

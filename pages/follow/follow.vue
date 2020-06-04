@@ -1,7 +1,8 @@
 <template>
 	<view class="pageview flex flex-direction">
 		<view class="list flex-sub">
-			<navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 3" :key="index">
+			<navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 3"
+			 :key="index">
 				<div class="name">神器插件</div>
 				<view class="flex justify-between">
 					<text class="num">100个关注</text>
@@ -13,19 +14,36 @@
 			<p>非VIP可免费创建6个收藏夹</p>
 			<p>加入VIP享受不限量的收藏功能</p>
 		</view>
-		<view class="add flex align-center">
-			<view><text class="cuIcon-add"></text>
-				<text>创建</text></view>
+		<view class="add flex align-center" @tap="addFile">
+			<view>
+				<text class="cuIcon-add"></text>
+				<text>创建</text>
+			</view>
 		</view>
+		<addmodal ref="addmodal"></addmodal>
+		
 	</view>
 </template>
 
 <script>
+	import addmodal from "@/component/addmodal"
 	export default {
 		data() {
 			return {
-
+				isAdd: false,
+				name: ''
 			};
+		},
+		components: {
+			addmodal
+		},
+		methods: {
+			handleAddFile() {
+				/* 创建文件夹 */
+			},
+			addFile(){
+				this.$refs.addmodal.show()
+			}
 		}
 	}
 </script>
@@ -72,15 +90,18 @@
 		height: 100upx;
 		width: 100upx;
 		border-radius: 100%;
-&>view{
-	width: 100%;
-}
+
+		&>view {
+			width: 100%;
+		}
+
 		text {
 			font-size: 20upx;
 			font-size-adjust: none;
 			display: block;
-			&:first-child{
-				font-size:46upx;
+
+			&:first-child {
+				font-size: 46upx;
 				font-weight: bold;
 				line-height: 30upx;
 			}
