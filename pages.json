@@ -4,7 +4,7 @@
 		"style": {
 			"navigationBarTitleText": "注册"
 		}
-	},{
+	}, {
 		"path": "pages/login/login",
 		"style": {
 			"navigationBarTitleText": "登录"
@@ -51,6 +51,11 @@
 	}, {
 		"path": "pages/followlist/followlist",
 		"style": {}
+	}, {
+		"path": "pages/subfind/subfind",
+		"style": {
+			"navigationStyle": "custom"
+		}
 	}],
 	"tabBar": {
 		"color": "#333",

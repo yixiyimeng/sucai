@@ -19,13 +19,20 @@ export const api = {
 	isNickNameAvailabled: '/common/isNickNameAvailabled',
 	isLoginAvailabled: '/common/isLoginAvailabled', //验证登录手机号的正确性
 	findCollectionsInfo: '/common/findCollectionsInfo/', //专辑信息
-	findPageMaterials:'/common/findPageMaterials',//查找素材
-	findMaterialDetail:'/common/findMaterialDetail/',//素材详情
-	getVipTemplates:'/common/getVipTemplates',//获取vip信息
-	getScoreTemplates:'/common/getScoreTemplates',//获取积分模板
-	addMaterialStore:'/material/addMaterialStore',//素材
-	addFollowFile:'/store/addOrUpdate',//添加或者更新收藏夹
-	findStores:'/store/findStores',//查找收藏夹
+	findPageMaterials: '/common/findPageMaterials', //查找素材
+	findMaterialDetail: '/common/findMaterialDetail/', //素材详情
+	getVipTemplates: '/common/getVipTemplates', //获取vip信息
+	getScoreTemplates: '/common/getScoreTemplates', //获取积分模板
+	addMaterialStore: '/material/addMaterialStore', //素材
+	addFollowFile: '/store/addOrUpdate', //添加或者更新收藏夹
+	findStores: '/store/findStores', //查找收藏夹
+	delStores: '/store/delete', //删除收藏夹
+	findResource: '/common/findChilds/', //根据专辑id获取子专辑
+	createPayQrcode: '/wxpay/createPayQrcode', //获取二维码
+	showQrcode: '/wxpay/showQrcode', //显示二维码
+	getPayState: '/wxpay/getPayState', //查询支付状态
+	findStoredMaterials: '/material/findStoredMaterials', //查询收藏素材
+	
 }
 
 export function getajax(url, params) {

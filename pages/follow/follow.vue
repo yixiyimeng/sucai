@@ -1,17 +1,27 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<mescroll-body ref="mescrollRef" :bottom="80" @init="mescrollInit"  @down="downCallback" 
-		 @up="upCallback">
+		<mescroll-body ref="mescrollRef" :bottom="80" @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<!-- 数据列表 -->
 			<view class="list">
-				<navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 20"
+				<!-- <navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 20"
 				 :key="index">
 					<div class="name">{{item.name}}</div>
 					<view class="flex justify-between">
 						<text class="num">100个关注</text>
 						<text>2010-10-10 创建</text>
 					</view>
-				</navigator>
+				</navigator> -->
+				<tui-swipe-action :actions="actions" @click="handlerButton" v-for="(item,index) in list" :key="index" :params="item">
+					<template v-slot:content>
+						<view class="follow-item" @tap.stop="details(item.id,item.name)">
+							<div class="name">{{item.name}}</div>
+							<!-- <view class="flex justify-between">
+								<text class="num">100个关注</text>
+								<text>2010-10-10 创建</text>
+							</view> -->
+						</view>
+					</template>
+				</tui-swipe-action>
 			</view>
 		</mescroll-body>
 		<view class="tip">
@@ -24,7 +34,7 @@
 				<text>创建</text>
 			</view>
 		</view>
-		<addmodal ref="addmodal"></addmodal>
+		<addmodal ref="addmodal" @upload="downCallback"></addmodal>
 
 	</view>
 </template>
@@ -32,17 +42,36 @@
 <script>
 	import addmodal from "@/component/addmodal"
 	import MescrollMixin from "@/component/mescroll-uni/mescroll-mixins.js";
+	import tuiSwipeAction from "@/component/swipe-action/swipe-action"
 	export default {
 		mixins: [MescrollMixin],
 		data() {
 			return {
 				isAdd: false,
 				name: '',
-				list:[]
+				list: [],
+				actions: [{
+						name: '删除',
+						color: '#fff',
+						fontsize: 30, //单位upx
+						width: 80, //单位px
+						//icon: 'like.png',//此处为图片地址
+						background: '#ed3f14'
+					},
+					{
+						name: '编辑',
+						color: '#fff',
+						fontsize: 30,
+						width: 80,
+						//icon: 'like.png',//此处为图片地址
+						background: '#ff7900'
+					}
+				]
 			};
 		},
 		components: {
-			addmodal
+			addmodal,
+			tuiSwipeAction
 		},
 		methods: {
 			upCallback(mescroll) {
@@ -54,8 +83,49 @@
 			getlist() {
 				this.$getajax(this.$api.findStores).then(da => {
 					let curPageData = da.list;
-					this.list=curPageData;
+					this.list = curPageData;
 					this.mescroll.endBySize(curPageData.length, curPageData.length);
+				})
+			},
+			delfollow(id) {
+				this.$getajax(this.$api.delStores, {
+					storeId: id
+				}).then(da => {
+					uni.showToast({
+						title: (da.code == 10000) ? '删除成功' : da.message,
+						icon: 'none'
+					});
+					if(da.code==10000){
+						this.mescroll && this.mescroll.resetUpScroll();
+					}
+
+				})
+			},
+			handlerButton(e) {
+				let index = e.index;
+				let item = e.item;
+				if (index == 0) {
+					/* 删除 */
+					let $me=this;
+					uni.showModal({
+						title: '',
+						content: '你确定要删除吗？',
+						success: function(res) {
+							if (res.confirm) {
+								$me.delfollow(item.id)
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					});
+				} else {
+					/* 编辑 */
+					this.$refs.addmodal.show(item.id, item.name)
+				}
+			},
+			details(id,name){
+				uni.navigateTo({
+					url:'/pages/followdetails/followdetails?id='+id+'&name='+name
 				})
 			}
 		}
@@ -80,10 +150,18 @@
 
 		.follow-item {
 			padding: 30upx;
-			margin-bottom: 20upx;
+			// margin-bottom: 20upx;
 			background: #fff;
-			border-top: 1px solid #eee;
+			// border-top: 1px solid #eee;
 			border-bottom: 1px solid #eee;
+			color: #999;
+			font-size: 24upx;
+
+			.name {
+				color: #333;
+				font-size: 28upx;
+				margin-bottom: 20upx;
+			}
 		}
 	}
 

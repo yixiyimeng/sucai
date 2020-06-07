@@ -1,64 +1,110 @@
 <template>
-	<view>
-		<view class="swiper-item">
-			<view class="tip">
-				<view>插件</view>
-				<view class="fav">
-					<text class="cuIcon-edit"></text>
-					<text>编辑</text>
+	<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
+		<view class="pageview flex flex-direction">
+			<view class="swiper-item">
+				<view class="tip">
+					<view>{{storeName}}</view>
+					<view class="fav" @tap="edit">
+						<text class="cuIcon-edit"></text>
+						<text>编辑</text>
+					</view>
+				</view>
+				<image src="/static/bg.jpg" mode="widthFix"></image>
+			</view>
+			<view v-if="relateds.length>0">
+				<view class="cu-bar bg-white solid-bottom">
+					<view class="action border-title">
+						<text class="text-orange">关联专辑</text>
+						<text class="bg-gradual-orange" style="width:4em"></text>
+					</view>
+				</view>
+				<view class="bg-white">
+					<view class='padding-sm flex flex-wrap justify-between'>
+						<view class="padding-xs" v-for="(item,index) in relateds" :key="index">
+							<view class='cu-tag  radius'>{{item.name}}</view>
+						</view>
+					</view>
+					<!-- <view class="more">
+					<text>展开</text>
+					<text class="cuIcon-unfold"></text>
+				</view> -->
 				</view>
 			</view>
-			<image src="/static/bg.jpg" mode="widthFix"></image>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action border-title">
-				<text class="text-orange">关联专辑</text>
-				<text class="bg-gradual-orange" style="width:4em"></text>
-			</view>
-		</view>
-		<view class="bg-white">
-			<view class='padding-sm flex flex-wrap justify-between'>
-				<view class="padding-xs" v-for="(item,index) in 3" :key="index">
-					<view class='cu-tag  radius'>标签</view>
-				</view>
-			</view>
-			<view class="more">
-				<text>展开</text>
-				<text class="cuIcon-unfold"></text>
-			</view>
-		</view>
+			<view>
 
-		<view class="">
-			<view class="padding goodslist flex flex-wrap justify-between">
-				<view class="goods-item" v-for="(item,index) in 10" :key="index">
-					<image src="/static/demo.png" mode="aspectFill"></image>
-					<p>配景乔木psd</p>
+				<view class="padding goodslist flex flex-wrap justify-between">
+					<view class="goods-item" v-for="(item,index) in list" :key="index">
+						<image :src="item.coverPath" mode="aspectFill"></image>
+						<p class="text-cut">{{item.title}}</p>
+					</view>
 				</view>
 			</view>
 		</view>
-	</view>
+		<addmodal ref="addmodal" @upload="uploadname"></addmodal>
+	</mescroll-body>
 </template>
 
 <script>
+	import addmodal from "@/component/addmodal"
+	import MescrollMixin from "@/component/mescroll-uni/mescroll-mixins.js"
 	export default {
 		data() {
 			return {
-				keyword: ''
+				keyword: '',
+				list: [],
+				storeId: '',
+				storeName: '',
+				relateds: []
 			};
+		},
+		components:{
+			addmodal
+		},
+		mixins: [MescrollMixin],
+		onLoad(option) {
+			this.storeId = option.id;
+			this.storeName = option.name;
 		},
 		methods: {
 			confirm() {
 				/* TODO 搜索 */
+			},
+			/*上拉加载的回调*/
+			upCallback(mescroll) {
+				this.findStoredMaterials();
+			},
+			findStoredMaterials() {
+				let pageNum = this.mescroll.num; // 页码, 默认从1开始
+				let pageSize = this.mescroll.size;
+				let param = {
+					page: pageNum,
+					pageSize: pageSize,
+					storeId: this.storeId
+				}
+				this.$postajax(this.$api.findStoredMaterials, param).then(da => {
+					if (da.code == 10000) {
+						let curPageData = da.list;
+						this.mescroll.endBySize(curPageData.length, da.total);
+						if (this.mescroll.num == 1)
+							this.list = []; //如果是第一页需手动制空列表
+						this.list = this.list.concat(curPageData); //追加新数据
+						this.relateds = da.relateds
+					}
+				})
+			},
+			edit(){
+				/* 编辑 */
+				this.$refs.addmodal.show(this.storeId,this.storeName)
+			},
+			uploadname(name){
+				this.storeName=name
 			}
 		}
 	}
 </script>
 
-<style lang="scss">
-	page {
-		// background: #fff;
-	}
 
+<style lang="scss" scoped>
 	.swiper-item {
 		height: 390upx;
 		position: relative;
@@ -96,7 +142,7 @@
 		}
 	}
 
-	
+
 	.more {
 		text-align: center;
 		padding: 10upx;

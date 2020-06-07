@@ -60,7 +60,7 @@
 			<view class="padding goodslist flex flex-wrap justify-between">
 				<navigator :url="`/pages/details/details?id=${item.id}`" class="goods-item" hover-class="none" v-for="(item,index) in materialslist" :key="index">
 					<image :src="item.coverPath" mode="aspectFill"></image>
-					<p>{{item.title}}</p>
+					<p class="text-cur">{{item.title}}</p>
 				</navigator>
 			</view>
 		</view>
@@ -82,6 +82,9 @@
 		methods: {
 			confirm() {
 				/* TODO 搜索 */
+				uni.navigateTo({
+					url: '/pages/search/search?keyword='+this.keyword
+				})
 			},
 			findCollectionsInfo(){
 				this.$getajax(this.$api.findCollectionsInfo+'0').then(da=>{

@@ -4,7 +4,7 @@
 		<view class="flex-sub ">
 			<view class="taglist flex justify-between flex-wrap">
 				<view class="tag flex align-center" :class="{'active':selectIndex==index}" v-for="(item,index) in list" :key='index'
-				 @tap="select(index)">
+				 @tap="select(index)" >
 					<view>
 						<p>{{item.title}}</p>
 						<p class="price">{{item.price}}元</p>
@@ -12,13 +12,16 @@
 				</view>
 			</view>
 		</view>
-		<view class="ftbar">
-			<view class="btn"><text>立即购买</text>({{money}}元)</view>
+		<view class="ftbar" v-if="list.length>0">
+			<view class="btn"  @tap="submit"><text>立即购买</text>({{money}}元)</view>
 		</view>
+		<buymodal ref="buymodal" @upload='upload'></buymodal>
+		
 	</view>
 </template>
 
 <script>
+	import buymodal from '@/component/buymodal.vue'
 	export default {
 		data() {
 			return {
@@ -28,9 +31,10 @@
 				list: []
 			};
 		},
+		components:{buymodal},
 		computed: {
 			money() {
-				return this.list[this.selectIndex].price || 0
+				return this.list.length>0&&this.list[this.selectIndex].price || 0
 			}
 		},
 		created() {
@@ -48,7 +52,10 @@
 			},
 			select(index) {
 				this.selectIndex = index;
-			}
+			},
+			submit() {
+				this.$refs.buymodal.show('scores', this.list[this.selectIndex].id)
+			},
 		}
 	}
 </script>

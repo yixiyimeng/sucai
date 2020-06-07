@@ -26,13 +26,15 @@
 				</view>
 			</view>
 		</view>
-		<view class="ftbar">
-			<view class="btn"><text>立即购买</text>({{money}}元)</view>
+		<view class="ftbar" v-if="list.length>0">
+			<view class="btn" @tap="submit"><text>立即购买</text>({{money}}元)</view>
 		</view>
+		<buymodal ref="buymodal" @upload='upload'></buymodal>
 	</view>
 </template>
 
 <script>
+	import buymodal from '@/component/buymodal.vue'
 	export default {
 		data() {
 			return {
@@ -41,13 +43,16 @@
 				userVipinfo: []
 			};
 		},
+		components: {
+			buymodal
+		},
 		created() {
 			this.getVipTemplates();
 			this.userVipinfo = uni.getStorageSync('userInfo').list;
 		},
 		computed: {
 			money() {
-				return this.list[this.selectIndex].price || 0
+				return this.list.length > 0 && this.list[this.selectIndex].price || 0
 			}
 		},
 		methods: {
@@ -61,7 +66,11 @@
 			selectVip(index) {
 				this.selectIndex = index;
 
-			}
+			},
+			submit() {
+				this.$refs.buymodal.show('vips', this.list[this.selectIndex].id)
+			},
+			
 		}
 	}
 </script>

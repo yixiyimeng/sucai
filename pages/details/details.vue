@@ -23,17 +23,17 @@
 		</view>
 		<view class="cu-bar bg-white tabbar border shop">
 
-			<view class="action">
-				<navigator url="/pages/index/index" open-type="switchTab">
+			<view class="action" @tap="gotohome">
+				<!-- <navigator url="/pages/index/index" open-type="switchTab"> -->
 					<view class=" cuIcon-home text-orange"></view>首页
-				</navigator>
+				<!-- </navigator> -->
 			</view>
 
 			<view class="btn-group">
-				<button class="cu-btn  round shadow-blur">收藏下载</button>
+				<button class="cu-btn  round shadow-blur" @tap="addfav">收藏下载</button>
 			</view>
 		</view>
-		<favmodal></favmodal>
+		<favmodal ref="favmodal"></favmodal>
 	</view>
 </template>
 
@@ -59,6 +59,15 @@
 					if (da.code == 10000) {
 						this.info = da.detail;
 					}
+				})
+			},
+			addfav(){
+				this.$refs.favmodal.show(this.info.id)
+			},
+			gotohome(){
+				console.log(122)
+				uni.switchTab({
+					url:'/pages/index/index'
 				})
 			}
 		}

@@ -35,7 +35,7 @@
 <style lang="scss" scoped>
 	.cu-modal {
 		.cu-dialog {
-			// width: 640upx;
+			width: 640upx;
 		}
 
 		.title {

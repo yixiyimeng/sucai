@@ -34,6 +34,7 @@ request.interceptors.response.use(
 		}
 		// wx.hideLoading();
 		if (response.data.code != 10000) {
+			console.log(12233)
 			uni.showToast({
 				title: response.data.message || '请求发生错误了',
 				icon: 'none'

@@ -2,54 +2,94 @@
 	<view class="pageview flex flex-direction">
 		<searchbar @search="search"></searchbar>
 		<view class="flex-sub">
-			<view class="cu-bar bg-white solid-bottom">
-				<view class="action border-title">
-					<text class="text-orange">相关专辑</text>
-					<text class="bg-gradual-orange" style="width:4em"></text>
-				</view>
-			</view>
-			<view class="bg-white">
-				<view class='padding-sm flex flex-wrap justify-between'>
-					<view class="padding-xs" v-for="(item,index) in 3" :key="index">
-						<view class='cu-tag  radius'>标签</view>
+			<mescroll-uni @init="mescrollInit" @down="downCallback" @up="upCallback" :fixed="false">
+
+				<view class="cu-bar bg-white solid-bottom" v-if="relateds.length>0">
+					<view class="action border-title">
+						<text class="text-orange">相关专辑</text>
+						<text class="bg-gradual-orange" style="width:4em"></text>
 					</view>
 				</view>
-				<view class="more">
-					<text>展开</text>
-					<text class="cuIcon-unfold"></text>
+				<view class="bg-white" v-if="relateds.length>0">
+					<view class='padding-sm flex flex-wrap justify-between'>
+						<view class="padding-xs" v-for="(item,index) in relateds" :key="index">
+							<view class='cu-tag  radius'>{{item.name}}</view>
+						</view>
+					</view>
+					<!-- <view class="more">
+						<text>展开</text>
+						<text class="cuIcon-unfold"></text>
+					</view> -->
 				</view>
-			</view>
-			<view class="cu-bar bg-white  margin-top-sm">
-				<view class="action border-title">
-					<text>共20条结果</text>
-				</view>
-			</view>
-			<view class="">
-				<view class="padding goodslist flex flex-wrap justify-between">
-					<view class="goods-item" v-for="(item,index) in 10" :key="index">
-						<image src="/static/demo.png" mode="aspectFill"></image>
-						<p>配景乔木psd</p>
+				<view class="cu-bar bg-white  margin-top-sm">
+					<view class="action border-title">
+						<text>共{{total}}条结果</text>
 					</view>
 				</view>
-			</view>
+				<view class="">
+					<view class="padding goodslist flex flex-wrap justify-between">
+						<navigator :url="`/pages/details/details?id=${item.id}`" class="goods-item" hover-class="none" v-for="(item,index) in materialslist" :key="index">
+							<image :src="item.coverPath" mode="aspectFill"></image>
+							<p class="text-cut">{{item.title}}</p>
+
+						</navigator>
+					</view>
+				</view>
+			</mescroll-uni>
 		</view>
 	</view>
 </template>
 
 <script>
 	import searchbar from '@/component/searchbar.vue'
+	import MescrollMixin from "@/component/mescroll-uni/mescroll-mixins.js"
 	export default {
 		data() {
 			return {
+				searchStr: '',
+				materialslist: [],
+				relateds: [],
+				total: 0
 			};
 		},
+		mixins: [MescrollMixin],
 		components: {
 			searchbar
 		},
+		onLoad(option) {
+			this.searchStr = option.keyword
+		},
 		methods: {
 			search(keyword) {
-				console.log(keyword)
-			}
+				this.searchStr = keyword;
+				this.mescroll && this.mescroll.resetUpScroll();
+			},
+			/*上拉加载的回调*/
+			upCallback(mescroll) {
+				this.findPageMaterials();
+			},
+			findPageMaterials() {
+				let pageNum = this.mescroll.num; // 页码, 默认从1开始
+				let pageSize = this.mescroll.size;
+				let param = {
+					page: pageNum,
+					pageSize: pageSize,
+					searchStr: this.searchStr
+				}
+				let $me = this;
+				this.$postajax(this.$api.findPageMaterials, param).then(da => {
+					if (da.code == 10000) {
+						let curPageData = da.list;
+						this.relateds = da.relateds;
+						this.total = da.total;
+						$me.mescroll.endBySize(curPageData.length, da.total);
+						if ($me.mescroll.num == 1)
+							$me.materialslist = []; //如果是第一页需手动制空列表
+						$me.materialslist = $me.materialslist.concat(curPageData); //追加新数据
+
+					}
+				})
+			},
 		}
 	}
 </script>
@@ -72,5 +112,12 @@
 		text-align: center;
 		padding: 10upx;
 		color: #999;
+	}
+
+	.cu-tag {
+		width: auto;
+		min-width: 210upx;
+		padding-left: 20upx;
+		padding-right: 20upx;
 	}
 </style>

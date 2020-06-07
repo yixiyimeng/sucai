@@ -15,6 +15,9 @@
 				keyword: ''
 			};
 		},
+		created() {
+			
+		},
 		methods: {
 			confirm() {
 				/* TODO 搜索 */

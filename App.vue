@@ -251,7 +251,6 @@
 	image {
 		height: auto;
 	}
-	
 </style>
 <style lang="scss">
 	.cu-tag {
@@ -262,35 +261,35 @@
 		text-align: center;
 		color: #333;
 		height: auto;
-		
+
 	}
-	
+
 	.goodslist {
 		.goods-item {
 			width: 48%;
 			margin: 0 0 20upx;
 			background: #fff;
-	
 			font-size: 28upx;
 			color: #333;
 			box-shadow: 0 10upx 10upx rgba(0, 0, 0, .05);
 			border-radius: 4upx;
 			overflow: hidden;
 			text-align: center;
-	
+
 			image {
 				display: block;
 				width: 100%;
 				height: 48vw;
 			}
-	
+
 			p {
 				height: 80upx;
 				line-height: 80upx;
+				padding:0 10upx;
 			}
 		}
 	}
-	
+
 	.cancelBtn,
 	.defaultBtn {
 		color: #fff;
@@ -303,17 +302,17 @@
 		margin-left: 40upx;
 		margin-right: 40upx;
 	}
-	
+
 	.cancelBtn {
 		background: #f0f0f0;
 		color: #fc743c;
 	}
-	
+
 	.defaultBtn {
 		background: #d5d5d5;
 	}
+
 	button::after {
 		border: none;
 	}
-	
 </style>

@@ -1,28 +1,46 @@
 <template>
 	<view class="pageview flex flex-direction">
 		<searchbar @search="search"></searchbar>
-		<div class="bread">
-			<span class="text-orange">专辑一</span>
-			<span>&gt;</span>
-			<span class="text-orange">专辑二</span>
-			<span>&gt;</span>
-			<span class="text-orange">专辑二</span>
-			<span>&gt;</span>
-			<span class="text-orange">专辑二</span>
-			<span>&gt;</span>
-			<span class="text-orange">专辑二</span>
-			<span>&gt;</span>
-			<text>专辑三</text>
-		</div>
 		<div class="flex-sub flex" style="overflow: hidden;">
-			<div class="list">
-				<div class="item">
-					<div class="title">专辑一</div>
-					<div class="flex justify-between">
-						<text>收藏数：100</text>
-						<text>创建时间：2020-05-24</text>
+			<div class="submenu">
+				<scroll-view scroll-y scroll-with-animation class="scroll-view" :scroll-into-view="'head-' + cateIndex">
+					<div class="submenu-item flex flex-align-center" :class="{ active: cateIndex == myitemIndex }" v-for="(item, myitemIndex) in menulist"
+					 :key="myitemIndex" @click="scrollTo(myitemIndex, item)" :id="'head-' + myitemIndex">
+						<span class="cate ">{{ item.name }}</span>
 					</div>
-				</div>
+				</scroll-view>
+			</div>
+			<div class="flex-sub main padding-left-sm">
+				<!-- <mescroll-uni  @init="mescrollInit" @down="downCallback" @up="upCallback" :fixed="false"> -->
+				<view class="cu-bar bg-white solid-bottom" v-if="list.length>0">
+					<view class="action border-title">
+						<text class="text-orange">子专辑</text>
+						<text class="bg-gradual-orange" style="width:3em"></text>
+					</view>
+				</view>
+				<view>
+					<view class='padding-sm flex flex-wrap justify-between' v-if="list.length>0">
+						<view class="padding-xs" v-for="(item,index) in list" :key="index" @tap="details(item)">
+							<view class='cu-tag  radius'>{{item.name}}</view>
+						</view>
+					</view>
+
+				</view>
+				<view class="cu-bar bg-white solid-bottom margint-top" v-if="attentions.length>0">
+					<view class="action border-title">
+						<text class="text-orange">推荐专辑</text>
+						<text class="bg-gradual-orange" style="width:4em"></text>
+					</view>
+				</view>
+				<view>
+					<view class='padding-sm flex flex-wrap justify-between' v-if="attentions.length>0">
+						<view class="padding-xs" v-for="(item,index) in list" :key="index" @tap="details(item)">
+							<view class='cu-tag  radius'>{{item.name}}</view>
+						</view>
+					</view>
+
+				</view>
+				<!-- </mescroll-uni> -->
 			</div>
 		</div>
 	</view>
@@ -39,24 +57,50 @@
 		data() {
 			return {
 				cateIndex: 0,
-				menulist: [{
-					'name': '关注的'
-				}, {
-					'name': '关注的'
-				}, {
-					'name': '关注的'
-				}]
+				curId: 1,
+				list: [],
+				attentions: [], //推荐专辑
+				menulist: []
 			};
+		},
+		created() {
+			this.findResource();
 		},
 		methods: {
 			search(keyword) {
-				// console.log(keyword)
+				console.log(keyword)
 				uni.navigateTo({
-					url: '/pages/search/search'
+					url: '/pages/search/search?keyword=' + keyword
 				})
 			},
 			scrollTo(index, item) {
-				this.cateIndex = index
+				this.cateIndex = index;
+				this.curId = item.id;
+				this.findCollectionsInfo();
+			},
+			findCollectionsInfo() {
+				this.$getajax(this.$api.findCollectionsInfo + this.curId).then(da => {
+					if (da.code == 10000) {
+						this.list = da.nodes;
+						this.attentions = da.attentions
+					}
+				})
+			},
+			findResource() {
+				let $me = this;
+				this.$getajax(this.$api.findResource + '1').then(da => {
+					if (da.code == 10000) {
+						let curPageData = da.list;
+						$me.menulist = curPageData;
+						this.curId = $me.menulist[0].id;
+						this.findCollectionsInfo();
+					}
+				})
+			},
+			details(info) {
+				uni.navigateTo({
+					url: '/pages/subfind/subfind?id=' + info.id + '&name=' + info.name
+				})
 			}
 		}
 	}
@@ -72,28 +116,44 @@
 	.main {
 		height: 100%;
 		overflow: auto;
+		background: #fff;
 	}
-.bread{
-	background: #fff;
-	padding: 20upx 30upx;
-	color: #999;
-	span{
-		margin-right: 20upx;
-	}
-}
-	.list {
-		margin-top: 20upx;
-		width: 100%;
-		.item {
-			color: #999;
-			font-size: 24upx;
-			background: #fff;
-			padding: 20upx 30upx;
-			border-bottom: 1px solid #eee;
-			.title{
-				color: #333;
-				font-size: 28upx;
-				margin-bottom:20upx;
+
+	.submenu {
+		height: 100%;
+		width: 170upx;
+
+		background: #f1f1f1;
+
+		.scroll-view {
+			height: 100%;
+		}
+
+		.submenu-item {
+			line-height: 100upx;
+			text-align: center;
+
+			&.active {
+				background: #fff;
+				position: relative;
+				color: #FF6A00;
+
+				&.active::after {
+					content: "";
+					width: 8upx;
+					height: 30upx;
+					border-radius: 10upx 0 0 10upx;
+					position: absolute;
+					background-color: currentColor;
+					top: 0;
+					right: 0upx;
+					bottom: 0;
+					margin: auto;
+				}
+			}
+
+			&>span {
+				width: 100%;
 			}
 		}
 	}

@@ -30,24 +30,27 @@
 			};
 		},
 		methods: {
-			show(id) {
-				this.id = id;
+			show(id,name) {
+				this.id = id||0;
+				this.info=name||'';
 				this.showModal = true;
 			},
 			cancel() {
 				this.showModal = false
 			},
 			submit() {
+				let $me=this;
 				this.$postajax(this.$api.addFollowFile, {
 					name: this.info,
-					id: 0
+					id:this.id
 				}).then(da => {
 					if (da.code == 10000) {
 						uni.showToast({
-							title: '添加成功',
+							title:$me.id==0?'添加成功':'编辑成功',
 							icon: 'none'
 						})
-						this.showModal = false
+						this.showModal = false;
+						this.$emit('upload',this.info);
 					} else {
 						uni.showToast({
 							title: da.message,
@@ -63,7 +66,7 @@
 <style lang="scss" scoped>
 	.cu-modal {
 		.cu-dialog {
-			width: 640upx;
+			width: 600upx;
 		}
 
 		.title {
