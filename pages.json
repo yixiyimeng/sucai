@@ -20,7 +20,9 @@
 		"style": {}
 	}, {
 		"path": "pages/follow/follow",
-		"style": {}
+		"style": {
+			"navigationBarTitleText": "我的收藏夹"
+		}
 	}, {
 		"path": "pages/mine/mine",
 		"style": {

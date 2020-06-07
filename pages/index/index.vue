@@ -15,7 +15,7 @@
 			<image src="/static/sousuo2.png" mode="widthFix"></image>
 			<input class="flex-sub" v-model="keyword" placeholder="请输入你想要的产品名称" type="text" confirm-type="search" @confirm="confirm($event)" />
 		</div>
-		<view class="cu-bar bg-white solid-bottom">
+		<!-- <view class="cu-bar bg-white solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">关注的专辑</text>
 				<text class="bg-gradual-orange" style="width:5em"></text>
@@ -48,7 +48,7 @@
 				<text>展开</text>
 				<text class="cuIcon-unfold"></text>
 			</view>
-		</view>
+		</view> -->
 		<view class="cu-bar bg-white margin-top-sm solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">最新</text>
