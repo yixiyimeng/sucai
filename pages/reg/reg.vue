@@ -9,7 +9,7 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">手机号码</view>
-				<input placeholder="输入框带标签" name="input"  @blur="changeMobile"></input>
+				<input placeholder="请输入手机号码" name="input"  @blur="changeMobile"></input>
 				<image v-if="isCheckmobile" src="#" mode="widthFix" class="loading text-orange"></image>
 				<!-- <text class="cuIcon-loading2 text-orange"></text> -->
 			</view>
@@ -25,7 +25,7 @@
 		</form>
 		<view class="margin-top-lg submitBtn cu-btn shadow" :class="{'bg-orange':isAble}" @tap="submitLogin">注册</view>
 		<view class="margin-lg text-right">
-			<navigator class="text-orange" url="/pages/login/login">去登陆&gt;</navigator>
+			<navigator class="text-orange" url="/pages/login/login" hover-class="none">去登录&gt;</navigator>
 		</view>
 	</view>
 </template>

@@ -2,7 +2,7 @@
 	<div class="searchbar">
 		<view class="flex align-center">
 			<image src="/static/sousuo2.png" mode="widthFix"></image>
-			<input type="text" class="flex-sub" v-model="keyword" placeholder="搜索" confirm-type="search" @confirm="confirm($event)">
+			<input type="text" class="flex-sub" v-model="keyword" placeholder="请输入想要素材的关键词" confirm-type="search" @confirm="confirm($event)">
 			<text class="del cuIcon-roundclosefill" @click.stop="cancel" v-if="keyword.length>0"></text>
 		</view>
 	</div>

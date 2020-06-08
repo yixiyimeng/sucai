@@ -1,16 +1,5 @@
 <template>
 	<view class="flex flex-direction pageview bg-white">
-		<!-- <view class="group flex-sub">
-			<view class="row flex">
-				<input type="text" placeholder="请输入手机号码" class="flex-sub" @input="changeMobile">
-			</view>
-			<view class="row flex">
-				<input type="text" placeholder="请输入验证码" class="flex-sub" @input="changeCode">
-				<view class="getcode" @tap="getcode">{{codetxt}}</view>
-			</view>
-			<view class="margin-top-lg" :class="[isAble?'submitBtn':'defaultBtn']" @tap="submitLogin">登录</view>
-			<view class="text-orange text-right margin-top">收不到验证码？</view>
-		</view> -->
 		<scroll-view scroll-x class="bg-white nav text-center margin-top">
 			<view class="cu-item" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in 2" :key="index" @tap="tabSelect"
 			 :data-id="index">
@@ -26,7 +15,7 @@
 			</view> -->
 			<view class="cu-form-group">
 				<view class="title">手机号码</view>
-				<input placeholder="输入框带标签" name="input" @blur="changeMobile"></input>
+				<input placeholder="请输入手机号码" name="input" @blur="changeMobile"></input>
 				<image v-if="isCheckmobile" src="#" mode="widthFix" class="loading text-orange"></image>
 			</view>
 			<view class="cu-form-group" v-if="TabCur==1">

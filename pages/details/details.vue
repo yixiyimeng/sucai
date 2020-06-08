@@ -2,7 +2,7 @@
 	<view class="pageview flex flex-direction">
 		<view class="flex-sub">
 			<view class='padding-sm flex flex-wrap'>
-				<view class="padding-xs" v-for="(item,index) in info.collections" :key="index">
+				<view class="padding-xs" @tap="showcollections(item)" v-for="(item,index) in info.collections" :key="index">
 					<view class='cu-tag  radius'>{{item.name}}</view>
 				</view>
 			</view>
@@ -68,6 +68,11 @@
 				console.log(122)
 				uni.switchTab({
 					url:'/pages/index/index'
+				})
+			},
+			showcollections(info){
+				uni.navigateTo({
+					url: '/pages/subfind/subfind?id=' + info.id + '&name=' + info.name
 				})
 			}
 		}

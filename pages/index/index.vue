@@ -13,7 +13,7 @@
 		</swiper>
 		<div class="searchbar flex align-center">
 			<image src="/static/sousuo2.png" mode="widthFix"></image>
-			<input class="flex-sub" v-model="keyword" placeholder="请输入你想要的产品名称" type="text" confirm-type="search" @confirm="confirm($event)" />
+			<input class="flex-sub" v-model="keyword" placeholder="请输入想要素材的关键词" type="text" confirm-type="search" @confirm="confirm($event)" />
 		</div>
 		<!-- <view class="cu-bar bg-white solid-bottom">
 			<view class="action border-title">
