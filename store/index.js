@@ -10,6 +10,7 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		SET_LOGIN(state, userInfo) {
+			console.log('122');
 			state.userInfo = userInfo;
 			uni.setStorageSync('userInfo', userInfo);
 			state.hasLogin = true;

@@ -21,7 +21,7 @@ Vue.prototype.$axios = axios;
 axios.defaults.timeout = 5000;   //响应时间
 axios.defaults.withCredentials=true;//让请求头携带参数cookie
 axios.defaults.baseURL = 'http://material.yipro.cn/';   //配置接口地址  
-
+Vue.prototype.$store = store
 App.mpType = 'app'
 
 const app = new Vue({

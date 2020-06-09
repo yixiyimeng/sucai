@@ -9,7 +9,7 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">手机号码</view>
-				<input placeholder="请输入手机号码" name="input"  @blur="changeMobile"></input>
+				<input placeholder="填写你常用的手机号作为登录账号" name="input" @blur="changeMobile"></input>
 				<image v-if="isCheckmobile" src="#" mode="widthFix" class="loading text-orange"></image>
 				<!-- <text class="cuIcon-loading2 text-orange"></text> -->
 			</view>
@@ -24,8 +24,9 @@
 			</view>
 		</form>
 		<view class="margin-top-lg submitBtn cu-btn shadow" :class="{'bg-orange':isAble}" @tap="submitLogin">注册</view>
-		<view class="margin-lg text-right">
-			<navigator class="text-orange" url="/pages/login/login" hover-class="none">去登录&gt;</navigator>
+		<view class="margin-lg">
+			<navigator class="text-orange" url="/pages/login/login" hover-class="none"><text class="text-grey">已有账号，</text><text>去登录</text><text
+				 class="cuIcon-right"></text></navigator>
 		</view>
 	</view>
 </template>
@@ -42,7 +43,7 @@
 				nickName: '',
 				verifyNum: '',
 				password: '',
-				codetxt: '验证码',
+				codetxt: '获取验证码',
 				num: 60,
 				timer: null,
 				isMobileAvailabled: false, //手机号是否可用
@@ -56,6 +57,14 @@
 			isAble() {
 				return (this.isMobileAvailabled && this.verifyNum && this.isNickNameAvailabled && this.password)
 			},
+		},
+		destroyed() {
+			if (this.timer) {
+				clearInterval(this.timer)
+				this.timer = null;
+			}
+			this.codetxt = '获取验证码';
+			this.num = 60;
 		},
 		methods: {
 			changeMobile(e) {
@@ -125,8 +134,7 @@
 									url: '/pages/login/login'
 								})
 							}, 500)
-						}
-						else{
+						} else {
 							uni.showToast({
 								title: da.message,
 								icon: 'none'
@@ -234,7 +242,7 @@
 	}
 
 	.getcode {
-		width: 165upx;
+		width: 200upx;
 	}
 
 	.submitBtn {

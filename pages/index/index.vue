@@ -13,9 +13,9 @@
 		</swiper>
 		<div class="searchbar flex align-center">
 			<image src="/static/sousuo2.png" mode="widthFix"></image>
-			<input class="flex-sub" v-model="keyword" placeholder="请输入想要素材的关键词" type="text" confirm-type="search" @confirm="confirm($event)" />
+			<input class="flex-sub" v-model="keyword" placeholder="你想要什么素材,一搜便有" type="text" confirm-type="search" @confirm="confirm($event)" />
 		</div>
-		<!-- <view class="cu-bar bg-white solid-bottom">
+		 <view class="cu-bar bg-white solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">关注的专辑</text>
 				<text class="bg-gradual-orange" style="width:5em"></text>
@@ -32,7 +32,7 @@
 				<text class="cuIcon-unfold"></text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white margin-top-sm solid-bottom">
+		<!--<view class="cu-bar bg-white margin-top-sm solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">推荐的专辑</text>
 				<text class="bg-gradual-orange" style="width:5em"></text>
@@ -72,7 +72,8 @@
 		data() {
 			return {
 				keyword: '',
-				materialslist:[]
+				materialslist:[],
+				attentions:[],//关注列表
 			};
 		},
 		onLoad() {
@@ -86,11 +87,6 @@
 					url: '/pages/search/search?keyword='+this.keyword
 				})
 			},
-			findCollectionsInfo(){
-				this.$getajax(this.$api.findCollectionsInfo+'0').then(da=>{
-					
-				})
-			},
 			findPageMaterials(){
 				this.$postajax(this.$api.findPageMaterials,{
 					page:1,
@@ -101,7 +97,16 @@
 						// console.log(da.data)
 					}
 				})
-			}
+			},
+			/* 查询关注专辑 */
+			findCollectionsInfo() {
+				this.$getajax(this.$api.findCollectionsInfo + '0').then(da => {
+					if (da.code == 10000) {
+						this.list = da.nodes;
+						this.attentions = da.attentions
+					}
+				})
+			},
 		}
 	}
 </script>

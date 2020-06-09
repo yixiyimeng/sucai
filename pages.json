@@ -94,9 +94,11 @@
 			"transparentTitle": "always",
 			"allowsBounceVertical": "NO"
 		},
-		"navigationBarBackgroundColor": "#141414",
+		"navigationBarBackgroundColor": "#fff",
 		"navigationBarTitleText": "设计e周•素材",
-		"navigationBarTextStyle": "white"
+		"navigationBarTextStyle": "black",
+		"navigationStyle": "custom"
+		
 	},
 	"usingComponts": true,
 	"condition": { //模式配置，仅开发期间生效

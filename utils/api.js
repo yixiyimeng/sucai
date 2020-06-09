@@ -32,7 +32,8 @@ export const api = {
 	showQrcode: '/wxpay/showQrcode', //显示二维码
 	getPayState: '/wxpay/getPayState', //查询支付状态
 	findStoredMaterials: '/material/findStoredMaterials', //查询收藏素材
-	
+	getWxqrUrl: '/wxutil/getWxqrUrl', //获取登录微信二维码
+	wechatCheckLogin: '/wxutil/wechatCheckLogin', //微信登录状态
 }
 
 export function getajax(url, params) {
