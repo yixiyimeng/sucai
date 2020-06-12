@@ -83,20 +83,22 @@
 				}).then(da => {
 					if (da.code == 10000) {
 						this.hideModal();
-						this.getUserInfo();
+						let userInfo = uni.getStorageSync('userInfo');
+						userInfo.scores = da.scores;
+						userInfo.cost = da.cost;
+						userInfo.list = da.list;
+						uni.setStorageSync('userInfo', userInfo);
 					}
 				})
 			},
-			hideModal(){
-				this.showModal=false;
+			hideModal() {
+				this.showModal = false;
 				if (this.timer) {
 					clearInterval(this.timer);
 					this.timer = null
 				}
 			},
-			getUserInfo(){
-				
-			}
+
 		}
 	}
 </script>
@@ -129,7 +131,7 @@
 	.ftbar {
 		border-top: 2upx solid rgba(0, 0, 0, .1);
 		height: 112upx;
-		
+
 		.btn {
 			font-weight: bold;
 			font-size: 34upx;

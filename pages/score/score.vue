@@ -1,6 +1,6 @@
 <template>
 	<view class=" pageview flex flex-direction">
-		<view class="tip">当前余额: <text class="num margin-right">{{scores}}积分</text>累计充值: <text class="num">¥44.55</text></view>
+		<view class="tip">当前余额: <text class="num margin-right">{{scores}}积分</text>累计充值: <text class="num">¥{{cost}}</text></view>
 		<view class="flex-sub ">
 			<view class="taglist flex justify-between flex-wrap">
 				<view class="tag flex align-center" :class="{'active':selectIndex==index}" v-for="(item,index) in list" :key='index'

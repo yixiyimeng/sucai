@@ -7,10 +7,14 @@
 					<image src="/static/photo.png" mode="widthFix"></image>
 				</div>
 				<div class="flex-sub">
-					<div class="name">哈哈哈哈</div>
+					<div class="name">{{userInfo.nickName}}</div>
 					<div>
-						<image class="vip" src="/static/VIP@2x.png" mode="widthFix"></image>
-						<text>vip用户</text>
+						<!-- <image class="vip" src="/static/VIP@2x.png" mode="widthFix"></image>-->
+						<text v-if="userVipinfo.length==0">普通用户</text> 
+						<span v-for="(item,index) in userVipinfo" :key="index" class="flex margin-right-xs">
+							 <image src="/static/VIP@2x.png" mode="widthFix"></image>
+							 <text class="num">{{item.vipTitle}}</text>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -57,8 +61,16 @@
 	export default {
 		data() {
 			return {
-				cuIconList: []
+				cuIconList: [],
+				userVipinfo:[],
+				userInfo:{}
 			};
+		},
+		onLoad() {
+		},
+		onShow() {
+			this.userInfo = uni.getStorageSync('userInfo');
+			this.userVipinfo=this.userInfo.list
 		}
 	}
 </script>
@@ -66,7 +78,7 @@
 <style lang="scss">
 	.userinfo {
 		position: relative;
-		overflow:hidden;
+		overflow: hidden;
 
 		&>image {
 			width: 100%;
@@ -81,10 +93,12 @@
 			padding: 40upx 30upx;
 			color: #fff;
 		}
-		.vip{
+
+		.vip {
 			width: 28upx;
 		}
-		.imgbox{
+
+		.imgbox {
 			width: 120upx;
 			height: 120upx;
 			border-radius: 100%;
@@ -93,7 +107,8 @@
 			border: 2px solid #fff;
 			margin-right: 20upx;
 		}
-		.name{
+
+		.name {
 			font-size: 32upx;
 			font-weight: bold;
 			margin-bottom: 10upx;

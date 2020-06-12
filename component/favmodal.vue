@@ -12,6 +12,7 @@
 				</view>
 				<view class="title flex justify-between align-center">
 					<text>选择收藏夹</text>
+					<text class="add" @tap="addNewFile">新建收藏夹</text>
 				</view>
 				<view class="grid col-3 padding-sm" v-if="list.length>0">
 					<view v-for="(item,index) in list" class="padding-xs" :key="index">
@@ -25,26 +26,7 @@
 
 			</view>
 		</view>
-		<!-- <view class="cu-modal" :class="showModal?'show':''">
-			<view class="cu-dialog bg-white">
-				<view class="title flex justify-between align-center">
-					<text>选择收藏夹</text>
-					<text class="cuIcon-close"></text>
-				</view>
-				<view class='padding-sm flex flex-wrap'>
-					<view class="padding-xs" v-for="(item,index) in 10" :key="index">
-						<view class='cu-tag  round' :class="{active:index==curIndex}">1223</view>
-					</view>
-				</view>
-				<view class="btn bg-orange round">
-					确定
-				</view>
-				<view class="tip">
-					<view>收藏后用电脑访问网址</view>
-					<view>sucai.yipro.cn进入收藏下载</view>
-				</view>
-			</view>
-		</view> -->
+		
 	</view>
 
 </template>
@@ -162,5 +144,12 @@
 		max-height: 400upx;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
+	}
+	.add{
+		border-radius: 50upx;
+		padding: 10upx 26upx;
+		color: #f37b1d;
+		border: 1px solid #f37b1d;
+		font-size: 24upx;
 	}
 </style>

@@ -2,6 +2,7 @@
 	<view class="pageview flex flex-direction">
 		<mescroll-body ref="mescrollRef" :bottom="80" @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<!-- 数据列表 -->
+			<div class="subtip">滑动对收藏夹进行编辑和删除</div>
 			<view class="list">
 				<!-- <navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 20"
 				 :key="index">
@@ -95,7 +96,7 @@
 						title: (da.code == 10000) ? '删除成功' : da.message,
 						icon: 'none'
 					});
-					if(da.code==10000){
+					if (da.code == 10000) {
 						this.mescroll && this.mescroll.resetUpScroll();
 					}
 
@@ -106,7 +107,7 @@
 				let item = e.item;
 				if (index == 0) {
 					/* 删除 */
-					let $me=this;
+					let $me = this;
 					uni.showModal({
 						title: '',
 						content: '你确定要删除吗？',
@@ -123,9 +124,9 @@
 					this.$refs.addmodal.show(item.id, item.name)
 				}
 			},
-			details(id,name){
+			details(id, name) {
 				uni.navigateTo({
-					url:'/pages/followdetails/followdetails?id='+id+'&name='+name
+					url: '/pages/followdetails/followdetails?id=' + id + '&name=' + name
 				})
 			}
 		}
@@ -143,6 +144,12 @@
 		height: 200upx;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
+	}
+
+	.subtip {
+		text-align: right;
+		color: #666;
+		padding: 10upx 20upx;
 	}
 
 	.list {

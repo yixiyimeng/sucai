@@ -15,15 +15,15 @@
 			<image src="/static/sousuo2.png" mode="widthFix"></image>
 			<input class="flex-sub" v-model="keyword" placeholder="你想要什么素材,一搜便有" type="text" confirm-type="search" @confirm="confirm($event)" />
 		</div>
-		 <view class="cu-bar bg-white solid-bottom">
+		<view class="cu-bar bg-white solid-bottom" v-if="attentions.length>0">
 			<view class="action border-title">
 				<text class="text-orange">关注的专辑</text>
 				<text class="bg-gradual-orange" style="width:5em"></text>
 			</view>
 		</view>
-		<view class="bg-white">
+		<view class="bg-white margin-bottom-sm" v-if="attentions.length>0">
 			<view class='padding-sm flex flex-wrap justify-between'>
-				<view class="padding-xs" v-for="(item,index) in 3" :key="index">
+				<view class="padding-xs" v-for="(item,index) in attentions" :key="index">
 					<navigator class='cu-tag  radius' url="/pages/list/list" hover-class="none">标签</navigator>
 				</view>
 			</view>
@@ -49,7 +49,7 @@
 				<text class="cuIcon-unfold"></text>
 			</view>
 		</view> -->
-		<view class="cu-bar bg-white margin-top-sm solid-bottom">
+		<view class="cu-bar bg-white solid-bottom">
 			<view class="action border-title">
 				<text class="text-orange">最新</text>
 				<text class="bg-gradual-orange" style="width:2em; min-width: 1em;"></text>
@@ -58,8 +58,9 @@
 		</view>
 		<view class="">
 			<view class="padding goodslist flex flex-wrap justify-between">
-				<navigator :url="`/pages/details/details?id=${item.id}`" class="goods-item" hover-class="none" v-for="(item,index) in materialslist" :key="index">
-					<image :src="item.coverPath" mode="aspectFill"></image>
+				<navigator :url="`/pages/details/details?id=${item.id}`" class="goods-item" hover-class="none" v-for="(item,index) in materialslist"
+				 :key="index">
+					<image :lazy-load="true" :src="item.coverPath" mode="aspectFill"></image>
 					<p class="text-cur">{{item.title}}</p>
 				</navigator>
 			</view>
@@ -72,8 +73,9 @@
 		data() {
 			return {
 				keyword: '',
-				materialslist:[],
-				attentions:[],//关注列表
+				materialslist: [],
+				attentions: [], //关注列表
+				page: 0,
 			};
 		},
 		onLoad() {
@@ -84,16 +86,20 @@
 			confirm() {
 				/* TODO 搜索 */
 				uni.navigateTo({
-					url: '/pages/search/search?keyword='+this.keyword
+					url: '/pages/search/search?keyword=' + this.keyword
 				})
 			},
-			findPageMaterials(){
-				this.$postajax(this.$api.findPageMaterials,{
-					page:1,
-					pageSize:10
-				}).then(da=>{
-					if(da.code==10000){
-						this.materialslist=da.list
+			findPageMaterials() {
+				this.page++;
+				this.$postajax(this.$api.findPageMaterials, {
+					page: this.page,
+					pageSize: 10
+				}).then(da => {
+					if (da.code == 10000) {
+						this.materialslist = da.list;
+						if ((this.page + 1) * 10 >= da.total) {
+							this.page = 0;
+						}
 						// console.log(da.data)
 					}
 				})

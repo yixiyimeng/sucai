@@ -1,5 +1,9 @@
 <script>
 	import Vue from 'vue'
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	export default {
 		onLaunch: function() {
 			uni.getSystemInfo({
@@ -104,13 +108,24 @@
 				},
 			]
 
+
 		},
 		onShow: function() {
 			console.log('App Show')
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		methods:{
+			...mapMutations['SET_USERINFO']
+		},
+		created() {
+			window.addEventListener('beforeunload', () => {
+				console.log('12232')
+				this.SET_USERINFO()
+			})
 		}
+	
 
 	}
 </script>
@@ -285,7 +300,7 @@
 			p {
 				height: 80upx;
 				line-height: 80upx;
-				padding:0 10upx;
+				padding: 0 10upx;
 			}
 		}
 	}

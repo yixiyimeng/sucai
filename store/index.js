@@ -5,8 +5,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		hasLogin: false,
-		userInfo: {}
+		hasLogin: uni.getStorageSync('token'),
+		userInfo:{}
 	},
 	mutations: {
 		SET_LOGIN(state, userInfo) {
@@ -14,6 +14,9 @@ const store = new Vuex.Store({
 			state.userInfo = userInfo;
 			uni.setStorageSync('userInfo', userInfo);
 			state.hasLogin = true;
+		},
+		SET_USERINFO(state){
+			state.userInfo=uni.getStorageSync('userInfo')||{}
 		},
 		SET_LOGOUT(state) {
 			for (var key in state) {
