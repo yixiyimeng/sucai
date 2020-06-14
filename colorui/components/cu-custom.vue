@@ -52,19 +52,22 @@
 		},
 		methods: {
 			BackPage() {
-				// uni.navigateBack({
-				// 	delta: 1
-				// });
+				uni.navigateBack({
+					delta: 1
+				});
 				console.log('返回')
-				this.$emit('backPage')
+				// this.$emit('backPage')
 			}
 		}
 	}
 </script>
 
 <style>
+	.cu-custom{
+		box-shadow: 0 10upx 10upx rgba(0,0,0,.05);
+	}
 .bgColor{
-		color: #fff;
-		background: #141414;
+		color: #333;
+		background: #fff;
 	}
 </style>

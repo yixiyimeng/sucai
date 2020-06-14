@@ -1,8 +1,13 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<mescroll-body ref="mescrollRef" :bottom="80" @init="mescrollInit" @down="downCallback" @up="upCallback">
+		<view class="top-warp">
+			<cu-custom :isBack="true" bgColor="bgColor">
+				<text slot="content">收藏夹</text>
+			</cu-custom>
+		</view>
+		<mescroll-body ref="mescrollRef" :top="100" :bottom="80" @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<!-- 数据列表 -->
-			<div class="subtip">滑动对收藏夹进行编辑和删除</div>
+			<div class="subtip">向左滑动对收藏夹进行编辑和删除</div>
 			<view class="list">
 				<!-- <navigator hover-class="none" url="../followdetails/followdetails" class="follow-item" v-for="(item,index) in 20"
 				 :key="index">
@@ -149,7 +154,7 @@
 	.subtip {
 		text-align: right;
 		color: #666;
-		padding: 10upx 20upx;
+		padding: 30upx 20upx 10upx;
 	}
 
 	.list {

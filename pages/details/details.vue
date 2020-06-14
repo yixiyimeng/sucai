@@ -1,5 +1,8 @@
 <template>
 	<view class="pageview flex flex-direction">
+		<cu-custom :isBack="true" bgColor="bgColor">
+			<text slot="content">{{info.title}}</text>
+		</cu-custom>
 		<view class="flex-sub">
 			<view class='padding-sm flex flex-wrap'>
 				<view class="padding-xs" @tap="showcollections(item)" v-for="(item,index) in info.collections" :key="index">

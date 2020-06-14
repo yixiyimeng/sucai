@@ -2,7 +2,7 @@
 	<view class="cu-modal" :class="showModal?'show':''">
 		<view class="cu-dialog bg-white">
 			<view class="title flex justify-between align-center">
-				<text>添加收藏夹</text>
+				<text>收藏夹</text>
 				<text class="cuIcon-close"></text>
 			</view>
 			<view class='padding-sm'>

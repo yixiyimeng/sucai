@@ -1,6 +1,11 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<searchbar @search="search"></searchbar>
+		<!-- <searchbar @search="search"></searchbar> -->
+		<topsearchbar :isBack="true" bgColor="bgColor" @backPage="BackPage">
+			<view slot="content">
+				<searchbar @search="search" v-model="searchStr"></searchbar>
+			</view>
+		</topsearchbar>
 		<view class="flex-sub">
 			<mescroll-uni @init="mescrollInit" @down="downCallback" @up="upCallback" :fixed="false">
 
@@ -11,7 +16,7 @@
 					</view>
 				</view>
 				<view class="bg-white" v-if="relateds.length>0">
-					<view class='padding-sm flex flex-wrap justify-between'>
+					<view class='padding-sm flex flex-wrap'>
 						<view class="padding-xs" v-for="(item,index) in relateds" :key="index">
 							<view class='cu-tag  radius'>{{item.name}}</view>
 						</view>
@@ -21,12 +26,12 @@
 						<text class="cuIcon-unfold"></text>
 					</view> -->
 				</view>
-				<view class="cu-bar bg-white  margin-top-sm">
+				<view class="cu-bar bg-white  margin-top-sm solid-bottom">
 					<view class="action border-title">
 						<text>共{{total}}条结果</text>
 					</view>
 				</view>
-				<view class="">
+				<view class="bg-white">
 					<view class="padding goodslist flex flex-wrap justify-between">
 						<navigator :url="`/pages/details/details?id=${item.id}`" class="goods-item" hover-class="none" v-for="(item,index) in materialslist" :key="index">
 							<image :src="item.coverPath" mode="aspectFill"></image>
@@ -90,13 +95,18 @@
 					}
 				})
 			},
+			BackPage(){
+				uni.navigateBack({
+					delta: 1
+				})
+			}
 		}
 	}
 </script>
 <style>
 	page,
 	.pageview {
-		background: #fff;
+		/* background: #fff; */
 		height: 100%;
 		overflow: hidden;
 	}

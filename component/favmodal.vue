@@ -26,12 +26,13 @@
 
 			</view>
 		</view>
-		
+		<addmodal ref="addmodal" @upload="getlist"></addmodal>
 	</view>
 
 </template>
 
 <script>
+	import addmodal from "@/component/addmodal"
 	export default {
 		data() {
 			return {
@@ -42,7 +43,9 @@
 				list: []
 			};
 		},
-
+		components: {
+			addmodal
+		},
 		computed: {},
 		methods: {
 			show(materialId) {
@@ -53,6 +56,7 @@
 				this.curIndex = index;
 			},
 			getlist() {
+				let $me = this;
 				this.$getajax(this.$api.findStores).then(da => {
 					let curPageData = da.list;
 					this.list = curPageData;
@@ -64,11 +68,7 @@
 							content: '您还没有收藏夹，请先创建',
 							success: function(res) {
 								if (res.confirm) {
-									uni.navigateTo({
-										url: '/pages/follow/follow'
-									})
-								} else if (res.cancel) {
-									console.log('用户点击取消');
+									$me.addNewFile();
 								}
 							}
 						});
@@ -77,12 +77,12 @@
 				})
 			},
 			addfav() {
-				let id=this.list[this.curIndex].id;
+				let id = this.list[this.curIndex].id;
 				this.$postajax(this.$api.addMaterialStore, {
 					storeId: id,
 					materialId: this.materialId,
-					storeTime:'',
-					id:0
+					storeTime: '',
+					id: 0
 				}).then(da => {
 					if (da.code == 10000) {
 						this.showModal = false;
@@ -90,7 +90,10 @@
 
 					}
 				})
-			}
+			},
+			addNewFile() {
+				this.$refs.addmodal.show()
+			},
 		}
 	}
 </script>
@@ -145,7 +148,8 @@
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 	}
-	.add{
+
+	.add {
 		border-radius: 50upx;
 		padding: 10upx 26upx;
 		color: #f37b1d;

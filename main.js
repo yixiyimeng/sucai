@@ -3,6 +3,8 @@ import App from './App'
 import store from './store'
 import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom',cuCustom)
+import topsearchbar from './component/topsearchbar.vue'
+Vue.component('topsearchbar',topsearchbar)
 // 注册全局组件
 import MescrollBody from "@/component/mescroll-uni/mescroll-body.vue"
 import MescrollUni from "@/component/mescroll-uni/mescroll-uni.vue"

@@ -1,7 +1,17 @@
 <template>
-	<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
-		<view class="pageview flex flex-direction">
-			<view class="swiper-item">
+	<view>
+		<view class="top-warp">
+			<cu-custom :isBack="true" bgColor="bgColor" @backPage="BackPage">
+				<text slot="content">{{storeName}}</text>
+				<view slot="right" @tap="edit" class="follow">
+					<text class="cuIcon-edit"></text>
+					<text>编辑</text>
+				</view>
+			</cu-custom>
+		</view>
+		<mescroll-body :top='100' ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
+
+			<!-- <view class="swiper-item">
 				<view class="tip">
 					<view>{{storeName}}</view>
 					<view class="fav" @tap="edit">
@@ -10,7 +20,7 @@
 					</view>
 				</view>
 				<image src="/static/bg.jpg" mode="widthFix"></image>
-			</view>
+			</view> -->
 			<view v-if="relateds.length>0">
 				<view class="cu-bar bg-white solid-bottom">
 					<view class="action border-title">
@@ -31,21 +41,16 @@
 				</view>
 			</view>
 			<view>
-
-				<view class="padding goodslist flex flex-wrap justify-between">
-					<view class="goods-item" v-for="(item,index) in list" :key="index">
-						<image :src="item.coverPath" mode="aspectFill"></image>
-						<p class="text-cut">{{item.title}}</p>
-					</view>
-				</view>
+				<material :list="list"></material>
 			</view>
-		</view>
-		<addmodal ref="addmodal" @upload="uploadname"></addmodal>
-	</mescroll-body>
+			<addmodal ref="addmodal" @upload="uploadname"></addmodal>
+		</mescroll-body>
+	</view>
 </template>
 
 <script>
 	import addmodal from "@/component/addmodal"
+	import material from "@/component/material"
 	import MescrollMixin from "@/component/mescroll-uni/mescroll-mixins.js"
 	export default {
 		data() {
@@ -57,8 +62,9 @@
 				relateds: []
 			};
 		},
-		components:{
-			addmodal
+		components: {
+			addmodal,
+			material
 		},
 		mixins: [MescrollMixin],
 		onLoad(option) {
@@ -92,13 +98,14 @@
 					}
 				})
 			},
-			edit(){
+			edit() {
 				/* 编辑 */
-				this.$refs.addmodal.show(this.storeId,this.storeName)
+				this.$refs.addmodal.show(this.storeId, this.storeName)
 			},
-			uploadname(name){
-				this.storeName=name
-			}
+			uploadname(name) {
+				this.storeName = name
+			},
+
 		}
 	}
 </script>
@@ -147,5 +154,14 @@
 		text-align: center;
 		padding: 10upx;
 		color: #999;
+	}
+
+	.follow {
+		color: #f37b1d;
+		border-radius: 10upx;
+		margin-right: 10upx;
+		border: 1px solid #f37b1d;
+		padding: 5upx 10upx;
+
 	}
 </style>

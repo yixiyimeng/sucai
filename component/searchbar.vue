@@ -2,7 +2,7 @@
 	<div class="searchbar">
 		<view class="flex align-center">
 			<image src="/static/sousuo2.png" mode="widthFix"></image>
-			<input type="text" class="flex-sub" v-model="keyword" placeholder="请输入想要素材的关键词" confirm-type="search" @confirm="confirm($event)">
+			<input type="text" class="flex-sub" v-model="keyword" :placeholder="placeholdertxt" confirm-type="search" @confirm="confirm($event)">
 			<text class="del cuIcon-roundclosefill" @click.stop="cancel" v-if="keyword.length>0"></text>
 		</view>
 	</div>
@@ -15,16 +15,35 @@
 				keyword: ''
 			};
 		},
+		props: {
+			value: { // 当前显示的下标 (使用v-model语法糖: 1.props需为value; 2.需回调input事件)
+				type: [String, Number],
+				default () {
+					return ''
+				}
+			},
+			placeholdertxt:{
+				type:String,
+				default:'请输入想要素材的关键词'
+			}
+		},
+		watch: {
+			value(newval, oldval) {
+				this.keyword = newval;
+			}
+		},
 		created() {
-			
+			this.keyword=this.value;
 		},
 		methods: {
 			confirm() {
 				/* TODO 搜索 */
+				this.$emit("input", this.keyword);
 				this.$emit('search',this.keyword)
 			},
 			cancel() {
-				this.keyword = ''
+				this.keyword = '';
+				this.$emit("input", this.keyword);
 			}
 		}
 	}
@@ -32,12 +51,12 @@
 
 <style scoped lang="scss">
 	.searchbar {
-		background: #141414;
+		// background: #141414;
 
 		padding: 10upx 0;
 
 		&>view {
-			background: #fff;
+			background: #f1f1f1;
 			margin: 0 20upx;
 			padding: 0 20upx;
 			border-radius: 50upx;

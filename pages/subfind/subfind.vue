@@ -1,13 +1,18 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<cu-custom :isBack="true" bgColor="bgColor" @backPage="BackPage">
-			<text slot="content">{{curName}}</text>
-		</cu-custom>
-		<searchbar @search="search"></searchbar>
+		<topsearchbar :isBack="true" bgColor="bgColor" @backPage="BackPage">
+			<!-- <text slot="content">{{curName}}</text> -->
+			<view slot="content">
+				<searchbar @search="search"></searchbar>
+			</view>
+			<view slot="right" @tap="collection" class="follow" :class="{active:follow}">
+				{{follow?'取消关注':'关注'}}
+			</view>
+		</topsearchbar>
 		<scroll-view scroll-x v-if="menulist.length>0" class="bread nav margin-bottom-sm" scroll-with-animation
 		 :scroll-into-view="intonav">
 			<div ref="bread">
-				<span v-for="(item,index) in menulist.slice(0,menulist.length-1)" :key="index">
+				<span @tap="showdetails(item)" v-for="(item,index) in menulist.slice(0,menulist.length-1)" :key="index">
 					<span class="text-orange">{{item.name}}</span>
 					<span>&gt;</span>
 				</span>
@@ -76,7 +81,8 @@
 				plist: [],
 				intonav: 'nav0',
 				materialslist: [],
-				bgColor: 'bgColor'
+				bgColor: 'bgColor',
+				follow: false
 			};
 		},
 		onLoad(option) {
@@ -84,7 +90,7 @@
 				this.id = option.id;
 				this.curName = option.name;
 				this.menulist.push({
-					name:this.curName,
+					name: this.curName,
 					id: this.id
 				});
 			}
@@ -120,7 +126,8 @@
 				this.$getajax(this.$api.findCollectionsInfo + this.id).then(da => {
 					if (da.code == 10000) {
 						this.list = da.nodes;
-						this.plist = da.pnodes
+						this.plist = da.pnodes;
+						this.follow = da.currentNode.follow
 					}
 				})
 			},
@@ -162,18 +169,48 @@
 			pdetails(info) {
 				this.id = info.id;
 				if (this.menulist.length <= 1) {
-					uni.navigateBack({
-						delta: 1
-					})
-				} else if(this.menulist.length>=2){
-					this.menulist=this.menulist.slice(0,this.menulist.length-1)
-				}else{
-					this.menulist=[];
+					this.gotopage();
+				} else if (this.menulist.length >= 2) {
+					this.menulist = this.menulist.slice(0, this.menulist.length - 2)
+				} else {
+					this.menulist = [];
 				}
 				this.menulist.push({
 					name: info.name,
 					id: info.id
 				});
+				this.$nextTick(() => {
+					this.intonav = 'nav' + (this.menulist.length - 1)
+				})
+				this.mescroll && this.mescroll.resetUpScroll();
+
+			},
+			gotopage() {
+				let currentPages = getCurrentPages();
+				let pageLen = currentPages.length;
+				if (pageLen == 1) {
+					uni.switchTab({
+						url: '/pages/find/find'
+					});
+				} else {
+					uni.navigateBack({
+						delta: 1
+					});
+				}
+			},
+			showdetails(info) {
+				this.id = info.id;
+				let menulist = [];
+				for (var i = 0; i < this.menulist.length; i++) {
+					menulist.push({
+						name: this.menulist[i].name,
+						id: this.menulist[i].id
+					});
+					if (this.menulist[i].id == this.id) {
+						break;
+					}
+				}
+				this.menulist = menulist;
 				this.$nextTick(() => {
 					let w = this.$refs.bread.offsetWidth;
 					this.intonav = 'nav' + (this.menulist.length - 1)
@@ -183,7 +220,6 @@
 
 			},
 			BackPage() {
-				console.log(122)
 				/* 返回上一级 */
 				if (this.menulist.length <= 1) {
 					uni.navigateBack({
@@ -194,6 +230,20 @@
 					this.id = this.menulist[this.menulist.length - 1].id;
 					this.mescroll && this.mescroll.resetUpScroll();
 				}
+			},
+			collection() {
+				let url = this.follow ? this.$api.cancelcollection : this.$api.collection
+				this.$getajax(url, {
+					cid: this.id
+				}).then(da => {
+					if (da.code == 10000) {
+						this.follow = da.currentNode.follow
+						uni.showToast({
+							title: this.follow ? '关注成功' : '取消关注',
+							icon: 'none'
+						})
+					}
+				})
 			}
 		}
 	}
@@ -244,10 +294,17 @@
 		}
 	}
 
-	.cu-tag {
-		width: auto;
-		min-width: 210upx;
-		padding-left: 20upx;
-		padding-right: 20upx;
+	.follow {
+		color: #fff;
+		background: #f37b1d;
+		border-radius: 10upx;
+		margin-right: 10upx;
+		border: 1px solid #f37b1d;
+		padding: 5upx 10upx;
+
+		&.active {
+			background: none;
+			color: #f37b1d;
+		}
 	}
 </style>

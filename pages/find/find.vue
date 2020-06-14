@@ -1,6 +1,12 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<searchbar @search="search"></searchbar>
+		<topsearchbar  bgColor="bgColor" >
+			<!-- <text slot="content">{{curName}}</text> -->
+			<view slot="content">
+				<searchbar @search="search"></searchbar>
+			</view>
+			
+		</topsearchbar>
 		<div class="flex-sub flex" style="overflow: hidden;">
 			<div class="submenu">
 				<scroll-view scroll-y scroll-with-animation class="scroll-view" :scroll-into-view="'head-' + cateIndex">

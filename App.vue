@@ -278,7 +278,12 @@
 		height: auto;
 
 	}
-
+.cu-tag {
+		width: auto;
+		min-width: 210upx;
+		padding-left: 20upx;
+		padding-right: 20upx;
+	}
 	.goodslist {
 		.goods-item {
 			width: 48%;
@@ -329,5 +334,14 @@
 
 	button::after {
 		border: none;
+	}
+	.top-warp {
+		z-index: 9990;
+		position: fixed;
+		top: --window-top;
+		/* css变量 */
+		left: 0;
+		width: 100%;
+		background-color: white;
 	}
 </style>
