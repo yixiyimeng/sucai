@@ -55,8 +55,8 @@
         }
     },
     "h5" : {
-        "title" : "sucai",
-        "domain" : "/h5/",
+        "title" : "设计e周•素材",
+        "domain" : "",
         "publicPath" : "./",
         "router" : {
             "mode" : "hash",

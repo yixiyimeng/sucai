@@ -1,5 +1,8 @@
 <template>
 	<view class=" pageview flex flex-direction">
+		<cu-custom :isBack="true" bgColor="bgColor">
+			<text slot="content">设计e周素材库VIP</text>
+		</cu-custom>
 		<view class="tip flex">
 			<text>当前状态:</text>
 			<view class="flex-sub">

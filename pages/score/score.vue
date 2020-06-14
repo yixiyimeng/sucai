@@ -1,5 +1,8 @@
 <template>
 	<view class=" pageview flex flex-direction">
+		<cu-custom :isBack="true" bgColor="bgColor">
+			<text slot="content">设计e周素材库积分充值</text>
+		</cu-custom>
 		<view class="tip">当前余额: <text class="num margin-right">{{scores}}积分</text>累计充值: <text class="num">¥{{cost}}</text></view>
 		<view class="flex-sub ">
 			<view class="taglist flex justify-between flex-wrap">
