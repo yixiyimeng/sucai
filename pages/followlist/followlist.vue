@@ -39,7 +39,7 @@
 		<view class="flex-sub">
 			<mescroll-uni @init="mescrollInit" @down="downCallback" @up="upCallback" :fixed="false">
 				<view class="">
-					<material :list="list" ></material>
+					<material :list="list" @upload="upload"></material>
 				</view>
 			</mescroll-uni>
 		</view>
@@ -81,7 +81,8 @@
 				let pageSize = this.mescroll.size;
 				let param = {
 					page: pageNum,
-					pageSize: pageSize
+					pageSize: pageSize,
+					storeId: 0
 				}
 				this.$postajax(this.$api.findStoredMaterials, param).then(da => {
 					if (da.code == 10000) {
@@ -98,6 +99,9 @@
 				this.$getajax(this.$api.findStores).then(da => {
 					this.storeslist = da.list.slice(0,3);
 				})
+			},
+			upload() {
+				this.mescroll && this.mescroll.resetUpScroll();
 			}
 		}
 	}

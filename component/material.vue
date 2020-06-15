@@ -56,7 +56,8 @@
 						icon: 'none'
 					});
 					if (da.code == 10000) {
-						this.mescroll && this.mescroll.resetUpScroll();
+						this.$emit('upload')
+						// this.mescroll && this.mescroll.resetUpScroll();
 					}
 
 				})

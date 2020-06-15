@@ -5,7 +5,7 @@
 				<text slot="content">{{storeName}}</text>
 				<view slot="right" @tap="edit" class="follow flex align-center">
 					<text class="cuIcon-more"></text>
-					<!-- <text>编辑</text> -->	
+					<!-- <text>编辑</text> -->
 				</view>
 			</cu-custom>
 		</view>
@@ -30,7 +30,7 @@
 				</view>
 			</view>
 			<view>
-				<material :list="list"></material>
+				<material :list="list" @upload="upload"></material>
 			</view>
 			<addmodal ref="addmodal" @upload="uploadname"></addmodal>
 			<t-rt-popup :itemList="itemList" ref="rtBubble" @click="itemClick"></t-rt-popup>
@@ -110,7 +110,7 @@
 				if (e.index == 0) {
 					/* 编辑 */
 					this.$refs.addmodal.show(this.storeId, this.storeName)
-				}else{
+				} else {
 					/* 删除 */
 					let $me = this;
 					uni.showModal({
@@ -135,12 +135,16 @@
 						icon: 'none'
 					});
 					if (da.code == 10000) {
-						this.mescroll && this.mescroll.resetUpScroll();
+						uni.navigateBack({
+							delta: 1
+						})
 					}
-			
+
 				})
 			},
-
+			upload() {
+				this.mescroll && this.mescroll.resetUpScroll();
+			}
 		}
 	}
 </script>
@@ -200,7 +204,7 @@
 		font-size: 38upx;
 		// border: 1px solid #f37b1d;
 		padding: 0 30upx;
-		
+
 
 	}
 </style>
