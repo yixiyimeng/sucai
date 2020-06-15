@@ -1,11 +1,11 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<topsearchbar  bgColor="bgColor" >
+		<topsearchbar bgColor="bgColor">
 			<!-- <text slot="content">{{curName}}</text> -->
 			<view slot="content">
 				<searchbar @search="search"></searchbar>
 			</view>
-			
+
 		</topsearchbar>
 		<div class="flex-sub flex" style="overflow: hidden;">
 			<div class="submenu">
@@ -40,7 +40,7 @@
 				</view>
 				<view>
 					<view class='padding-sm flex flex-wrap justify-between' v-if="attentions.length>0">
-						<view class="padding-xs" v-for="(item,index) in list" :key="index" @tap="details(item)">
+						<view class="padding-xs" v-for="(item,index) in attentions" :key="index" @tap="details(item)">
 							<view class='cu-tag  radius'>{{item.name}}</view>
 						</view>
 					</view>
@@ -81,24 +81,31 @@
 			},
 			scrollTo(index, item) {
 				this.cateIndex = index;
-				this.curId = item.id;
+				if (index == 0) {
+					this.curId = 0;
+				} else {
+					this.curId = item.id;
+				}
 				this.findCollectionsInfo();
 			},
 			findCollectionsInfo() {
 				this.$getajax(this.$api.findCollectionsInfo + this.curId).then(da => {
 					if (da.code == 10000) {
-						this.list = da.nodes;
+						this.list = da.nodes||[];
 						this.attentions = da.attentions
 					}
 				})
 			},
+
 			findResource() {
 				let $me = this;
 				this.$getajax(this.$api.findResource + '1').then(da => {
 					if (da.code == 10000) {
 						let curPageData = da.list;
-						$me.menulist = curPageData;
-						this.curId = $me.menulist[0].id;
+						$me.menulist = [{
+							name: '关注'
+						}, ...curPageData];
+						this.curId = 0;
 						this.findCollectionsInfo();
 					}
 				})

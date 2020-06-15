@@ -1,0 +1,42 @@
+.swiper-item {
+  height: 390rpx;
+  position: relative;
+}
+.swiper-item .tip {
+    font-size: 50rpx;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+    font-weight: bold;
+    z-index: 1;
+    text-align: center;
+    text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.5);
+    left: 10rpx;
+    right: 10rpx;
+}
+.swiper-item .tip .fav {
+      font-size: 24rpx;
+      font-weight: normal;
+      color: #666;
+      background: #fff;
+      border-radius: 8rpx;
+      padding: 8rpx 20rpx;
+      width: 100rpx;
+      text-shadow: none;
+      -webkit-box-shadow: 0 0 5rpx rgba(0, 0, 0, 0.05);
+              box-shadow: 0 0 5rpx rgba(0, 0, 0, 0.05);
+      margin: 10rpx auto;
+}
+.swiper-item .tip .fav.active {
+        color: #fff;
+        background: #FF6A00;
+}
+.more {
+  text-align: center;
+  padding: 10rpx;
+  color: #999;
+}
+

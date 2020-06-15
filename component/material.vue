@@ -26,6 +26,7 @@
 				type: Array,
 				default: []
 			}
+		
 		},
 		computed: {},
 		methods: {
@@ -46,11 +47,9 @@
 			},
 			/* 删除收藏素材 */
 			delfollow(id) {
-				this.$postajax(this.$api.removeMaterialStore, {
-					storeId: this.storeId,
-					materialId: id,
-					id: 0,
-					storeTime: ''
+				this.$getajax(this.$api.removeMaterialStore, {
+					mid: id
+				
 				}).then(da => {
 					uni.showToast({
 						title: (da.code == 10000) ? '删除成功' : da.message,

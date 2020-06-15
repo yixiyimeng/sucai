@@ -22,8 +22,8 @@
 						<view class="follow-item" @tap.stop="details(item.id,item.name)">
 							<div class="name">{{item.name}}</div>
 							<view class="flex justify-between">
-								<text class="num">100个素材</text>
-								<text>2010-10-10 创建</text>
+								<text class="num">{{item.materialCount}}个素材</text>
+								<text>{{item.createTime}}创建</text>
 							</view>
 						</view>
 					</template>

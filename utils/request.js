@@ -53,7 +53,7 @@ request.interceptors.response.use(
 	},
 	(err, promise) => {
 		// uni.hideLoading()
-		return promise.reject(err)
+		return Promise.reject(err)
 	}
 )
 

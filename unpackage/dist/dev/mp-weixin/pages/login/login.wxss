@@ -1,0 +1,57 @@
+page,
+.pageview {
+  height: 100%;
+  width: 100%;
+}
+.otherway {
+  text-align: center;
+  font-size: 26rpx;
+  color: #878787;
+}
+.otherway .title {
+    margin: 0 30rpx;
+    font-weight: bold;
+}
+.otherway .title .line {
+      height: 1px;
+      background: #e5e5e5;
+}
+.otherway .title > view:nth-child(2) {
+      margin: 0 30rpx;
+}
+.otherway .wechat {
+    background: #fff;
+    font-size: 26rpx;
+    border: none;
+}
+.otherway image {
+    display: block;
+    margin: 35rpx auto 25rpx;
+    width: 116rpx;
+}
+.otherway navigator {
+    display: inline-block;
+}
+.cu-form-group .title {
+  min-width: calc(4em + 15px);
+}
+.getcode {
+  width: 200rpx;
+}
+.submitBtn {
+  line-height: 100rpx;
+  height: 100rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  display: block;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+}
+.loading {
+  height: 20px;
+  width: 20px;
+}
+.imgbox {
+  width: 100%;
+}
+

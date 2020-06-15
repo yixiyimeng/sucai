@@ -344,4 +344,9 @@
 		width: 100%;
 		background-color: white;
 	}
+	.scrollview {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		-webkit-mask: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 1)), color-stop(0.75, #fff), to(rgba(0, 0, 0, 0)));
+	}
 </style>

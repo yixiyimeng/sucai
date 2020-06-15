@@ -1,15 +1,26 @@
 {
   "pages": [
+    "pages/reg/reg",
+    "pages/login/login",
     "pages/index/index",
     "pages/find/find",
     "pages/follow/follow",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/details/details",
+    "pages/score/score",
+    "pages/vip/vip",
+    "pages/list/list",
+    "pages/followdetails/followdetails",
+    "pages/search/search",
+    "pages/followlist/followlist",
+    "pages/subfind/subfind"
   ],
   "subPackages": [],
   "window": {
-    "navigationBarBackgroundColor": "#0081ff",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "设计e周•素材",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
   },
   "usingComponents": {},
   "tabBar": {
@@ -31,7 +42,7 @@
         "text": "发现"
       },
       {
-        "pagePath": "pages/follow/follow",
+        "pagePath": "pages/followlist/followlist",
         "iconPath": "static/tabbar/shoucang.png",
         "selectedIconPath": "static/tabbar/shoucang_1.png",
         "text": "收藏"

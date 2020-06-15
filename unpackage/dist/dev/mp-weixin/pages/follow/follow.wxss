@@ -1,0 +1,135 @@
+
+.tui-swipeout-wrap {
+	background: #fff;
+	position: relative;
+	overflow: hidden;
+}
+.swipe-action-show {
+	position: relative;
+	z-index: 99999
+}
+.tui-swipeout-item {
+	width: 100%;
+	/* padding: 15px 20px; */
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-transition: -webkit-transform 0.2s ease;
+	transition: -webkit-transform 0.2s ease;
+	-o-transition: transform 0.2s ease;
+	transition: transform 0.2s ease;
+	transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+	font-size: 14px;
+}
+.tui-swipeout-content {
+	white-space: nowrap;
+	overflow: hidden;
+}
+.tui-swipeout-button-right-group {
+	position: absolute;
+	right: -100%;
+	top: 0;
+	height: 100%;
+	z-index: 1;
+	width: 100%;
+}
+.tui-swipeout-button-right-item {
+	height: 100%;
+	float: left;
+	white-space: nowrap;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	text-align: center;
+}
+.swipe-action_mask {
+	display: block;
+	opacity: 0;
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+.pageview,
+page {
+	/* height: 100%; */
+	/* overflow: hidden; */
+}
+
+.pageview > .flex-sub {
+  height: 200rpx;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.subtip {
+  text-align: right;
+  color: #666;
+  padding: 30rpx 20rpx 10rpx;
+}
+.list {
+  padding-top: 20rpx;
+}
+.list .follow-item {
+    padding: 30rpx;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    color: #999;
+    font-size: 24rpx;
+}
+.list .follow-item .name {
+      color: #333;
+      font-size: 28rpx;
+      margin-bottom: 20rpx;
+}
+.tip {
+  text-align: center;
+  color: #666;
+  font-size: 20rpx;
+  padding: 10rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  -webkit-box-shadow: 0 -10rpx 10rpx rgba(0, 0, 0, 0.05);
+          box-shadow: 0 -10rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.add {
+  position: fixed;
+  bottom: 200rpx;
+  right: 20rpx;
+  background: #FF6A00;
+  color: #fff;
+  text-align: center;
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 100%;
+}
+.add > view {
+    width: 100%;
+}
+.add text {
+    font-size: 20rpx;
+    font-size-adjust: none;
+    display: block;
+}
+.add text:first-child {
+      font-size: 46rpx;
+      font-weight: bold;
+      line-height: 30rpx;
+}
+

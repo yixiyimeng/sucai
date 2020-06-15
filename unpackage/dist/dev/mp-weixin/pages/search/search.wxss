@@ -1,0 +1,25 @@
+
+page,
+.pageview {
+	/* background: #fff; */
+	height: 100%;
+	overflow: hidden;
+}
+
+.pageview > .flex-sub.data-v-4c1f777e {
+  height: 200rpx;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.more.data-v-4c1f777e {
+  text-align: center;
+  padding: 10rpx;
+  color: #999;
+}
+.cu-tag.data-v-4c1f777e {
+  width: auto;
+  min-width: 210rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+

@@ -1,0 +1,50 @@
+
+page,
+.pageview {
+	height: 100%;
+	overflow: hidden;
+}
+
+.main {
+  height: 100%;
+  overflow: auto;
+}
+.bread {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  color: #999;
+}
+.bread ._span {
+    margin-right: 20rpx;
+}
+/deep/ .mescroll-uni-warp {
+  width: 100%;
+}
+.list {
+  width: 100%;
+}
+.list .item {
+    color: #999;
+    font-size: 24rpx;
+    background: #fff;
+    padding: 20rpx 30rpx;
+    border-bottom: 1px solid #eee;
+}
+.list .item .title {
+      color: #333;
+      font-size: 28rpx;
+      margin-bottom: 20rpx;
+}
+.follow {
+  padding: 5rpx 10rpx;
+  color: #f37b1d;
+  font-size: 40rpx;
+}
+.follow text {
+    vertical-align: middle;
+}
+.follow .txt {
+    color: #999;
+    font-size: 20rpx;
+}
+

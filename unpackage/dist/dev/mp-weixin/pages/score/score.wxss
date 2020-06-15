@@ -1,0 +1,58 @@
+
+page {
+	background: #fff;
+	height: 100%;
+}
+
+.pageview.data-v-15437eb2 {
+  height: 100%;
+  overflow: hidden;
+}
+.tip.data-v-15437eb2 {
+  background: #fff;
+  padding: 20rpx;
+  text-align: center;
+  font-size: 30rpx;
+  -webkit-box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.05);
+          box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.tip .num.data-v-15437eb2 {
+    color: #FF6A00;
+}
+.taglist.data-v-15437eb2 {
+  margin-top: 20rpx;
+  padding: 0 15rpx;
+}
+.taglist .tag.data-v-15437eb2 {
+    width: 330rpx;
+    margin: 10rpx 15rpx;
+    border: 1px solid #FF6A00;
+    border-radius: 10rpx;
+    height: 140rpx;
+    text-align: center;
+    color: #FF6A00;
+    font-size: 38rpx;
+}
+.taglist .tag > view.data-v-15437eb2 {
+      width: 100%;
+}
+.taglist .tag .price.data-v-15437eb2 {
+      color: #999;
+      font-size: 30rpx;
+      margin-top: 10rpx;
+}
+.taglist .tag.active.data-v-15437eb2 {
+      color: #fff;
+      background: #FF6A00;
+}
+.taglist .tag.active .price.data-v-15437eb2 {
+        color: #fff;
+}
+.ftbar.data-v-15437eb2 {
+  line-height: 110rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  background: #FF6A00;
+}
+

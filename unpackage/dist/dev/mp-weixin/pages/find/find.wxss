@@ -1,0 +1,45 @@
+
+page,
+.pageview {
+	height: 100%;
+	overflow: hidden;
+}
+
+.main {
+  height: 100%;
+  overflow: auto;
+  background: #fff;
+}
+.submenu {
+  height: 100%;
+  width: 170rpx;
+  background: #f1f1f1;
+}
+.submenu .scroll-view {
+    height: 100%;
+}
+.submenu .submenu-item {
+    line-height: 100rpx;
+    text-align: center;
+}
+.submenu .submenu-item.active {
+      background: #fff;
+      position: relative;
+      color: #FF6A00;
+}
+.submenu .submenu-item.active.active::after {
+        content: "";
+        width: 8rpx;
+        height: 30rpx;
+        border-radius: 10rpx 0 0 10rpx;
+        position: absolute;
+        background-color: currentColor;
+        top: 0;
+        right: 0rpx;
+        bottom: 0;
+        margin: auto;
+}
+.submenu .submenu-item > ._span {
+      width: 100%;
+}
+

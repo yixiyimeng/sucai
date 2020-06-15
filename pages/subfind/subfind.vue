@@ -6,7 +6,9 @@
 				<searchbar @search="search"></searchbar>
 			</view>
 			<view slot="right" @tap="collection" class="follow" :class="{active:follow}">
-				{{follow?'取消关注':'关注'}}
+				<!--  -->
+				<text :class="[follow?'cuIcon-favorfill':'cuIcon-favor']"></text>
+				<!-- <text class="txt">{{follow?'已关注':'去关注'}}</text> -->
 			</view>
 		</topsearchbar>
 		<scroll-view scroll-x v-if="menulist.length>0" class="bread nav margin-bottom-sm" scroll-with-animation
@@ -29,25 +31,36 @@
 						<text class="text-orange">父专辑</text>
 						<text class="bg-gradual-orange" style="width:3em"></text>
 					</view>
+					<view class="more margin-right-sm text-sm text-gray" @tap="isMorefather=!isMorefather">
+						<text>更多</text>
+						<text :class="'cuIcon-'+(isMorefather?'unfold':'right')"></text>
+					</view>
 				</view>
-				<view class="bg-white">
-					<view class='padding-sm flex flex-wrap justify-between' v-if="plist.length>0">
-						<view class="padding-xs" v-for="(item,index) in plist" :key="index" @tap="pdetails(item)">
-							<view class='cu-tag  radius'>{{item.name}}</view>
+				<view class="bg-white" v-if="plist.length>0">
+					<view class="padding-sm" style="overflow: hidden;">
+						<view class='flex' :class="{'flex-wrap':isMoreChild,'scrollview':!isMorefather}">
+							<view class="padding-xs" v-for="(item,index) in plist" :key="index" @tap="pdetails(item)">
+								<view class='cu-tag  radius'>{{item.name}}</view>
+							</view>
 						</view>
 					</view>
-
 				</view>
-				<view class="cu-bar bg-white solid-bottom" v-if="list.length>0">
+				<view class="cu-bar bg-white solid-bottom margin-top-xs" v-if="list.length>0">
 					<view class="action border-title">
 						<text class="text-orange">子专辑</text>
 						<text class="bg-gradual-orange" style="width:3em"></text>
 					</view>
+					<view class="more margin-right-sm text-sm text-gray" @tap="isMoreChild=!isMoreChild">
+						<text>更多</text>
+						<text :class="'cuIcon-'+(isMoreChild?'unfold':'right')"></text>
+					</view>
 				</view>
-				<view class="bg-white">
-					<view class='padding-sm flex flex-wrap justify-between' v-if="list.length>0">
-						<view class="padding-xs" v-for="(item,index) in list" :key="index" @tap="details(item)">
-							<view class='cu-tag  radius'>{{item.name}}</view>
+				<view class="bg-white" v-if="list.length>0">
+					<view class="padding-sm" style="overflow: hidden;">
+						<view class='flex' :class="{'flex-wrap':isMoreChild,'scrollview':!isMoreChild}">
+							<view class="padding-xs" v-for="(item,index) in list" :key="index" @tap="details(item)">
+								<view class='cu-tag  radius'>{{item.name}}</view>
+							</view>
 						</view>
 					</view>
 
@@ -82,7 +95,9 @@
 				intonav: 'nav0',
 				materialslist: [],
 				bgColor: 'bgColor',
-				follow: false
+				follow: false,
+				isMoreChild: false,
+				isMorefather: false
 			};
 		},
 		onLoad(option) {
@@ -239,7 +254,7 @@
 					if (da.code == 10000) {
 						this.follow = da.currentNode.follow
 						uni.showToast({
-							title: this.follow ? '关注成功' : '取消关注',
+							title: this.follow ? '关注成功' : '取消关注成功',
 							icon: 'none'
 						})
 					}
@@ -295,16 +310,30 @@
 	}
 
 	.follow {
-		color: #fff;
-		background: #f37b1d;
-		border-radius: 10upx;
-		margin-right: 10upx;
-		border: 1px solid #f37b1d;
+		// color: #fff;
+		// background: #f37b1d;
+		// border-radius: 10upx;
+		// margin-right: 10upx;
+		// border: 1px solid #f37b1d;
 		padding: 5upx 10upx;
+		color: #f37b1d;
+		font-size: 40upx;
 
-		&.active {
-			background: none;
-			color: #f37b1d;
+		text {
+			vertical-align: middle;
 		}
+
+		.txt {
+			color: #999;
+			font-size: 20upx;
+
+		}
+
+		// &.active {
+		// 	background: none;
+		// 	color: #f37b1d;
+		// }
 	}
+
+	
 </style>

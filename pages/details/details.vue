@@ -28,12 +28,12 @@
 
 			<view class="action" @tap="gotohome">
 				<!-- <navigator url="/pages/index/index" open-type="switchTab"> -->
-					<view class=" cuIcon-home text-orange"></view>首页
+				<view class=" cuIcon-home text-orange"></view>首页
 				<!-- </navigator> -->
 			</view>
 
 			<view class="btn-group">
-				<button class="cu-btn  round shadow-blur" @tap="addfav">收藏下载</button>
+				<button class="cu-btn  round shadow-blur" @tap="addfav" :class="{cancel:info.stored}">{{info.stored?'取消收藏':'收藏下载'}}</button>
 			</view>
 		</view>
 		<favmodal ref="favmodal"></favmodal>
@@ -64,16 +64,34 @@
 					}
 				})
 			},
-			addfav(){
-				this.$refs.favmodal.show(this.info.id)
+			addfav() {
+				if (this.info.stored) {
+					this.delfollow(this.info.id);
+				} else {
+					this.$refs.favmodal.show(this.info.id)
+				}
 			},
-			gotohome(){
-				console.log(122)
-				uni.switchTab({
-					url:'/pages/index/index'
+			/* 删除收藏素材 */
+			delfollow(id) {
+				this.$getajax(this.$api.removeMaterialStore, {
+					mid: id
+				}).then(da => {
+					uni.showToast({
+						title: (da.code == 10000) ? '取消收藏成功' : da.message,
+						icon: 'none'
+					});
+					if (da.code == 10000) {
+						this.findMaterialDetail();
+					}
+
 				})
 			},
-			showcollections(info){
+			gotohome() {
+				uni.switchTab({
+					url: '/pages/index/index'
+				})
+			},
+			showcollections(info) {
 				uni.navigateTo({
 					url: '/pages/subfind/subfind?id=' + info.id + '&name=' + info.name
 				})
@@ -130,7 +148,13 @@
 		.cu-btn {
 			width: 80%;
 			background: #FF6A00;
+			border: 1px solid #FF6A00;
 			color: #fff;
+
+			&.cancel {
+				background: #fff;
+				color: #FF6A00;
+			}
 		}
 	}
 

@@ -3,24 +3,13 @@
 		<view class="top-warp">
 			<cu-custom :isBack="true" bgColor="bgColor" @backPage="BackPage">
 				<text slot="content">{{storeName}}</text>
-				<view slot="right" @tap="edit" class="follow">
-					<text class="cuIcon-edit"></text>
-					<text>编辑</text>
+				<view slot="right" @tap="edit" class="follow flex align-center">
+					<text class="cuIcon-more"></text>
+					<!-- <text>编辑</text> -->	
 				</view>
 			</cu-custom>
 		</view>
 		<mescroll-body :top='100' ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
-
-			<!-- <view class="swiper-item">
-				<view class="tip">
-					<view>{{storeName}}</view>
-					<view class="fav" @tap="edit">
-						<text class="cuIcon-edit"></text>
-						<text>编辑</text>
-					</view>
-				</view>
-				<image src="/static/bg.jpg" mode="widthFix"></image>
-			</view> -->
 			<view v-if="relateds.length>0">
 				<view class="cu-bar bg-white solid-bottom">
 					<view class="action border-title">
@@ -44,6 +33,7 @@
 				<material :list="list"></material>
 			</view>
 			<addmodal ref="addmodal" @upload="uploadname"></addmodal>
+			<t-rt-popup :itemList="itemList" ref="rtBubble" @click="itemClick"></t-rt-popup>
 		</mescroll-body>
 	</view>
 </template>
@@ -52,6 +42,7 @@
 	import addmodal from "@/component/addmodal"
 	import material from "@/component/material"
 	import MescrollMixin from "@/component/mescroll-uni/mescroll-mixins.js"
+	import tRtPopup from '@/component/t-rt-popup/t-rt-popup';
 	export default {
 		data() {
 			return {
@@ -59,12 +50,22 @@
 				list: [],
 				storeId: '',
 				storeName: '',
-				relateds: []
+				relateds: [],
+				itemList: [{
+						title: '编辑',
+						icon: 'edit'
+					},
+					{
+						title: '删除',
+						icon: 'deletefill'
+					}
+				]
 			};
 		},
 		components: {
 			addmodal,
-			material
+			material,
+			tRtPopup
 		},
 		mixins: [MescrollMixin],
 		onLoad(option) {
@@ -99,11 +100,45 @@
 				})
 			},
 			edit() {
-				/* 编辑 */
-				this.$refs.addmodal.show(this.storeId, this.storeName)
+
+				this.$refs.rtBubble.toggle();
 			},
 			uploadname(name) {
 				this.storeName = name
+			},
+			itemClick(e) {
+				if (e.index == 0) {
+					/* 编辑 */
+					this.$refs.addmodal.show(this.storeId, this.storeName)
+				}else{
+					/* 删除 */
+					let $me = this;
+					uni.showModal({
+						title: '',
+						content: '你确定要删除这个收藏夹吗？',
+						success: function(res) {
+							if (res.confirm) {
+								$me.delfollow(item.id)
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					});
+				}
+			},
+			delfollow(id) {
+				this.$getajax(this.$api.delStores, {
+					storeId: id
+				}).then(da => {
+					uni.showToast({
+						title: (da.code == 10000) ? '删除成功' : da.message,
+						icon: 'none'
+					});
+					if (da.code == 10000) {
+						this.mescroll && this.mescroll.resetUpScroll();
+					}
+			
+				})
 			},
 
 		}
@@ -158,10 +193,14 @@
 
 	.follow {
 		color: #f37b1d;
-		border-radius: 10upx;
-		margin-right: 10upx;
-		border: 1px solid #f37b1d;
-		padding: 5upx 10upx;
+		// border-radius: 10upx;
+		position: absolute;
+		right: 10upx;
+		height: 100%;
+		font-size: 38upx;
+		// border: 1px solid #f37b1d;
+		padding: 0 30upx;
+		
 
 	}
 </style>

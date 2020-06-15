@@ -13,18 +13,22 @@
 				<text class="text-orange">我的收藏夹</text>
 				<text class="bg-gradual-orange" style="width:5em"></text>
 			</view>
+			<navigator class="more margin-right-sm text-sm text-gray" url="/pages/follow/follow" hover-class="none">
+				<text>更多</text>
+				<text class="cuIcon-right"></text>
+			</navigator>
 		</view>
 		<view class="bg-white">
-			<view class='padding-sm flex flex-wrap justify-between'>
+			<view class='padding-sm flex flex-wrap'>
 				<view class="padding-xs" v-for="(item,index) in storeslist" :key="index">
 					<navigator class='cu-tag  round light' :url="`/pages/followdetails/followdetails?id=${item.id}&name=${item.name}`" hover-class="none">{{item.name}}</navigator>
 				</view>
-				<view class="padding-xs">
+				<!-- <view class="padding-xs">
 					<navigator class='cu-tag  round more' url="/pages/follow/follow" hover-class="none">
 						<text>更多</text>
 						<text class="cuIcon-more"></text>
 					</navigator>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="cu-bar bg-white  margin-top-sm">
@@ -35,7 +39,7 @@
 		<view class="flex-sub">
 			<mescroll-uni @init="mescrollInit" @down="downCallback" @up="upCallback" :fixed="false">
 				<view class="">
-					<material :list="list"></material>
+					<material :list="list" ></material>
 				</view>
 			</mescroll-uni>
 		</view>
@@ -92,7 +96,7 @@
 			},
 			getlist() {
 				this.$getajax(this.$api.findStores).then(da => {
-					this.storeslist = da.list.slice(0,2);
+					this.storeslist = da.list.slice(0,3);
 				})
 			}
 		}

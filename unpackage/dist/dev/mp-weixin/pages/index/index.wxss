@@ -1,7 +1,7 @@
-swiper {
+swiper.data-v-3cc1b5b2 {
   height: 390rpx;
 }
-swiper .tip {
+swiper .tip.data-v-3cc1b5b2 {
     font-size: 50rpx;
     color: #fff;
     position: absolute;
@@ -16,52 +16,39 @@ swiper .tip {
     left: 10rpx;
     right: 10rpx;
 }
-.searchbar {
+.indexsearchbar.data-v-3cc1b5b2 {
   margin: 0 40rpx;
   border-radius: 8rpx;
   background: #fff;
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
-  font-size: 30rpx;
   line-height: 80rpx;
   padding: 0 10rpx;
   -webkit-box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.1);
           box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.1);
   height: 80rpx;
 }
-.searchbar image {
+.indexsearchbar input.data-v-3cc1b5b2 {
+    font-size: 26rpx;
+}
+.indexsearchbar image.data-v-3cc1b5b2 {
     width: 50rpx;
     margin-right: 20rpx;
 }
-.more {
+.indexsearchbar .del.data-v-3cc1b5b2 {
+    color: #bbb;
+    font-size: 36rpx;
+}
+.more.data-v-3cc1b5b2 {
   text-align: center;
   padding: 10rpx;
   color: #999;
 }
-.cu-tag {
-  padding: 0 20rpx;
-  font-size: 30rpx;
-}
-.goodslist .goods-item {
-  width: 48%;
-  margin: 0 0 20rpx;
-  background: #fff;
-  font-size: 28rpx;
-  color: #333;
-  -webkit-box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.05);
-          box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.05);
-  border-radius: 4rpx;
-  overflow: hidden;
-  text-align: center;
-}
-.goodslist .goods-item image {
-    display: block;
-    width: 100%;
-    height: 48vw;
-}
-.goodslist .goods-item ._p {
-    height: 80rpx;
-    line-height: 80rpx;
+.cu-tag.data-v-3cc1b5b2 {
+  width: auto;
+  min-width: 210rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }
 
