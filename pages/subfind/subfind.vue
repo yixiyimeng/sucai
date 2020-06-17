@@ -5,10 +5,10 @@
 			<view slot="content">
 				<searchbar @search="search"></searchbar>
 			</view>
-			<view slot="right" @tap="collection" class="follow" :class="{active:follow}">
+			<view slot="right" @tap="collection" class="follow">
 				<!--  -->
-				<text :class="[follow?'cuIcon-favorfill':'cuIcon-favor']"></text>
-				<!-- <text class="txt">{{follow?'已关注':'去关注'}}</text> -->
+				<text :class="[follow?'cuIcon-attentionfill':'cuIcon-attention']"></text>
+				<view class="txt">{{follow?'已关注':'去关注'}}</view>
 			</view>
 		</topsearchbar>
 		<scroll-view scroll-x v-if="menulist.length>0" class="bread nav margin-bottom-sm" scroll-with-animation
@@ -318,6 +318,7 @@
 		padding: 5upx 10upx;
 		color: #f37b1d;
 		font-size: 40upx;
+		text-align: center;
 
 		text {
 			vertical-align: middle;
@@ -325,7 +326,8 @@
 
 		.txt {
 			color: #999;
-			font-size: 20upx;
+			font-size: 16upx;
+
 
 		}
 
@@ -334,6 +336,4 @@
 		// 	color: #f37b1d;
 		// }
 	}
-
-	
 </style>

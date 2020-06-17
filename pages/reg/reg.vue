@@ -1,5 +1,8 @@
 <template>
 	<view class="flex flex-direction bg-white pageview">
+		<cu-custom :isHome='true'>
+			<view slot="content">注册</view>
+		</cu-custom>
 		<form>
 			<view class="cu-form-group margin-top">
 				<view class="title">昵称</view>

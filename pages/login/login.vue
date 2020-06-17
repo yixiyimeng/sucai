@@ -1,5 +1,8 @@
 <template>
 	<view class="flex flex-direction pageview bg-white">
+		<cu-custom :isHome='true'>
+			<view slot="content">登录</view>
+		</cu-custom>
 		<scroll-view scroll-x class="bg-white nav text-center margin-top">
 			<view class="cu-item" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in 2" :key="index" @tap="tabSelect"
 			 :data-id="index">
@@ -286,6 +289,7 @@
 	.otherway {
 		text-align: center;
 		font-size: 26upx;
+		padding-bottom: 30upx;
 		// position: absolute;
 		// bottom: 20px;
 		// left: 0;
