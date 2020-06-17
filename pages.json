@@ -1,5 +1,11 @@
 {
-	"pages": [{
+	"pages": [ {
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "设计e周•素材",
+			"navigationStyle": "custom"
+		}
+	},{
 		"path": "pages/reg/reg",
 		"style": {
 			"navigationBarTitleText": "注册"
@@ -8,12 +14,6 @@
 		"path": "pages/login/login",
 		"style": {
 			"navigationBarTitleText": "登录"
-		}
-	}, {
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "设计e周•素材",
-			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/find/find",

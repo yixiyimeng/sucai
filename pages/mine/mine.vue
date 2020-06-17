@@ -10,10 +10,10 @@
 					<div class="name">{{userInfo.nickName}}</div>
 					<div>
 						<!-- <image class="vip" src="/static/VIP@2x.png" mode="widthFix"></image>-->
-						<text v-if="userVipinfo.length==0">普通用户</text> 
+						<text v-if="userVipinfo.length==0">普通用户</text>
 						<span v-for="(item,index) in userVipinfo" :key="index" class="flex margin-right-xs">
-							 <image src="/static/VIP@2x.png" mode="widthFix"></image>
-							 <text class="num">{{item.vipTitle}}</text>
+							<image src="/static/VIP@2x.png" mode="widthFix"></image>
+							<text class="num">{{item.vipTitle}}</text>
 						</span>
 					</div>
 				</div>
@@ -62,15 +62,16 @@
 		data() {
 			return {
 				cuIconList: [],
-				userVipinfo:[],
-				userInfo:{}
+				userVipinfo: [],
+				userInfo: {}
 			};
 		},
-		onLoad() {
-		},
+		onLoad() {},
 		onShow() {
 			this.userInfo = uni.getStorageSync('userInfo');
-			this.userVipinfo=this.userInfo.list
+			if (this.userInfo) {
+				this.userVipinfo = this.userInfo.list
+			}
 		}
 	}
 </script>

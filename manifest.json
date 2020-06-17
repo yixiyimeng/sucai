@@ -60,7 +60,7 @@
         "publicPath" : "./",
         "router" : {
             "mode" : "hash",
-            "base" : "/h5/"
+            "base" : "/"
         },
         "devServer" : {
             "https" : false
