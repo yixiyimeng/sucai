@@ -1,11 +1,11 @@
 <template>
 	<view class="pageview flex flex-direction">
-		<topsearchbar  bgColor="bgColor" >
+		<topsearchbar bgColor="bgColor">
 			<!-- <text slot="content">{{curName}}</text> -->
 			<view slot="content">
 				<searchbar @search="search"></searchbar>
 			</view>
-			
+
 		</topsearchbar>
 		<!-- <searchbar @search="search"></searchbar> -->
 		<view class="cu-bar bg-white solid-bottom">
@@ -21,7 +21,8 @@
 		<view class="bg-white">
 			<view class='padding-sm flex flex-wrap'>
 				<view class="padding-xs" v-for="(item,index) in storeslist" :key="index">
-					<navigator class='cu-tag  round light' :url="`/pages/followdetails/followdetails?id=${item.id}&name=${item.name}`" hover-class="none">{{item.name}}</navigator>
+					<navigator class='cu-tag  round light' :url="`/pages/followdetails/followdetails?id=${item.id}&name=${item.name}`"
+					 hover-class="none">{{item.name}}</navigator>
 				</view>
 				<!-- <view class="padding-xs">
 					<navigator class='cu-tag  round more' url="/pages/follow/follow" hover-class="none">
@@ -53,8 +54,8 @@
 	export default {
 		data() {
 			return {
-				list:[],
-				storeslist:[]
+				list: [],
+				storeslist: []
 			};
 		},
 		mixins: [MescrollMixin],
@@ -63,7 +64,10 @@
 			material
 		},
 		onShow() {
-			this.getlist()
+			this.getlist();
+			if(this.mescroll){
+				this.upload();
+			}
 		},
 		methods: {
 			search(keyword) {
@@ -91,13 +95,17 @@
 						if (this.mescroll.num == 1)
 							this.list = []; //如果是第一页需手动制空列表
 						this.list = this.list.concat(curPageData); //追加新数据
-					
+
 					}
 				})
 			},
 			getlist() {
 				this.$getajax(this.$api.findStores).then(da => {
-					this.storeslist = da.list.slice(0,3);
+					if (da.list&&da.list.length >= 3) {
+						this.storeslist = da.list.slice(0, 3);
+					} else {
+						this.storeslist = da.list
+					}
 				})
 			},
 			upload() {

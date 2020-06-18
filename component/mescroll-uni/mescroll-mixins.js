@@ -29,6 +29,7 @@ const MescrollMixin = {
 		// mescroll组件初始化的回调,可获取到mescroll对象
 		mescrollInit(mescroll) {
 			this.mescroll = mescroll;
+			console.log('初始化')
 			this.mescrollInitByRef(); // 兼容字节跳动小程序
 		},
 		// 以ref的方式初始化mescroll对象 (兼容字节跳动小程序: http://www.mescroll.com/qa.html?v=20200107#q26)
@@ -40,6 +41,7 @@ const MescrollMixin = {
 		},
 		// 下拉刷新的回调
 		downCallback() {
+			console.log('触发')
 			// mixin默认resetUpScroll
 			this.mescroll.resetUpScroll()
 		},
