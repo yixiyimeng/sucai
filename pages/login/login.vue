@@ -48,7 +48,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="otherway">
+		<!-- <view class="otherway">
 			<view class="title flex align-center">
 				<view class="line flex-sub"></view>
 				<view>第三方账号登录</view>
@@ -59,7 +59,7 @@
 				<view>微信登录</view>
 			</view>
 
-		</view>
+		</view> -->
 
 	</view>
 </template>

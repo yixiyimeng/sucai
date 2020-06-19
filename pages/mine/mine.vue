@@ -12,7 +12,7 @@
 						<!-- <image class="vip" src="/static/VIP@2x.png" mode="widthFix"></image>-->
 						<text v-if="userVipinfo.length==0">普通用户</text>
 						<span v-for="(item,index) in userVipinfo" :key="index" class="flex margin-right-xs">
-							<image src="/static/VIP@2x.png" mode="widthFix"></image>
+							<image class="vip" src="/static/VIP@2x.png" mode="widthFix"></image>
 							<text class="num">{{item.vipTitle}}</text>
 						</span>
 					</div>
@@ -20,7 +20,8 @@
 			</div>
 		</view>
 		<view class="cu-list menu sm-border margin-top">
-			<navigator class="cu-item arrow" url="/pages/vip/vip" hover-class="none">
+			<view class="cu-item arrow">
+				<!-- <navigator class="cu-item arrow" url="/pages/vip/vip" hover-class="none"> -->
 				<view class="content flex align-center">
 					<text class="cuIcon-vip text-orange icon"></text>
 					<text>我的素材VIP</text>
@@ -28,33 +29,36 @@
 				<view class="action text-grey">
 					加入
 				</view>
-			</navigator>
-			<navigator class="cu-item arrow" url="/pages/score/score" hover-class="none">
-				<view class="content flex align-center">
-					<text class="cuIcon-coin text-green icon"></text>
-					<text>我的素材积分</text>
+				<!-- </navigator> -->
 				</view>
-				<view class="action text-grey">
-					充值
+				<view class="cu-item arrow">
+					<!-- <navigator class="cu-item arrow" url="/pages/score/score" hover-class="none"> -->
+					<view class="content flex align-center">
+						<text class="cuIcon-coin text-green icon"></text>
+						<text>我的素材积分</text>
+					</view>
+					<view class="action text-grey">
+						充值
+					</view>
+					<!-- </navigator> -->
 				</view>
-			</navigator>
-			<view class="cu-item arrow">
-				<view class="content flex align-center">
-					<text class="cuIcon-settings text-red icon"></text>
-					<text>设置</text>
+				<view class="cu-item arrow">
+					<view class="content flex align-center">
+						<text class="cuIcon-settings text-red icon"></text>
+						<text>设置</text>
+					</view>
+
+				</view>
+				<view class="cu-item arrow">
+					<view class="content flex align-center">
+						<text class="cuIcon-question text-blue icon"></text>
+						<text>使用帮助</text>
+					</view>
 				</view>
 
-			</view>
-			<view class="cu-item arrow">
-				<view class="content flex align-center">
-					<text class="cuIcon-question text-blue icon"></text>
-					<text>使用帮助</text>
-				</view>
 			</view>
 
 		</view>
-
-	</view>
 </template>
 
 <script>
@@ -71,6 +75,8 @@
 			this.userInfo = uni.getStorageSync('userInfo');
 			if (this.userInfo) {
 				this.userVipinfo = this.userInfo.list
+			}else{
+				this.userInfo={}
 			}
 		}
 	}

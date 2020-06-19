@@ -34,7 +34,7 @@
 				</view>
 				<view class="cu-bar bg-white solid-bottom margint-top" v-if="attentions.length>0">
 					<view class="action border-title">
-						<text class="text-orange">推荐专辑</text>
+						<text class="text-orange">{{cateIndex!=0?'推荐专辑':'关注专辑'}}</text>
 						<text class="bg-gradual-orange" style="width:4em"></text>
 					</view>
 				</view>

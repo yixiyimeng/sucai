@@ -5,11 +5,6 @@
 			<view slot="content">
 				<searchbar @search="search"></searchbar>
 			</view>
-			<view slot="right" @tap="collection" class="follow">
-				<!--  -->
-				<text :class="[follow?'cuIcon-attentionfill':'cuIcon-attention']"></text>
-				<view class="txt">{{follow?'已关注':'去关注'}}</view>
-			</view>
 		</topsearchbar>
 		<scroll-view scroll-x v-if="menulist.length>0" class="bread nav margin-bottom-sm" scroll-with-animation
 		 :scroll-into-view="intonav">
@@ -21,9 +16,17 @@
 				<text :id="'nav'+(menulist.length-1)">{{menulist[menulist.length-1].name}}</text>
 			</div>
 		</scroll-view>
-
+		<view class="bg-white currentNode margin-bottom-sm">
+			<view class="flex justify-between align-center">
+				<span class="name">{{currentNode.name}}</span>
+				<view @tap="collection" class="follow">
+					<text :class="[follow?'cuIcon-attentionfill':'cuIcon-attention']"></text>
+					<view class="txt">{{follow?'已关注':'去关注'}}</view>
+				</view>
+			</view>
+			<view>{{currentNode.description}}</view>
+		</view>
 		<div class="flex-sub" style="overflow: auto;">
-
 
 			<mescroll-uni @init="mescrollInit" @down="downCallback" @up="upCallback" :fixed="false">
 				<view class="cu-bar bg-white solid-bottom" v-if="plist.length>0">
@@ -97,7 +100,8 @@
 				bgColor: 'bgColor',
 				follow: false,
 				isMoreChild: false,
-				isMorefather: false
+				isMorefather: false,
+				currentNode: {}
 			};
 		},
 		onLoad(option) {
@@ -142,6 +146,7 @@
 					if (da.code == 10000) {
 						this.list = da.nodes;
 						this.plist = da.pnodes;
+						this.currentNode = da.currentNode;
 						this.follow = da.currentNode.follow
 					}
 				})
@@ -335,5 +340,14 @@
 		// 	background: none;
 		// 	color: #f37b1d;
 		// }
+	}
+
+	.currentNode {
+		padding: 0 20upx 10upx;
+
+		.name {
+			color: #333;
+			font-size: 32upx;
+		}
 	}
 </style>

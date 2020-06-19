@@ -9,7 +9,7 @@
 		<view class="flex-sub">
 			<mescroll-uni @init="mescrollInit" @down="downCallback" @up="upCallback" :fixed="false">
 
-				<view class="cu-bar bg-white solid-bottom" v-if="relateds.length>0">
+				<!-- <view class="cu-bar bg-white solid-bottom" v-if="relateds.length>0">
 					<view class="action border-title">
 						<text class="text-orange">相关专辑</text>
 						<text class="bg-gradual-orange" style="width:4em"></text>
@@ -21,11 +21,29 @@
 							<view class='cu-tag  radius'>{{item.name}}</view>
 						</view>
 					</view>
-					<!-- <view class="more">
-						<text>展开</text>
-						<text class="cuIcon-unfold"></text>
-					</view> -->
-				</view>
+					
+				</view> -->
+				<template v-if="relateds.length>0">
+					<view class="cu-bar bg-white solid-bottom">
+						<view class="action border-title">
+							<text class="text-orange">相关专辑</text>
+							<text class="bg-gradual-orange" style="width:5em"></text>
+						</view>
+						<view class="more margin-right-sm text-sm text-gray" @tap="isMore=!isMore">
+							<text>更多</text>
+							<text :class="'cuIcon-'+(isMore?'unfold':'right')"></text>
+						</view>
+					</view>
+					<view class="bg-white margin-bottom-sm" >
+						<view class="padding-sm" style="overflow: hidden;">
+							<view class='flex' :class="{'flex-wrap':isMore,'scrollview':!isMore}">
+								<view class="padding-xs" v-for="(item,index) in relateds" :key="index">
+									<navigator class='cu-tag  radius' :url="`/pages/subfind/subfind?id=${item.id}&name=${item.name}`" hover-class="none">{{item.name}}</navigator>
+								</view>
+							</view>
+						</view>
+					</view>
+				</template>
 				<view class="cu-bar bg-white  margin-top-sm solid-bottom">
 					<view class="action border-title">
 						<text>共{{total}}条结果</text>
@@ -54,7 +72,8 @@
 				searchStr: '',
 				materialslist: [],
 				relateds: [],
-				total: 0
+				total: 0,
+				isMore:false
 			};
 		},
 		mixins: [MescrollMixin],
