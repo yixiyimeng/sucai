@@ -33,11 +33,30 @@
 			<view class="btn" @tap="submit"><text>立即购买</text>({{money}}元)</view>
 		</view>
 		<buymodal ref="buymodal" @upload='upload'></buymodal>
+		<div style="width: 60%;margin: 0 auto">
+		    <div>stripe demo支付demo</div>
+		   <form action="/charge" method="post" id="payment-form">
+		     <div class="form-row">
+		       <label for="card-element">
+		         Credit or debit card
+		       </label>
+		       <div id="card-element">
+		         <!-- A Stripe Element will be inserted here. -->
+		       </div>
+		   
+		       <!-- Used to display Element errors. -->
+		       <div id="card-errors" role="alert"></div>
+		     </div>
+		   
+		     <button>Submit Payment</button>
+		   </form>
+		   </div>
 	</view>
 </template>
 
 <script>
 	import buymodal from '@/component/buymodal.vue'
+	import stripe from '../../utils/stripe.js'
 	export default {
 		data() {
 			return {
@@ -71,9 +90,9 @@
 
 			},
 			submit() {
-				this.$refs.buymodal.show('vips', this.list[this.selectIndex].id)
+				// this.$refs.buymodal.show('vips', this.list[this.selectIndex].id)
 			},
-			
+
 		}
 	}
 </script>

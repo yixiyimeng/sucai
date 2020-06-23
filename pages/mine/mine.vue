@@ -20,9 +20,9 @@
 			</div>
 		</view>
 		<view class="cu-list menu sm-border margin-top">
-			<view class="cu-item arrow">
+			<view class="cu-item arrow" @tap="gotopage">
 				<!-- <navigator class="cu-item arrow" url="/pages/vip/vip" hover-class="none"> -->
-				<view class="content flex align-center">
+				<view class="content flex align-center" >
 					<text class="cuIcon-vip text-orange icon"></text>
 					<text>我的素材VIP</text>
 				</view>
@@ -31,7 +31,7 @@
 				</view>
 				<!-- </navigator> -->
 				</view>
-				<view class="cu-item arrow">
+				<view class="cu-item arrow" @tap="gotopage">
 					<!-- <navigator class="cu-item arrow" url="/pages/score/score" hover-class="none"> -->
 					<view class="content flex align-center">
 						<text class="cuIcon-coin text-green icon"></text>
@@ -42,14 +42,14 @@
 					</view>
 					<!-- </navigator> -->
 				</view>
-				<view class="cu-item arrow">
+				<view class="cu-item arrow" @tap="gotopage">
 					<view class="content flex align-center">
 						<text class="cuIcon-settings text-red icon"></text>
 						<text>设置</text>
 					</view>
 
 				</view>
-				<view class="cu-item arrow">
+				<view class="cu-item arrow" @tap="gotopage">
 					<view class="content flex align-center">
 						<text class="cuIcon-question text-blue icon"></text>
 						<text>使用帮助</text>
@@ -77,6 +77,14 @@
 				this.userVipinfo = this.userInfo.list
 			}else{
 				this.userInfo={}
+			}
+		},
+		methods:{
+			gotopage(){
+				uni.showToast({
+					title:'敬请期待',
+					icon:'none'
+				})
 			}
 		}
 	}

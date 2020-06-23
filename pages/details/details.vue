@@ -18,7 +18,7 @@
 					<rich-text :nodes="info.content"></rich-text>
 				</view>
 				<view class="tip">
-					<p>下载所需积分：<text class="num">0</text></p>
+					<p>下载所需积分：<text class="num">{{info.cost}}</text></p>
 					<p>文件大小：{{info.fileSize}}</p>
 					<p>发布人：{{info.creator}}</p>
 				</view>
