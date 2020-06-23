@@ -56,7 +56,6 @@
 
 <script>
 	import buymodal from '@/component/buymodal.vue'
-	import stripe from '../../utils/stripe.js'
 	export default {
 		data() {
 			return {
