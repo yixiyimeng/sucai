@@ -36,7 +36,7 @@
 				<button class="cu-btn  round shadow-blur" @tap="addfav" :class="{cancel:info.stored}">{{info.stored?'取消收藏':'收藏下载'}}</button>
 			</view>
 		</view>
-		<favmodal ref="favmodal"></favmodal>
+		<favmodal ref="favmodal" @upload="findMaterialDetail"></favmodal>
 	</view>
 </template>
 

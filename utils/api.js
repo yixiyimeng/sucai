@@ -37,6 +37,7 @@ export const api = {
 	wechatCheckLogin: '/wxutil/wechatCheckLogin', //微信登录状态
 	collection: '/collection/addFollow/', //收藏专辑
 	cancelcollection: '/collection/cancelFollow/', //取消专辑
+	checkToken:'/user/checkToken',//校验token是否过期
 
 }
 

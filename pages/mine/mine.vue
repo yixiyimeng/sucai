@@ -70,7 +70,9 @@
 				userInfo: {}
 			};
 		},
-		onLoad() {},
+		onLoad() {
+			this.checktoken();
+		},
 		onShow() {
 			this.userInfo = uni.getStorageSync('userInfo');
 			if (this.userInfo) {
@@ -78,6 +80,7 @@
 			}else{
 				this.userInfo={}
 			}
+			
 		},
 		methods:{
 			gotopage(){
@@ -85,6 +88,18 @@
 					title:'敬请期待',
 					icon:'none'
 				})
+			},
+			checktoken(){
+				var token=uni.getStorageSync('token');
+				if(token){
+					this.$postajax(this.$api.checkToken).then(da=>{
+						console.log('122')
+					})
+				}else{
+					uni.navigateTo({
+						url:'/pages/login/login'
+					})
+				}
 			}
 		}
 	}

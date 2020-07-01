@@ -86,8 +86,7 @@
 				}).then(da => {
 					if (da.code == 10000) {
 						this.showModal = false;
-					} else {
-
+						this.$emit('upload')
 					}
 				})
 			},
