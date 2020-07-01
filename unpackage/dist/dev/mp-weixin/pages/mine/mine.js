@@ -111,6 +111,7 @@ var render = function() {
                   { key: index, staticClass: "flex margin-right-xs" },
                   [
                     _c("image", {
+                      staticClass: "vip",
                       attrs: { src: "/static/VIP@2x.png", mode: "widthFix" }
                     }),
                     _c("text", { staticClass: "num" }, [
@@ -125,43 +126,50 @@ var render = function() {
         ])
       ])
     ]),
-    _c(
-      "view",
-      { staticClass: "cu-list menu sm-border margin-top" },
-      [
-        _c(
-          "navigator",
-          {
-            staticClass: "cu-item arrow",
-            attrs: { url: "/pages/vip/vip", "hover-class": "none" }
-          },
-          [
-            _c("view", { staticClass: "content flex align-center" }, [
-              _c("text", { staticClass: "cuIcon-vip text-orange icon" }),
-              _c("text", [_vm._v("我的素材VIP")])
-            ]),
-            _c("view", { staticClass: "action text-grey" }, [_vm._v("加入")])
-          ]
-        ),
-        _c(
-          "navigator",
-          {
-            staticClass: "cu-item arrow",
-            attrs: { url: "/pages/score/score", "hover-class": "none" }
-          },
-          [
-            _c("view", { staticClass: "content flex align-center" }, [
-              _c("text", { staticClass: "cuIcon-coin text-green icon" }),
-              _c("text", [_vm._v("我的素材积分")])
-            ]),
-            _c("view", { staticClass: "action text-grey" }, [_vm._v("充值")])
-          ]
-        ),
-        _vm._m(1),
-        _vm._m(2)
-      ],
-      1
-    )
+    _c("view", { staticClass: "cu-list menu sm-border margin-top" }, [
+      _c(
+        "view",
+        {
+          staticClass: "cu-item arrow",
+          attrs: { eventid: "6edda055-0" },
+          on: { tap: _vm.gotopage }
+        },
+        [
+          _vm._m(1),
+          _c("view", { staticClass: "action text-grey" }, [_vm._v("加入")])
+        ]
+      ),
+      _c(
+        "view",
+        {
+          staticClass: "cu-item arrow",
+          attrs: { eventid: "6edda055-1" },
+          on: { tap: _vm.gotopage }
+        },
+        [
+          _vm._m(2),
+          _c("view", { staticClass: "action text-grey" }, [_vm._v("充值")])
+        ]
+      ),
+      _c(
+        "view",
+        {
+          staticClass: "cu-item arrow",
+          attrs: { eventid: "6edda055-2" },
+          on: { tap: _vm.gotopage }
+        },
+        [_vm._m(3)]
+      ),
+      _c(
+        "view",
+        {
+          staticClass: "cu-item arrow",
+          attrs: { eventid: "6edda055-3" },
+          on: { tap: _vm.gotopage }
+        },
+        [_vm._m(4)]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -177,22 +185,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("view", { staticClass: "cu-item arrow" }, [
-      _c("view", { staticClass: "content flex align-center" }, [
-        _c("text", { staticClass: "cuIcon-settings text-red icon" }),
-        _c("text", [_vm._v("设置")])
-      ])
+    return _c("view", { staticClass: "content flex align-center" }, [
+      _c("text", { staticClass: "cuIcon-vip text-orange icon" }),
+      _c("text", [_vm._v("我的素材VIP")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("view", { staticClass: "cu-item arrow" }, [
-      _c("view", { staticClass: "content flex align-center" }, [
-        _c("text", { staticClass: "cuIcon-question text-blue icon" }),
-        _c("text", [_vm._v("使用帮助")])
-      ])
+    return _c("view", { staticClass: "content flex align-center" }, [
+      _c("text", { staticClass: "cuIcon-coin text-green icon" }),
+      _c("text", [_vm._v("我的素材积分")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "content flex align-center" }, [
+      _c("text", { staticClass: "cuIcon-settings text-red icon" }),
+      _c("text", [_vm._v("设置")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "content flex align-center" }, [
+      _c("text", { staticClass: "cuIcon-question text-blue icon" }),
+      _c("text", [_vm._v("使用帮助")])
     ])
   }
 ]
@@ -286,6 +308,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 {
   data: function data() {
     return {
@@ -294,12 +320,22 @@ __webpack_require__.r(__webpack_exports__);
       userInfo: {} };
 
   },
-  onLoad: function onLoad() {
-  },
+  onLoad: function onLoad() {},
   onShow: function onShow() {
     this.userInfo = uni.getStorageSync('userInfo');
-    this.userVipinfo = this.userInfo.list;
-  } };exports.default = _default;
+    if (this.userInfo) {
+      this.userVipinfo = this.userInfo.list;
+    } else {
+      this.userInfo = {};
+    }
+  },
+  methods: {
+    gotopage: function gotopage() {
+      uni.showToast({
+        title: '敬请期待',
+        icon: 'none' });
+
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 7)["default"]))
 
 /***/ }),

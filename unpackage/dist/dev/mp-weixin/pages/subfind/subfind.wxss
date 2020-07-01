@@ -39,12 +39,20 @@ page,
   padding: 5rpx 10rpx;
   color: #f37b1d;
   font-size: 40rpx;
+  text-align: center;
 }
 .follow text {
     vertical-align: middle;
 }
 .follow .txt {
     color: #999;
-    font-size: 20rpx;
+    font-size: 16rpx;
+}
+.currentNode {
+  padding: 0 20rpx 10rpx;
+}
+.currentNode .name {
+    color: #333;
+    font-size: 32rpx;
 }
 

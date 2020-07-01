@@ -85,7 +85,12 @@ page,
 .cu-bar .cu-btn.data-v-3989b647 {
     width: 80%;
     background: #FF6A00;
+    border: 1px solid #FF6A00;
     color: #fff;
+}
+.cu-bar .cu-btn.cancel.data-v-3989b647 {
+      background: #fff;
+      color: #FF6A00;
 }
 .data-v-3989b647 uni-rich-text ._img {
   max-width: 100%;

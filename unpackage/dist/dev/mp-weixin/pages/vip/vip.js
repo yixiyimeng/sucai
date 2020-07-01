@@ -192,7 +192,37 @@ var render = function() {
         ref: "buymodal",
         attrs: { eventid: "43da6471-2", mpcomid: "43da6471-2" },
         on: { upload: _vm.upload }
-      })
+      }),
+      _c(
+        "div",
+        { staticStyle: { width: "60%", margin: "0 auto" } },
+        [
+          _c("div", [_vm._v("stripe demo支付demo")]),
+          _c(
+            "form",
+            {
+              attrs: { action: "/charge", method: "post", id: "payment-form" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "form-row" },
+                [
+                  _c("label", { attrs: { for: "card-element" } }, [
+                    _vm._v("Credit or debit card")
+                  ]),
+                  _c("div", { attrs: { id: "card-element" } }),
+                  _c("div", { attrs: { id: "card-errors", role: "alert" } })
+                ],
+                1
+              ),
+              _c("button", [_vm._v("Submit Payment")])
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -267,6 +297,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _buymodal = _interopRequireDefault(__webpack_require__(/*! @/component/buymodal.vue */ 163));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   data: function data() {
@@ -301,7 +349,7 @@ var _buymodal = _interopRequireDefault(__webpack_require__(/*! @/component/buymo
 
     },
     submit: function submit() {
-      this.$refs.buymodal.show('vips', this.list[this.selectIndex].id);
+      // this.$refs.buymodal.show('vips', this.list[this.selectIndex].id)
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 7)["default"]))
 

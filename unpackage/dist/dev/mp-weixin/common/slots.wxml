@@ -1,18 +1,22 @@
+<import src="/colorui/components/cu-custom.vue.wxml" />
 <import src="/component/topsearchbar.vue.wxml" />
 <import src="/component/searchbar.vue.wxml" />
 <import src="/component/mescroll-uni/mescroll-body.vue.wxml" />
-<import src="/colorui/components/cu-custom.vue.wxml" />
 <import src="/component/swipe-action/swipe-action.vue.wxml" />
 <import src="/component/addmodal.vue.wxml" />
-<import src="/component/favmodal.vue.wxml" />
 <import src="/component/buymodal.vue.wxml" />
-<import src="/component/mescroll-uni/mescroll-uni.vue.wxml" />
+<import src="/component/favmodal.vue.wxml" />
 <import src="/component/material.vue.wxml" />
 <import src="/component/t-rt-popup/t-rt-popup.vue.wxml" />
+<import src="/component/mescroll-uni/mescroll-uni.vue.wxml" />
 <import src="/component/tui-bubble-popup/tui-bubble-popup.vue.wxml" />
 <import src="/common/slots.wxml" />
 <import src="/component/mescroll-uni/components/mescroll-empty.vue.wxml" />
 <import src="/component/mescroll-uni/components/mescroll-top.vue.wxml" />
+
+<template name="M68ef31df-default-68ef31df-0"></template>
+
+<template name="M68ef31df-content-68ef31df-0">注册</template>
 
 <template name="data-v-3cc1b5b2-default-fdfd28ca-1"></template>
 
@@ -28,27 +32,21 @@
 
 <template name="M61406ed6-content-61406ed6-0">收藏夹</template>
 
-<template name="M61406ed6-default-61406ed6-2-+index"><template><view class="_view M61406ed6 follow-item" catchtap="handleProxy" data-eventid="{{'61406ed6-0-'+index}}" data-comkey="{{$k}}"><view class="_div M61406ed6 name">{{item.name}}</view><view class="_view M61406ed6 flex justify-between"><text class="_text M61406ed6 num">100个素材</text><text class="_text M61406ed6">2010-10-10 创建</text></view></view></template></template>
+<template name="M61406ed6-default-61406ed6-2-+index"><template><view class="_view M61406ed6 follow-item" catchtap="handleProxy" data-eventid="{{'61406ed6-0-'+index}}" data-comkey="{{$k}}"><view class="_div M61406ed6 name">{{item.name}}</view><view class="_view M61406ed6 flex justify-between"><text class="_text M61406ed6 num">{{item.materialCount}}个素材</text><text class="_text M61406ed6">{{item.createTime}}创建</text></view></view></template></template>
 
 <template name="M61406ed6-default-61406ed6-3"><view class="_div M61406ed6 subtip">向左滑动对收藏夹进行编辑和删除</view><view class="_view M61406ed6 list"><template bindtap="handleProxy" wx:key="index" data-eventid="{{'61406ed6-1-'+index}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'61406ed6-2-'+index],$root, $slotdefault:'M61406ed6-default-61406ed6-2-+index'}}" is="ff7748e4" wx:for="{{list}}" wx:for-index="index" wx:for-item="item"></template></view></template>
-
-<template name="data-v-3989b647-default-5afc328a-0"></template>
-
-<template name="data-v-3989b647-content-5afc328a-0">{{info.title}}</template>
 
 <template name="data-v-15437eb2-default-e8cb71ca-0"></template>
 
 <template name="data-v-15437eb2-content-e8cb71ca-0">设计e周素材库积分充值</template>
 
-<template name="data-v-67641cfd-default-43da6471-0"></template>
+<template name="M7f776b89-default-7f776b89-0"></template>
 
-<template name="data-v-67641cfd-content-43da6471-0">设计e周素材库VIP</template>
+<template name="M7f776b89-content-7f776b89-0">登录</template>
 
-<template name="data-v-4c1f777e-default-019c1696-1"></template>
+<template name="data-v-3989b647-default-5afc328a-0"></template>
 
-<template name="data-v-4c1f777e-content-019c1696-1"><template bindsearch="handleProxy" value="{{searchStr}}" bindchange="handleProxy" data-eventid="{{'019c1696-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'019c1696-0'],$root}}" is="6ee3daac"></template></template>
-
-<template name="data-v-4c1f777e-default-019c1696-2"><view class="_view data-v-4c1f777e cu-bar bg-white solid-bottom" wx:if="{{relateds.length>0}}"><view class="_view data-v-4c1f777e action border-title"><text class="_text data-v-4c1f777e text-orange">相关专辑</text><text class="_text data-v-4c1f777e bg-gradual-orange" style="width:4em"></text></view></view><view class="_view data-v-4c1f777e bg-white" wx:if="{{relateds.length>0}}"><view class="_view data-v-4c1f777e padding-sm flex flex-wrap"><view class="_view data-v-4c1f777e padding-xs" wx:key="index" key="{{index}}" wx:for="{{relateds}}" wx:for-index="index" wx:for-item="item"><view class="_view data-v-4c1f777e cu-tag  radius">{{item.name}}</view></view></view></view><view class="_view data-v-4c1f777e cu-bar bg-white  margin-top-sm solid-bottom"><view class="_view data-v-4c1f777e action border-title"><text class="_text data-v-4c1f777e">共{{total}}条结果</text></view></view><view class="_view data-v-4c1f777e bg-white"><view class="_view data-v-4c1f777e padding goodslist flex flex-wrap justify-between"><navigator url="{{`/pages/details/details?id=${item.id}`}}" class="_navigator data-v-4c1f777e goods-item" hover-class="none" wx:key="index" key="{{index}}" wx:for="{{materialslist}}" wx:for-index="index" wx:for-item="item"><image src="{{item.coverPath}}" mode="aspectFill" class="_image data-v-4c1f777e"></image><view class="_p data-v-4c1f777e text-cut">{{item.title}}</view></navigator></view></view></template>
+<template name="data-v-3989b647-content-5afc328a-0">{{info.title}}</template>
 
 <template name="data-v-40d113b6-default-bb2d58ce-0"></template>
 
@@ -56,21 +54,29 @@
 
 <template bindtap="handleProxy" data-eventid="{{'bb2d58ce-0'}}" data-comkey="{{$k}}" name="data-v-40d113b6-right-bb2d58ce-0"><text class="_text data-v-40d113b6 cuIcon-more"></text></template>
 
-<template name="data-v-40d113b6-default-bb2d58ce-4"><view wx:if="{{relateds.length>0}}" class="_view data-v-40d113b6"><view class="_view data-v-40d113b6 cu-bar bg-white solid-bottom"><view class="_view data-v-40d113b6 action border-title"><text class="_text data-v-40d113b6 text-orange">关联专辑</text><text class="_text data-v-40d113b6 bg-gradual-orange" style="width:4em"></text></view></view><view class="_view data-v-40d113b6 bg-white"><view class="_view data-v-40d113b6 padding-sm flex flex-wrap justify-between"><view class="_view data-v-40d113b6 padding-xs" wx:key="index" key="{{index}}" wx:for="{{relateds}}" wx:for-index="index" wx:for-item="item"><view class="_view data-v-40d113b6 cu-tag  radius">{{item.name}}</view></view></view></view></view><view class="_view data-v-40d113b6"><template data="{{...$root['0'], ...$root[$kk+'bb2d58ce-1'],$root}}" is="2da68408"></template></view><template ref="addmodal" bindupload="handleProxy" data-eventid="{{'bb2d58ce-2'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'bb2d58ce-2'],$root}}" is="5a2644e6"></template><template ref="rtBubble" bindtap="handleProxy" data-eventid="{{'bb2d58ce-3'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'bb2d58ce-3'],$root}}" is="32d763ee"></template></template>
+<template name="data-v-40d113b6-default-bb2d58ce-4"><view wx:if="{{relateds.length>0}}" class="_view data-v-40d113b6"><view class="_view data-v-40d113b6 cu-bar bg-white solid-bottom"><view class="_view data-v-40d113b6 action border-title"><text class="_text data-v-40d113b6 text-orange">关联专辑</text><text class="_text data-v-40d113b6 bg-gradual-orange" style="width:5em"></text></view><view class="_view data-v-40d113b6 more margin-right-sm text-sm text-gray" bindtap="handleProxy" data-eventid="{{'bb2d58ce-2'}}" data-comkey="{{$k}}"><text class="_text data-v-40d113b6">更多</text><text class="_text data-v-40d113b6 {{'cuIcon-' + (isMore ? 'unfold' : 'right')}}"></text></view></view><view class="_view data-v-40d113b6 bg-white margin-bottom-sm"><view class="_view data-v-40d113b6 padding-sm" style="overflow: hidden;"><view class="_view data-v-40d113b6 flex {{[isMore ? 'flex-wrap' : '', !isMore ? 'scrollview' : '']}}"><view class="_view data-v-40d113b6 padding-xs" wx:key="index" key="{{index}}" wx:for="{{relateds}}" wx:for-index="index" wx:for-item="item"><navigator class="_navigator data-v-40d113b6 cu-tag  radius" url="{{`/pages/subfind/subfind?id=${item.id}&name=${item.name}`}}" hover-class="none">{{item.name}}</navigator></view></view></view></view></view><view class="_view data-v-40d113b6"><template bindupload="handleProxy" data-eventid="{{'bb2d58ce-3'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'bb2d58ce-1'],$root}}" is="2da68408"></template></view><template ref="addmodal" bindupload="handleProxy" data-eventid="{{'bb2d58ce-4'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'bb2d58ce-2'],$root}}" is="5a2644e6"></template><template ref="rtBubble" bindtap="handleProxy" data-eventid="{{'bb2d58ce-5'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'bb2d58ce-3'],$root}}" is="32d763ee"></template></template>
 
-<template name="data-v-42265061-default-030c7656-1"></template>
+<template name="data-v-4c1f777e-default-019c1696-1"></template>
 
-<template name="data-v-42265061-content-030c7656-1"><template bindsearch="handleProxy" data-eventid="{{'030c7656-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'030c7656-0'],$root}}" is="6ee3daac"></template></template>
+<template name="data-v-4c1f777e-content-019c1696-1"><template bindsearch="handleProxy" value="{{searchStr}}" bindchange="handleProxy" data-eventid="{{'019c1696-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'019c1696-0'],$root}}" is="6ee3daac"></template></template>
 
-<template name="data-v-42265061-default-030c7656-3"><view class="_view data-v-42265061"><template data="{{...$root['0'], ...$root[$kk+'030c7656-2'],$root}}" is="2da68408"></template></view></template>
+<template name="data-v-4c1f777e-default-019c1696-3"><block wx:if="{{relateds.length>0}}"><view class="_view data-v-4c1f777e cu-bar bg-white solid-bottom"><view class="_view data-v-4c1f777e action border-title"><text class="_text data-v-4c1f777e text-orange">相关专辑</text><text class="_text data-v-4c1f777e bg-gradual-orange" style="width:5em"></text></view><view class="_view data-v-4c1f777e more margin-right-sm text-sm text-gray" bindtap="handleProxy" data-eventid="{{'019c1696-2'}}" data-comkey="{{$k}}"><text class="_text data-v-4c1f777e">更多</text><text class="_text data-v-4c1f777e {{'cuIcon-' + (isMore ? 'unfold' : 'right')}}"></text></view></view><view class="_view data-v-4c1f777e bg-white margin-bottom-sm"><view class="_view data-v-4c1f777e padding-sm" style="overflow: hidden;"><view class="_view data-v-4c1f777e flex {{[isMore ? 'flex-wrap' : '', !isMore ? 'scrollview' : '']}}"><view class="_view data-v-4c1f777e padding-xs" wx:key="index" key="{{index}}" wx:for="{{relateds}}" wx:for-index="index" wx:for-item="item"><navigator class="_navigator data-v-4c1f777e cu-tag  radius" url="{{`/pages/subfind/subfind?id=${item.id}&name=${item.name}`}}" hover-class="none">{{item.name}}</navigator></view></view></view></view></block><view class="_view data-v-4c1f777e cu-bar bg-white  margin-top-sm solid-bottom"><view class="_view data-v-4c1f777e action border-title"><text class="_text data-v-4c1f777e">共{{total}}条结果</text></view></view><view class="_view data-v-4c1f777e bg-white"><view class="_view data-v-4c1f777e padding goodslist flex flex-wrap justify-between"><navigator url="{{`/pages/details/details?id=${item.id}`}}" class="_navigator data-v-4c1f777e goods-item" hover-class="none" wx:key="index" key="{{index}}" wx:for="{{materialslist}}" wx:for-index="index" wx:for-item="item"><image src="{{item.coverPath}}" mode="aspectFill" class="_image data-v-4c1f777e"></image><view class="_p data-v-4c1f777e text-cut">{{item.title}}</view></navigator></view></view></template>
+
+<template name="data-v-67641cfd-default-43da6471-0"></template>
+
+<template name="data-v-67641cfd-content-43da6471-0">设计e周素材库VIP</template>
 
 <template name="M01db8329-default-01db8329-1"></template>
 
 <template name="M01db8329-content-01db8329-1"><template bindsearch="handleProxy" data-eventid="{{'01db8329-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'01db8329-0'],$root}}" is="6ee3daac"></template></template>
 
-<template bindtap="handleProxy" data-eventid="{{'01db8329-1'}}" data-comkey="{{$k}}" name="M01db8329-right-01db8329-1"><text class="_text M01db8329 {{[follow ? 'cuIcon-favorfill' : 'cuIcon-favor']}}"></text></template>
-
 <template name="M01db8329-default-01db8329-2"><view class="_view M01db8329 cu-bar bg-white solid-bottom" wx:if="{{plist.length>0}}"><view class="_view M01db8329 action border-title"><text class="_text M01db8329 text-orange">父专辑</text><text class="_text M01db8329 bg-gradual-orange" style="width:3em"></text></view><view class="_view M01db8329 more margin-right-sm text-sm text-gray" bindtap="handleProxy" data-eventid="{{'01db8329-4'}}" data-comkey="{{$k}}"><text class="_text M01db8329">更多</text><text class="_text M01db8329 {{'cuIcon-' + (isMorefather ? 'unfold' : 'right')}}"></text></view></view><view class="_view M01db8329 bg-white" wx:if="{{plist.length>0}}"><view class="_view M01db8329 padding-sm" style="overflow: hidden;"><view class="_view M01db8329 flex {{[isMoreChild ? 'flex-wrap' : '', !isMorefather ? 'scrollview' : '']}}"><view class="_view M01db8329 padding-xs" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'01db8329-5-'+index}}" data-comkey="{{$k}}" wx:for="{{plist}}" wx:for-index="index" wx:for-item="item"><view class="_view M01db8329 cu-tag  radius">{{item.name}}</view></view></view></view></view><view class="_view M01db8329 cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{list.length>0}}"><view class="_view M01db8329 action border-title"><text class="_text M01db8329 text-orange">子专辑</text><text class="_text M01db8329 bg-gradual-orange" style="width:3em"></text></view><view class="_view M01db8329 more margin-right-sm text-sm text-gray" bindtap="handleProxy" data-eventid="{{'01db8329-6'}}" data-comkey="{{$k}}"><text class="_text M01db8329">更多</text><text class="_text M01db8329 {{'cuIcon-' + (isMoreChild ? 'unfold' : 'right')}}"></text></view></view><view class="_view M01db8329 bg-white" wx:if="{{list.length>0}}"><view class="_view M01db8329 padding-sm" style="overflow: hidden;"><view class="_view M01db8329 flex {{[isMoreChild ? 'flex-wrap' : '', !isMoreChild ? 'scrollview' : '']}}"><view class="_view M01db8329 padding-xs" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'01db8329-7-'+index}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="index" wx:for-item="item"><view class="_view M01db8329 cu-tag  radius">{{item.name}}</view></view></view></view></view><view class="_view M01db8329 padding goodslist flex flex-wrap justify-between"><navigator url="{{`/pages/details/details?id=${item.id}`}}" class="_navigator M01db8329 goods-item" hover-class="none" wx:key="index" key="{{index}}" wx:for="{{materialslist}}" wx:for-index="index" wx:for-item="item"><image src="{{item.coverPath}}" mode="aspectFill" class="_image M01db8329"></image><view class="_p M01db8329 text-cut">{{item.title}}</view></navigator></view></template>
+
+<template name="data-v-42265061-default-030c7656-1"></template>
+
+<template name="data-v-42265061-content-030c7656-1"><template bindsearch="handleProxy" data-eventid="{{'030c7656-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'030c7656-0'],$root}}" is="6ee3daac"></template></template>
+
+<template name="data-v-42265061-default-030c7656-3"><view class="_view data-v-42265061"><template bindupload="handleProxy" data-eventid="{{'030c7656-1'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'030c7656-2'],$root}}" is="2da68408"></template></view></template>
 
 <template name="data-v-eb7c3e0c-default-32d763ee-0"><view class="_view data-v-eb7c3e0c tui-popup-item {{[  index === 0 ? 'tui-start' : '',  index === itemList.length - 1 ? 'tui-last' : '']}}" hover-class="tui-item-active" hover-stay-time="{{150}}" bindtap="handleProxy" wx:key="index" key="{{index}}" data-eventid="{{'32d763ee-0-'+index}}" data-comkey="{{$k}}" wx:for="{{itemList}}" wx:for-index="index" wx:for-item="item"><text class="_text data-v-eb7c3e0c lg {{'cuIcon-' + item.icon}}" wx:if="{{item.icon && isImage}}"></text><text class="_text data-v-eb7c3e0c tui-bubble-popup_title">{{ item.title }}</text></view></template>
 

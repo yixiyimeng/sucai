@@ -100,7 +100,7 @@ var render = function() {
           attrs: {
             isBack: true,
             bgColor: "bgColor",
-            eventid: "01db8329-2",
+            eventid: "01db8329-1",
             mpcomid: "01db8329-1"
           },
           on: { backPage: _vm.BackPage }
@@ -116,21 +116,6 @@ var render = function() {
               })
             ],
             1
-          ),
-          _c(
-            "view",
-            {
-              staticClass: "follow",
-              class: { active: _vm.follow },
-              attrs: { eventid: "01db8329-1" },
-              on: { tap: _vm.collection },
-              slot: "right"
-            },
-            [
-              _c("text", {
-                class: [_vm.follow ? "cuIcon-favorfill" : "cuIcon-favor"]
-              })
-            ]
           )
         ]
       ),
@@ -157,7 +142,7 @@ var render = function() {
                         "span",
                         {
                           key: index,
-                          attrs: { eventid: "01db8329-3-" + index },
+                          attrs: { eventid: "01db8329-2-" + index },
                           on: {
                             tap: function($event) {
                               _vm.showdetails(item)
@@ -184,6 +169,32 @@ var render = function() {
             ]
           )
         : _vm._e(),
+      _c("view", { staticClass: "bg-white currentNode margin-bottom-sm" }, [
+        _c("view", { staticClass: "flex justify-between align-center" }, [
+          _c("span", { staticClass: "name" }, [
+            _vm._v(_vm._s(_vm.currentNode.name))
+          ]),
+          _c(
+            "view",
+            {
+              staticClass: "follow",
+              attrs: { eventid: "01db8329-3" },
+              on: { tap: _vm.collection }
+            },
+            [
+              _c("text", {
+                class: [
+                  _vm.follow ? "cuIcon-attentionfill" : "cuIcon-attention"
+                ]
+              }),
+              _c("view", { staticClass: "txt" }, [
+                _vm._v(_vm._s(_vm.follow ? "已关注" : "去关注"))
+              ])
+            ]
+          )
+        ]),
+        _c("view", [_vm._v(_vm._s(_vm.currentNode.description))])
+      ]),
       _c(
         "div",
         { staticClass: "flex-sub", staticStyle: { overflow: "auto" } },
@@ -508,8 +519,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 88));
-var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 89));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+
+
+var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 72));
+var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 73));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   components: {
     searchbar: _searchbar.default },
@@ -527,7 +541,8 @@ var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/sear
       bgColor: 'bgColor',
       follow: false,
       isMoreChild: false,
-      isMorefather: false };
+      isMorefather: false,
+      currentNode: {} };
 
   },
   onLoad: function onLoad(option) {
@@ -572,6 +587,7 @@ var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/sear
         if (da.code == 10000) {
           _this.list = da.nodes;
           _this.plist = da.pnodes;
+          _this.currentNode = da.currentNode;
           _this.follow = da.currentNode.follow;
         }
       });

@@ -140,7 +140,19 @@ var render = function() {
               ? _c(
                   "view",
                   { staticClass: "cu-bar bg-white solid-bottom margint-top" },
-                  [_vm._m(1)]
+                  [
+                    _c("view", { staticClass: "action border-title" }, [
+                      _c("text", { staticClass: "text-orange" }, [
+                        _vm._v(
+                          _vm._s(_vm.cateIndex != 0 ? "推荐专辑" : "关注专辑")
+                        )
+                      ]),
+                      _c("text", {
+                        staticClass: "bg-gradual-orange",
+                        staticStyle: { width: "4em" }
+                      })
+                    ])
+                  ]
                 )
               : _vm._e(),
             _c("view", [
@@ -190,18 +202,6 @@ var staticRenderFns = [
       _c("text", {
         staticClass: "bg-gradual-orange",
         staticStyle: { width: "3em" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("view", { staticClass: "action border-title" }, [
-      _c("text", { staticClass: "text-orange" }, [_vm._v("推荐专辑")]),
-      _c("text", {
-        staticClass: "bg-gradual-orange",
-        staticStyle: { width: "4em" }
       })
     ])
   }
@@ -291,8 +291,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 88));
-var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 89));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _default =
+var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 72));
+var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 73));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _default =
 {
   components: {
     searchbar: _searchbar.default },

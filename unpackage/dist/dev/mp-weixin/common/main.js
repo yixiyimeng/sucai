@@ -431,10 +431,27 @@ var render = function() {
                     on: { tap: _vm.BackPage }
                   },
                   [
-                    _c("text", { staticClass: "cuIcon-back" }),
-                    _vm._t("backText", null, { mpcomid: "44dcaacc-0" })
+                    _vm._t(
+                      "left",
+                      [
+                        _c("text", { staticClass: "cuIcon-back" }),
+                        _vm._t("backText", null, { mpcomid: "44dcaacc-0" })
+                      ],
+                      { mpcomid: "44dcaacc-1" }
+                    )
                   ],
                   2
+                )
+              : _vm._e(),
+            _vm.isHome
+              ? _c(
+                  "view",
+                  {
+                    staticClass: "action",
+                    attrs: { eventid: "44dcaacc-1" },
+                    on: { tap: _vm.BackHome }
+                  },
+                  [_vm._m(0)]
                 )
               : _vm._e(),
             _c(
@@ -443,10 +460,10 @@ var render = function() {
                 staticClass: "content",
                 style: [{ top: _vm.StatusBar + "px" }]
               },
-              [_vm._t("content", null, { mpcomid: "44dcaacc-1" })],
+              [_vm._t("content", null, { mpcomid: "44dcaacc-2" })],
               2
             ),
-            _vm._t("right", null, { mpcomid: "44dcaacc-2" })
+            _vm._t("right", null, { mpcomid: "44dcaacc-3" })
           ],
           2
         )
@@ -454,7 +471,16 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "home text-lg" }, [
+      _c("text", { staticClass: "cuIcon-home" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -484,6 +510,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+
+
+
+
+
+
+
 
 
 
@@ -532,7 +565,11 @@ __webpack_require__.r(__webpack_exports__);
 
     bgImage: {
       type: String,
-      default: '' } },
+      default: '' },
+
+    isHome: {
+      type: [Boolean, String],
+      default: false } },
 
 
   methods: {
@@ -542,6 +579,11 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log('返回');
       // this.$emit('backPage')
+    },
+    BackHome: function BackHome() {
+      uni.reLaunch({
+        url: '/pages/index/index' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 7)["default"]))
 

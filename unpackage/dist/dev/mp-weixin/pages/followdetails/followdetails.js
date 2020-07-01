@@ -127,7 +127,7 @@ var render = function() {
         "mescroll-body",
         {
           ref: "mescrollRef",
-          attrs: { top: 100, eventid: "bb2d58ce-4", mpcomid: "bb2d58ce-4" },
+          attrs: { top: 100, eventid: "bb2d58ce-6", mpcomid: "bb2d58ce-4" },
           on: {
             init: _vm.mescrollInit,
             down: _vm.downCallback,
@@ -144,27 +144,71 @@ var render = function() {
                     ]),
                     _c("text", {
                       staticClass: "bg-gradual-orange",
-                      staticStyle: { width: "4em" }
+                      staticStyle: { width: "5em" }
                     })
-                  ])
-                ]),
-                _c("view", { staticClass: "bg-white" }, [
+                  ]),
                   _c(
                     "view",
                     {
-                      staticClass: "padding-sm flex flex-wrap justify-between"
+                      staticClass: "more margin-right-sm text-sm text-gray",
+                      attrs: { eventid: "bb2d58ce-2" },
+                      on: {
+                        tap: function($event) {
+                          _vm.isMore = !_vm.isMore
+                        }
+                      }
                     },
-                    _vm._l(_vm.relateds, function(item, index) {
-                      return _c(
+                    [
+                      _c("text", [_vm._v("更多")]),
+                      _c("text", {
+                        class: "cuIcon-" + (_vm.isMore ? "unfold" : "right")
+                      })
+                    ]
+                  )
+                ]),
+                _c("view", { staticClass: "bg-white margin-bottom-sm" }, [
+                  _c(
+                    "view",
+                    {
+                      staticClass: "padding-sm",
+                      staticStyle: { overflow: "hidden" }
+                    },
+                    [
+                      _c(
                         "view",
-                        { key: index, staticClass: "padding-xs" },
-                        [
-                          _c("view", { staticClass: "cu-tag  radius" }, [
-                            _vm._v(_vm._s(item.name))
-                          ])
-                        ]
+                        {
+                          staticClass: "flex",
+                          class: {
+                            "flex-wrap": _vm.isMore,
+                            scrollview: !_vm.isMore
+                          }
+                        },
+                        _vm._l(_vm.relateds, function(item, index) {
+                          return _c(
+                            "view",
+                            { key: index, staticClass: "padding-xs" },
+                            [
+                              _c(
+                                "navigator",
+                                {
+                                  staticClass: "cu-tag  radius",
+                                  attrs: {
+                                    url:
+                                      "/pages/subfind/subfind?id=" +
+                                      item.id +
+                                      "&name=" +
+                                      item.name,
+                                    "hover-class": "none"
+                                  }
+                                },
+                                [_vm._v(_vm._s(item.name))]
+                              )
+                            ],
+                            1
+                          )
+                        })
                       )
-                    })
+                    ]
                   )
                 ])
               ])
@@ -173,21 +217,26 @@ var render = function() {
             "view",
             [
               _c("material", {
-                attrs: { list: _vm.list, mpcomid: "bb2d58ce-1" }
+                attrs: {
+                  list: _vm.list,
+                  eventid: "bb2d58ce-3",
+                  mpcomid: "bb2d58ce-1"
+                },
+                on: { upload: _vm.upload }
               })
             ],
             1
           ),
           _c("addmodal", {
             ref: "addmodal",
-            attrs: { eventid: "bb2d58ce-2", mpcomid: "bb2d58ce-2" },
+            attrs: { eventid: "bb2d58ce-4", mpcomid: "bb2d58ce-2" },
             on: { upload: _vm.uploadname }
           }),
           _c("t-rt-popup", {
             ref: "rtBubble",
             attrs: {
               itemList: _vm.itemList,
-              eventid: "bb2d58ce-3",
+              eventid: "bb2d58ce-5",
               mpcomid: "bb2d58ce-3"
             },
             on: { click: _vm.itemClick }
@@ -271,9 +320,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _addmodal = _interopRequireDefault(__webpack_require__(/*! @/component/addmodal */ 114));
 var _material = _interopRequireDefault(__webpack_require__(/*! @/component/material */ 198));
-var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 88));
+var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 72));
 var _tRtPopup = _interopRequireDefault(__webpack_require__(/*! @/component/t-rt-popup/t-rt-popup */ 205));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   data: function data() {
@@ -289,9 +354,10 @@ var _tRtPopup = _interopRequireDefault(__webpack_require__(/*! @/component/t-rt-
 
       {
         title: '删除',
-        icon: 'deletefill' }] };
+        icon: 'deletefill' }],
 
 
+      isMore: false };
 
   },
   components: {
@@ -358,7 +424,7 @@ var _tRtPopup = _interopRequireDefault(__webpack_require__(/*! @/component/t-rt-
 
       }
     },
-    delfollow: function delfollow(id) {var _this2 = this;
+    delfollow: function delfollow(id) {
       this.$getajax(this.$api.delStores, {
         storeId: id }).
       then(function (da) {
@@ -367,10 +433,15 @@ var _tRtPopup = _interopRequireDefault(__webpack_require__(/*! @/component/t-rt-
           icon: 'none' });
 
         if (da.code == 10000) {
-          _this2.mescroll && _this2.mescroll.resetUpScroll();
+          uni.navigateBack({
+            delta: 1 });
+
         }
 
       });
+    },
+    upload: function upload() {
+      this.mescroll && this.mescroll.resetUpScroll();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 7)["default"]))
 

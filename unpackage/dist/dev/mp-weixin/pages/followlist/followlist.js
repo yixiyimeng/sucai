@@ -170,7 +170,7 @@ var render = function() {
             {
               attrs: {
                 fixed: false,
-                eventid: "030c7656-1",
+                eventid: "030c7656-2",
                 mpcomid: "030c7656-3"
               },
               on: {
@@ -185,7 +185,12 @@ var render = function() {
                 {},
                 [
                   _c("material", {
-                    attrs: { list: _vm.list, mpcomid: "030c7656-2" }
+                    attrs: {
+                      list: _vm.list,
+                      eventid: "030c7656-1",
+                      mpcomid: "030c7656-2"
+                    },
+                    on: { upload: _vm.upload }
                   })
                 ],
                 1
@@ -308,9 +313,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 89));
+
+var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 73));
 var _material = _interopRequireDefault(__webpack_require__(/*! @/component/material */ 198));
-var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 88));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 72));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   data: function data() {
     return {
@@ -325,6 +331,9 @@ var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component
 
   onShow: function onShow() {
     this.getlist();
+    if (this.mescroll) {
+      this.upload();
+    }
   },
   methods: {
     search: function search(keyword) {
@@ -342,7 +351,8 @@ var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component
       var pageSize = this.mescroll.size;
       var param = {
         page: pageNum,
-        pageSize: pageSize };
+        pageSize: pageSize,
+        storeId: 0 };
 
       this.$postajax(this.$api.findStoredMaterials, param).then(function (da) {
         if (da.code == 10000) {
@@ -357,8 +367,15 @@ var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component
     },
     getlist: function getlist() {var _this2 = this;
       this.$getajax(this.$api.findStores).then(function (da) {
-        _this2.storeslist = da.list.slice(0, 3);
+        if (da.list && da.list.length >= 3) {
+          _this2.storeslist = da.list.slice(0, 3);
+        } else {
+          _this2.storeslist = da.list;
+        }
       });
+    },
+    upload: function upload() {
+      this.mescroll && this.mescroll.resetUpScroll();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 7)["default"]))
 

@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/reg/reg",
     "pages/login/login",
-    "pages/index/index",
     "pages/find/find",
     "pages/follow/follow",
     "pages/mine/mine",
@@ -54,5 +54,6 @@
         "text": "我的"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap61.json"
 }

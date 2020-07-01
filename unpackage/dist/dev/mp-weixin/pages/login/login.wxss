@@ -6,6 +6,7 @@ page,
 .otherway {
   text-align: center;
   font-size: 26rpx;
+  padding-bottom: 30rpx;
   color: #878787;
 }
 .otherway .title {

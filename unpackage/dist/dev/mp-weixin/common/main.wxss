@@ -5005,13 +5005,13 @@ button::after {
 }
 
 
-.cu-custom{
-		-webkit-box-shadow: 0 10rpx 10rpx rgba(0,0,0,.05);
-		        box-shadow: 0 10rpx 10rpx rgba(0,0,0,.05);
+.cu-custom {
+	-webkit-box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, .05);
+	        box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, .05);
 }
-.bgColor{
-		color: #333;
-		background: #fff;
+.bgColor {
+	color: #333;
+	background: #fff;
 }
 
 

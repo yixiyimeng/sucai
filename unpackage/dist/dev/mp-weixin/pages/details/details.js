@@ -144,7 +144,9 @@ var render = function() {
             [
               _c("p", [
                 _vm._v("下载所需积分："),
-                _c("text", { staticClass: "num" }, [_vm._v("0")])
+                _c("text", { staticClass: "num" }, [
+                  _vm._v(_vm._s(_vm.info.cost))
+                ])
               ]),
               _c("p", [_vm._v("文件大小：" + _vm._s(_vm.info.fileSize))]),
               _c("p", [_vm._v("发布人：" + _vm._s(_vm.info.creator))])
@@ -174,10 +176,11 @@ var render = function() {
               "button",
               {
                 staticClass: "cu-btn  round shadow-blur",
+                class: { cancel: _vm.info.stored },
                 attrs: { eventid: "5afc328a-2" },
                 on: { tap: _vm.addfav }
               },
-              [_vm._v("收藏下载")]
+              [_vm._v(_vm._s(_vm.info.stored ? "取消收藏" : "收藏下载"))]
             )
           ],
           1
@@ -286,10 +289,28 @@ var _favmodal = _interopRequireDefault(__webpack_require__(/*! @/component/favmo
       });
     },
     addfav: function addfav() {
-      this.$refs.favmodal.show(this.info.id);
+      if (this.info.stored) {
+        this.delfollow(this.info.id);
+      } else {
+        this.$refs.favmodal.show(this.info.id);
+      }
+    },
+    /* 删除收藏素材 */
+    delfollow: function delfollow(id) {var _this2 = this;
+      this.$getajax(this.$api.removeMaterialStore, {
+        mid: id }).
+      then(function (da) {
+        uni.showToast({
+          title: da.code == 10000 ? '取消收藏成功' : da.message,
+          icon: 'none' });
+
+        if (da.code == 10000) {
+          _this2.findMaterialDetail();
+        }
+
+      });
     },
     gotohome: function gotohome() {
-      console.log(122);
       uni.switchTab({
         url: '/pages/index/index' });
 

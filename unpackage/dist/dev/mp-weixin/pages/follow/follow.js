@@ -164,9 +164,9 @@ var render = function() {
                         ]),
                         _c("view", { staticClass: "flex justify-between" }, [
                           _c("text", { staticClass: "num" }, [
-                            _vm._v("100个素材")
+                            _vm._v(_vm._s(item.materialCount) + "个素材")
                           ]),
-                          _c("text", [_vm._v("2010-10-10 创建")])
+                          _c("text", [_vm._v(_vm._s(item.createTime) + "创建")])
                         ])
                       ]
                     )
@@ -295,7 +295,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _addmodal = _interopRequireDefault(__webpack_require__(/*! @/component/addmodal */ 114));
-var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 88));
+var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 72));
 var _swipeAction = _interopRequireDefault(__webpack_require__(/*! @/component/swipe-action/swipe-action */ 121));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   mixins: [_mescrollMixins.default],

@@ -135,8 +135,8 @@ var render = function() {
             {
               attrs: {
                 fixed: false,
-                eventid: "019c1696-2",
-                mpcomid: "019c1696-2"
+                eventid: "019c1696-3",
+                mpcomid: "019c1696-3"
               },
               on: {
                 init: _vm.mescrollInit,
@@ -146,36 +146,88 @@ var render = function() {
             },
             [
               _vm.relateds.length > 0
-                ? _c("view", { staticClass: "cu-bar bg-white solid-bottom" }, [
-                    _c("view", { staticClass: "action border-title" }, [
-                      _c("text", { staticClass: "text-orange" }, [
-                        _vm._v("相关专辑")
-                      ]),
-                      _c("text", {
-                        staticClass: "bg-gradual-orange",
-                        staticStyle: { width: "4em" }
-                      })
-                    ])
-                  ])
-                : _vm._e(),
-              _vm.relateds.length > 0
-                ? _c("view", { staticClass: "bg-white" }, [
+                ? [
                     _c(
                       "view",
-                      { staticClass: "padding-sm flex flex-wrap" },
-                      _vm._l(_vm.relateds, function(item, index) {
-                        return _c(
+                      { staticClass: "cu-bar bg-white solid-bottom" },
+                      [
+                        _c("view", { staticClass: "action border-title" }, [
+                          _c("text", { staticClass: "text-orange" }, [
+                            _vm._v("相关专辑")
+                          ]),
+                          _c("text", {
+                            staticClass: "bg-gradual-orange",
+                            staticStyle: { width: "5em" }
+                          })
+                        ]),
+                        _c(
                           "view",
-                          { key: index, staticClass: "padding-xs" },
+                          {
+                            staticClass:
+                              "more margin-right-sm text-sm text-gray",
+                            attrs: { eventid: "019c1696-2" },
+                            on: {
+                              tap: function($event) {
+                                _vm.isMore = !_vm.isMore
+                              }
+                            }
+                          },
                           [
-                            _c("view", { staticClass: "cu-tag  radius" }, [
-                              _vm._v(_vm._s(item.name))
-                            ])
+                            _c("text", [_vm._v("更多")]),
+                            _c("text", {
+                              class:
+                                "cuIcon-" + (_vm.isMore ? "unfold" : "right")
+                            })
                           ]
                         )
-                      })
-                    )
-                  ])
+                      ]
+                    ),
+                    _c("view", { staticClass: "bg-white margin-bottom-sm" }, [
+                      _c(
+                        "view",
+                        {
+                          staticClass: "padding-sm",
+                          staticStyle: { overflow: "hidden" }
+                        },
+                        [
+                          _c(
+                            "view",
+                            {
+                              staticClass: "flex",
+                              class: {
+                                "flex-wrap": _vm.isMore,
+                                scrollview: !_vm.isMore
+                              }
+                            },
+                            _vm._l(_vm.relateds, function(item, index) {
+                              return _c(
+                                "view",
+                                { key: index, staticClass: "padding-xs" },
+                                [
+                                  _c(
+                                    "navigator",
+                                    {
+                                      staticClass: "cu-tag  radius",
+                                      attrs: {
+                                        url:
+                                          "/pages/subfind/subfind?id=" +
+                                          item.id +
+                                          "&name=" +
+                                          item.name,
+                                        "hover-class": "none"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(item.name))]
+                                  )
+                                ],
+                                1
+                              )
+                            })
+                          )
+                        ]
+                      )
+                    ])
+                  ]
                 : _vm._e(),
               _c(
                 "view",
@@ -217,7 +269,8 @@ var render = function() {
                   })
                 )
               ])
-            ]
+            ],
+            2
           )
         ],
         1
@@ -305,15 +358,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 89));
-var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 88));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _searchbar = _interopRequireDefault(__webpack_require__(/*! @/component/searchbar.vue */ 73));
+var _mescrollMixins = _interopRequireDefault(__webpack_require__(/*! @/component/mescroll-uni/mescroll-mixins.js */ 72));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   data: function data() {
     return {
       searchStr: '',
       materialslist: [],
       relateds: [],
-      total: 0 };
+      total: 0,
+      isMore: false };
 
   },
   mixins: [_mescrollMixins.default],
